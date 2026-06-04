@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kibo – Design Reference</title>
+<style>
+  :root {
+    --c-bg: #F4F5F7;
+    --c-surface: #FFFFFF;
+    --c-border: #DFE1E6;
+    --c-text: #172B4D;
+    --c-text-sub: #6B778C;
+    --c-accent: #0052CC;
+    --c-accent-light: #DEEBFF;
+    --c-code-bg: #F4F5F7;
+    --c-tag: #EBECF0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         background: var(--c-bg); color: var(--c-text); line-height: 1.6; }
+
+  /* ---- Layout ---- */
+  .page-wrap { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  /* ---- Breadcrumb ---- */
+  .breadcrumb { font-size: 12px; color: var(--c-text-sub); margin-bottom: 12px; }
+  .breadcrumb a { color: var(--c-accent); text-decoration: none; }
+  .breadcrumb span { margin: 0 6px; }
+
+  /* ---- Page header ---- */
+  .page-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 32px; position: relative; }
+  .page-icon { font-size: 48px; line-height: 1; }
+  .page-title-group h1 { font-size: 28px; font-weight: 700; color: var(--c-text); }
+  .page-meta { font-size: 13px; color: var(--c-text-sub); margin-top: 4px; }
+  .page-meta strong { color: var(--c-text); }
+
+  /* ---- Language Selector ---- */
+  .lang-select-wrap { position: absolute; right: 0; top: 0; }
+  .lang-select { background: var(--c-surface); color: var(--c-text); border: 1px solid var(--c-border); padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 500; }
+
+  /* ---- TOC ---- */
+  .toc { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 6px;
+         padding: 16px 20px; margin-bottom: 36px; width: fit-content; min-width: 260px; }
+  .toc h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+            color: var(--c-text-sub); margin-bottom: 10px; }
+  .toc ol { padding-left: 18px; }
+  .toc li { font-size: 13px; margin-bottom: 4px; }
+  .toc a { color: var(--c-accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  /* ---- Section ---- */
+  .section { margin-bottom: 48px; }
+  h2 { font-size: 20px; font-weight: 700; color: var(--c-text);
+       border-bottom: 2px solid var(--c-border); padding-bottom: 8px; margin-bottom: 20px; }
+  h3 { font-size: 15px; font-weight: 700; color: var(--c-text); margin: 20px 0 10px; }
+  p  { font-size: 14px; color: var(--c-text); margin-bottom: 12px; }
+
+  /* ---- Info / tip panels ---- */
+  .panel { border-radius: 4px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; display: flex; gap: 10px; }
+  .panel-info  { background: #E6F0FF; border-left: 4px solid #0065FF; }
+  .panel-note  { background: #FFFAE6; border-left: 4px solid #FF991F; }
+  .panel-icon  { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  /* ---- Tables ---- */
+  .table-wrap { overflow-x: auto; margin-bottom: 20px; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; background: var(--c-surface); border-radius: 6px; overflow: hidden; }
+  th { background: #F4F5F7; font-weight: 700; text-align: left; padding: 10px 14px;
+       border-bottom: 2px solid var(--c-border); white-space: nowrap; }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--c-border); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #F8F9FF; }
+
+  /* ---- Tags / badges ---- */
+  .tag { display: inline-block; background: var(--c-tag); border-radius: 3px;
+         padding: 2px 7px; font-size: 11px; font-weight: 600; color: var(--c-text-sub); margin: 1px; }
+  .tag.fire   { background:#FFF0E0; color:#974F0C; }
+  .tag.water  { background:#E6F4FB; color:#0747A6; }
+  .tag.grass  { background:#E4F5E8; color:#2B6B2B; }
+  .tag.elec   { background:#FFFBE0; color:#7A5800; }
+  .tag.ice    { background:#EEF7FB; color:#2F5F7A; }
+  .tag.air    { background:#F3EEFF; color:#5243AA; }
+  .tag.ground { background:#F5EDE0; color:#7A4B00; }
+  .tag.star   { background:#F0EAFF; color:#403294; }
+
+  .badge { display: inline-block; border-radius: 12px; padding: 2px 10px;
+           font-size: 11px; font-weight: 700; }
+  .badge-green  { background:#E3FCEF; color:#006644; }
+  .badge-blue   { background:#DEEBFF; color:#0747A6; }
+  .badge-purple { background:#EAE6FF; color:#403294; }
+  .badge-red    { background:#FFEBE6; color:#BF2600; }
+  .badge-orange { background:#FFF0E0; color:#974F0C; }
+  .badge-grey   { background:#F4F5F7; color:#5E6C84; }
+
+  /* ---- Code blocks ---- */
+  .code-block { background: #1C2A3A; color: #CDD9E5; border-radius: 6px;
+                padding: 16px 20px; font-family: "SFMono-Regular", Consolas, monospace;
+                font-size: 13px; line-height: 1.7; margin-bottom: 16px; overflow-x: auto; }
+  .code-block .kw  { color: #85C1E9; }
+  .code-block .cm  { color: #7F8C9A; font-style: italic; }
+  .code-block .nm  { color: #82E0AA; }
+  .code-block .st  { color: #F9E79F; }
+  .code-block .nb  { color: #F8C471; }
+
+  .formula-box { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 6px;
+                 padding: 18px 22px; margin-bottom: 16px; }
+  .formula-box .formula-main { font-family: "SFMono-Regular", Consolas, monospace;
+                               font-size: 15px; font-weight: 700; color: #0052CC;
+                               background: var(--c-accent-light); padding: 10px 14px;
+                               border-radius: 4px; display: inline-block; margin: 8px 0; }
+  .formula-vars { margin-top: 12px; }
+  .formula-vars li { font-size: 13px; margin-bottom: 4px; list-style: none; padding-left: 0; }
+  .formula-vars li::before { content: "▸ "; color: var(--c-accent); }
+
+  /* ---- Emotion cards grid ---- */
+  .emotion-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .emotion-card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 8px;
+                  padding: 16px 12px 14px; text-align: center; transition: box-shadow .15s; }
+  .emotion-card:hover { box-shadow: 0 4px 14px rgba(9,30,66,.12); }
+  .emotion-card svg   { display: block; margin: 0 auto 10px; }
+  .emotion-card h4    { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .emotion-card p     { font-size: 12px; color: var(--c-text-sub); margin: 0; line-height: 1.4; }
+  .trigger-label { font-size: 11px; color: var(--c-text-sub); margin-top: 6px; }
+  .trigger-val   { font-weight: 700; color: var(--c-text); }
+
+  /* ---- Weather grid ---- */
+  .weather-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; margin-bottom: 24px; }
+  .weather-card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 8px;
+                  padding: 14px 12px 12px; text-align: center; }
+  .weather-card svg   { display: block; margin: 0 auto 8px; }
+  .weather-card h4    { font-size: 13px; font-weight: 700; margin-bottom: 3px; }
+  .weather-card p     { font-size: 12px; color: var(--c-text-sub); margin: 0; }
+
+  /* ---- XP progress visualization ---- */
+  .xp-bar-wrap { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 8px;
+                 padding: 20px 24px; margin-bottom: 20px; }
+  .xp-bar-track { height: 20px; background: #EBECF0; border-radius: 10px; position: relative; overflow: visible; margin: 20px 0 8px; }
+  .xp-bar-fill  { height: 100%; border-radius: 10px; background: linear-gradient(90deg, #36B37E, #00875A); }
+  .xp-markers   { display: flex; justify-content: space-between; font-size: 11px; color: var(--c-text-sub); }
+  .xp-stage-marker { position: absolute; top: -24px; display: flex; flex-direction: column; align-items: center; }
+  .xp-stage-marker .line { width: 2px; height: 32px; background: #5243AA; margin-top: 4px; }
+  .xp-stage-marker span { font-size: 11px; font-weight: 700; color: #5243AA; white-space: nowrap; }
+  .xp-label { font-size: 13px; font-weight: 700; }
+
+  /* ---- Evolution table colors ---- */
+  .sp-ignis  { color: #974F0C; }
+  .sp-aqua   { color: #0747A6; }
+  .sp-flora  { color: #2B6B2B; }
+  .sp-volt   { color: #7A5800; }
+  .sp-glace  { color: #2F5F7A; }
+  .sp-aether { color: #403294; }
+  .sp-terra  { color: #7A4B00; }
+  .sp-astra  { color: #5243AA; }
+
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
+
+  footer { text-align: center; font-size: 12px; color: var(--c-text-sub); margin-top: 60px; border-top: 1px solid var(--c-border); padding-top: 20px; }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <a href="#">Kibo</a><span>›</span>
+    <a href="#">Docs</a><span>›</span>
+    <span data-i18n="doc_ref">Design Reference</span>
+  </div>
+
+  <div class="page-header">
+    <div class="page-icon">🐾</div>
+    <div class="page-title-group">
+      <h1 data-i18n="main_title">Kibo – Design Reference</h1>
+      <div class="page-meta"><span data-i18n="last_mod">Ultima modifica:</span> <strong>Giugno 2025</strong> · <span data-i18n="author">Autore:</span> <strong>Team Kibo</strong> · <span class="tag">v1.0</span></div>
+    </div>
+    
+    <div class="lang-select-wrap">
+      <select class="lang-select" onchange="translatePage(this.value)">
+          <option value="it">🇮🇹 Italiano</option>
+          <option value="en">🇺🇸 English</option>
+          <option value="es">🇪🇸 Español</option>
+          <option value="fr">🇫🇷 Français</option>
+          <option value="de">🇩🇪 Deutsch</option>
+          <option value="ja">🇯🇵 日本語</option>
+          <option value="zh">🇨🇳 中文</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="toc">
+    <h4 data-i18n="toc_title">Contenuti</h4>
+    <ol>
+      <li><a href="#emozioni" data-i18n="toc_1">Stati / Emozioni del mostro</a></li>
+      <li><a href="#evoluzioni" data-i18n="toc_2">Tabella evoluzioni</a></li>
+      <li><a href="#xp" data-i18n="toc_3">Formula XP per evoluzione</a></li>
+      <li><a href="#calorie" data-i18n="toc_4">Formula calorie attive</a></li>
+      <li><a href="#meteo" data-i18n="toc_5">Animazioni meteo</a></li>
+    </ol>
+  </div>
+
+  <div class="section" id="emozioni">
+    <h2 data-i18n="sec1_title">🎭 Stati / Emozioni del mostro</h2>
+
+    <p data-i18n="sec1_desc">Il mostro ha <strong>5 stati emotivi</strong> determinati in tempo reale da Body Battery e livello di stress del Garmin. Lo stress ha priorità: se ≥ 65 il mostro è <em>Stressato</em> indipendentemente dalla Body Battery.</p>
+
+    <div class="panel panel-info">
+      <div class="panel-icon">ℹ️</div>
+      <div data-i18n="sec1_panel">La <strong>priorità di lettura</strong> è: <code>Stress ≥ 65 → Stressato</code>. Altrimenti si usa la Body Battery: ≥70 → Iper, ≥20 → Attivo, ≥10 → Stanco, &lt;10 → Esausto.</div>
+    </div>
+
+    <div class="emotion-grid">
+
+      <div class="emotion-card">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="42" fill="#FFCFA8"/>
+          <circle cx="50" cy="56" r="28" fill="#FFE8CC"/>
+          <path d="M32 42 Q37 47 42 42" stroke="#22303A" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M58 42 Q63 47 68 42" stroke="#22303A" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <circle cx="50" cy="60" r="8" fill="#6E2B20"/>
+          <circle cx="50" cy="61" r="5" fill="#C0392B"/>
+          <text x="64" y="38" font-size="9" fill="white" font-family="sans-serif" font-weight="bold">z</text>
+          <text x="70" y="28" font-size="12" fill="white" font-family="sans-serif" font-weight="bold">Z</text>
+          <circle cx="30" cy="54" r="5" fill="#FF9E6E" opacity=".5"/>
+          <circle cx="70" cy="54" r="5" fill="#FF9E6E" opacity=".5"/>
+        </svg>
+        <h4 data-i18n="mood0_t">😴 Esausto</h4>
+        <p data-i18n="mood0_d">Occhi chiusi, bocca aperta, ZZZ fluttuanti</p>
+        <div class="trigger-label">Body Battery <span class="trigger-val">&lt; 10</span></div>
+        <div style="margin-top:6px"><span class="badge badge-grey">mood = 0</span></div>
+      </div>
+
+      <div class="emotion-card">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="42" fill="#FFCFA8"/>
+          <circle cx="50" cy="56" r="28" fill="#FFE8CC"/>
+          <circle cx="35" cy="43" r="9" fill="white"/>
+          <circle cx="65" cy="43" r="9" fill="white"/>
+          <circle cx="35" cy="46" r="6" fill="#22303A"/>
+          <circle cx="65" cy="46" r="6" fill="#22303A"/>
+          <rect x="26" y="34" width="18" height="8" rx="0" fill="#FFCFA8"/>
+          <rect x="56" y="34" width="18" height="8" rx="0" fill="#FFCFA8"/>
+          <circle cx="32" cy="44" r="2" fill="white"/>
+          <circle cx="62" cy="44" r="2" fill="white"/>
+          <line x1="44" y1="60" x2="56" y2="60" stroke="#5A3A2A" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="30" cy="54" r="5" fill="#FF9E6E" opacity=".5"/>
+          <circle cx="70" cy="54" r="5" fill="#FF9E6E" opacity=".5"/>
+        </svg>
+        <h4 data-i18n="mood1_t">😪 Stanco</h4>
+        <p data-i18n="mood1_d">Occhi socchiusi con palpebra pesante, bocca neutra</p>
+        <div class="trigger-label">Body Battery <span class="trigger-val">10 – 19</span></div>
+        <div style="margin-top:6px"><span class="badge badge-blue">mood = 1</span></div>
+      </div>
+
+      <div class="emotion-card">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="42" fill="#FFCFA8"/>
+          <circle cx="50" cy="56" r="28" fill="#FFE8CC"/>
+          <circle cx="35" cy="43" r="9" fill="white"/>
+          <circle cx="65" cy="43" r="9" fill="white"/>
+          <circle cx="35" cy="44" r="6.5" fill="#22303A"/>
+          <circle cx="65" cy="44" r="6.5" fill="#22303A"/>
+          <circle cx="32" cy="41" r="2" fill="white"/>
+          <circle cx="62" cy="41" r="2" fill="white"/>
+          <path d="M40 60 Q50 68 60 60" stroke="#C0392B" stroke-width="2.5" fill="#C0392B"/>
+          <circle cx="28" cy="54" r="5" fill="#FF9E6E" opacity=".5"/>
+          <circle cx="72" cy="54" r="5" fill="#FF9E6E" opacity=".5"/>
+        </svg>
+        <h4 data-i18n="mood2_t">😊 Attivo</h4>
+        <p data-i18n="mood2_d">Occhi aperti e vivaci, sorriso aperto</p>
+        <div class="trigger-label">Body Battery <span class="trigger-val">20 – 69</span></div>
+        <div style="margin-top:6px"><span class="badge badge-green">mood = 2</span></div>
+      </div>
+
+      <div class="emotion-card">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="42" fill="#FFCFA8"/>
+          <circle cx="50" cy="56" r="28" fill="#FFE8CC"/>
+          <circle cx="35" cy="43" r="11" fill="white"/>
+          <circle cx="65" cy="43" r="11" fill="white"/>
+          <circle cx="35" cy="44" r="8" fill="#22303A"/>
+          <circle cx="65" cy="44" r="8" fill="#22303A"/>
+          <circle cx="31" cy="40" r="2.5" fill="white"/>
+          <circle cx="61" cy="40" r="2.5" fill="white"/>
+          <path d="M37 60 Q50 72 63 60" stroke="#C0392B" stroke-width="2.5" fill="#C0392B"/>
+          <circle cx="26" cy="55" r="6" fill="#FF9E6E" opacity=".6"/>
+          <circle cx="74" cy="55" r="6" fill="#FF9E6E" opacity=".6"/>
+          <path d="M18 28 L20 22 L22 28 L28 30 L22 32 L20 38 L18 32 L12 30 Z" fill="#FFD23F"/>
+          <path d="M74 20 L75.5 16 L77 20 L81 21.5 L77 23 L75.5 27 L74 23 L70 21.5 Z" fill="#FFD23F"/>
+        </svg>
+        <h4 data-i18n="mood3_t">🤩 Iper</h4>
+        <p data-i18n="mood3_d">Occhi spalancati, mega sorriso, sparkles brillanti</p>
+        <div class="trigger-label">Body Battery <span class="trigger-val">≥ 70</span></div>
+        <div style="margin-top:6px"><span class="badge badge-purple">mood = 3</span></div>
+      </div>
+
+      <div class="emotion-card">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="42" fill="#FFCFA8"/>
+          <circle cx="50" cy="56" r="28" fill="#FFE8CC"/>
+          <circle cx="35" cy="43" r="9" fill="white"/>
+          <circle cx="65" cy="43" r="9" fill="white"/>
+          <circle cx="35" cy="44" r="6.5" fill="#22303A"/>
+          <circle cx="65" cy="44" r="6.5" fill="#22303A"/>
+          <circle cx="32" cy="41" r="2" fill="white"/>
+          <circle cx="62" cy="41" r="2" fill="white"/>
+          <line x1="25" y1="30" x2="34" y2="35" stroke="#22303A" stroke-width="3" stroke-linecap="round"/>
+          <line x1="75" y1="30" x2="66" y2="35" stroke="#22303A" stroke-width="3" stroke-linecap="round"/>
+          <path d="M42 63 Q50 57 58 63" stroke="#5A3A2A" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <circle cx="72" cy="42" r="5" fill="#7CD8FF"/>
+          <polygon points="72,34 68,42 76,42" fill="#7CD8FF"/>
+          <line x1="62" y1="22" x2="70" y2="14" stroke="#FF5A5A" stroke-width="2"/>
+          <line x1="70" y1="22" x2="76" y2="15" stroke="#FF5A5A" stroke-width="2"/>
+          <circle cx="28" cy="54" r="5" fill="#FF9E6E" opacity=".4"/>
+          <circle cx="72" cy="54" r="5" fill="#FF9E6E" opacity=".4"/>
+        </svg>
+        <h4 data-i18n="mood4_t">😰 Stressato</h4>
+        <p data-i18n="mood4_d">Sopracciglia arcuate, bocca giù, goccia di sudore</p>
+        <div class="trigger-label">Stress <span class="trigger-val">≥ 65</span></div>
+        <div style="margin-top:6px"><span class="badge badge-red">mood = 4</span></div>
+      </div>
+
+    </div><h3 data-i18n="tbl1_title">Tabella riassuntiva stati</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>mood</th>
+            <th data-i18n="tbl1_th2">Nome</th>
+            <th>Trigger</th>
+            <th data-i18n="tbl1_th4">Occhi</th>
+            <th data-i18n="tbl1_th5">Bocca</th>
+            <th>Extra</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-grey">0</span></td>
+            <td><strong data-i18n="tbl1_m0_n">Esausto</strong> 😴</td>
+            <td>Body Battery &lt; 10</td>
+            <td data-i18n="tbl1_m0_e">Archi chiusi, palpebra abbassata</td>
+            <td data-i18n="tbl1_m0_m">Yawn aperto (cerchio scuro + interno rosso)</td>
+            <td data-i18n="tbl1_m0_ex">ZZZ bianchi fluttuanti</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-blue">1</span></td>
+            <td><strong data-i18n="tbl1_m1_n">Stanco</strong> 😪</td>
+            <td>Body Battery 10–19</td>
+            <td data-i18n="tbl1_m1_e">Aperti, iride bassa + palpebra a metà</td>
+            <td data-i18n="tbl1_m1_m">Linea retta (neutrale)</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-green">2</span></td>
+            <td><strong data-i18n="tbl1_m2_n">Attivo</strong> 😊</td>
+            <td>Body Battery 20–69</td>
+            <td data-i18n="tbl1_m2_e">Aperti, iride centrata</td>
+            <td data-i18n="tbl1_m2_m">Mezzaluna sorridente</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-purple">3</span></td>
+            <td><strong data-i18n="tbl1_m3_n">Iper</strong> 🤩</td>
+            <td>Body Battery ≥ 70</td>
+            <td data-i18n="tbl1_m3_e">Spalancati, iride grande</td>
+            <td data-i18n="tbl1_m3_m">Mezzaluna grande sorridente</td>
+            <td data-i18n="tbl1_m3_ex">Sparkle dorati ai lati della testa</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-red">4</span></td>
+            <td><strong data-i18n="tbl1_m4_n">Stressato</strong> 😰</td>
+            <td>Stress ≥ 65 <em>(priorità)</em></td>
+            <td data-i18n="tbl1_m4_e">Aperti, sopracciglia inclinate (\ /)</td>
+            <td data-i18n="tbl1_m4_m">Arco rovesciato (frown)</td>
+            <td data-i18n="tbl1_m4_ex">Goccia sudore animata + segni tensione rossi</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel panel-note">
+      <div class="panel-icon">⚠️</div>
+      <div data-i18n="sec1_note">Quando il dispositivo non ha ancora dati (prima accensione / simulatore) il mostro mostra il mood <strong>Attivo (2)</strong> di default.</div>
+    </div>
+  </div>
+
+  <div class="section" id="evoluzioni">
+    <h2 data-i18n="sec2_title">🌱 Tabella evoluzioni</h2>
+
+    <p data-i18n="sec2_desc">Ogni famiglia ha <strong>3 stadi evolutivi</strong> (0 → 1 → 2). L'evoluzione è guidata dall'XP cumulativo; la de-evoluzione avviene se l'XP scende sotto la soglia per inattività.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="tbl2_th1">Famiglia</th>
+            <th data-i18n="tbl2_th2">Tipo</th>
+            <th data-i18n="tbl2_th3">Stadio 0 – Base</th>
+            <th data-i18n="tbl2_th4">Stadio 1 – Intermedio</th>
+            <th data-i18n="tbl2_th5">Stadio 2 – Finale</th>
+            <th data-i18n="tbl2_th6">Accento visivo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="dot" style="background:#FF7A33"></span><strong class="sp-ignis">Ignis</strong></td>
+            <td><span class="tag fire" data-i18n="t_fire">🔥 Fiamma</span></td>
+            <td>Cinder</td>
+            <td>Blaze <em data-i18n="t_horns1">(+ corna ariete)</em></td>
+            <td>Infernyx <em data-i18n="t_crest1">(+ cresta di fiamme)</em></td>
+            <td data-i18n="t_accent1">Coda fiamma, cresta animata</td>
+          </tr>
+          <tr>
+            <td><span class="dot" style="background:#3FB5E6"></span><strong class="sp-aqua">Aqua</strong></td>
+            <td><span class="tag water" data-i18n="t_water">💧 Pinne</span></td>
+            <td>Dewlet</td>
+            <td>Splashling <em data-i18n="t_fin1">(+ pinna dorsale)</em></td>
+            <td>Tidewyrm <em data-i18n="t_gills1">(+ branchie + pinne pettorali)</em></td>
+            <td data-i18n="t_accent2">Pinna dorsale, coda squalo</td>
+          </tr>
+          <tr>
+            <td><span class="dot" style="background:#5FC56B"></span><strong class="sp-flora">Flora</strong></td>
+            <td><span class="tag grass" data-i18n="t_grass">🍃 Foglia</span></td>
+            <td>Sprig</td>
+            <td>Mossky <em data-i18n="t_leaf1">(+ orecchie fogliari)</em></td>
+            <td>Verdantaur <em data-i18n="t_flower1">(+ fiore sbocciato)</em></td>
+            <td data-i18n="t_accent3">Gemma sulla testa, petali</td>
+          </tr>
+          <tr>
+            <td><span class="dot" style="background:#FFD23F"></span><strong class="sp-volt">Volt</strong></td>
+            <td><span class="tag elec" data-i18n="t_elec">⚡ Folgore</span></td>
+            <td>Zappy</td>
+            <td>Voltkit <em data-i18n="t_light1">(+ orecchie fulmine)</em></td>
+            <td>Thundrake <em data-i18n="t_spark1">(+ scintille guance)</em></td>
+            <td data-i18n="t_accent4">Coda fulmine, scintille animate</td>
+          </tr>
+          <tr>
+            <td><span class="dot" style="background:#9FE3F2"></span><strong class="sp-glace">Glace</strong></td>
+            <td><span class="tag ice" data-i18n="t_ice">🧊 Cristallo</span></td>
+            <td>Frostle</td>
+            <td>Snowpaw <em data-i18n="t_cryst1">(+ 2 cristalli-corna)</em></td>
+            <td>Cryowyrm <em data-i18n="t_crown1">(+ corona centrale + schegge dorsali)</em></td>
+            <td data-i18n="t_accent5">Schegge di ghiaccio, cristalli</td>
+          </tr>
+          <tr>
+            <td><span class="dot" style="background:#C9B7FF"></span><strong class="sp-aether">Aether</strong></td>
+            <td><span class="tag air" data-i18n="t_air">🌬 Ali</span></td>
+            <td>Puff</td>
+            <td>Breezle <em data-i18n="t_wings1">(+ ali piccole)</em></td>
+            <td>Aerogriff <em data-i18n="t_wings2">(+ ali grandi + aureola)</em></td>
+            <td data-i18n="t_accent6">Nuvola sotto i piedi, aureola</td>
+          </tr>
+          <tr>
+            <td><span class="dot" style="background:#C79A63"></span><strong class="sp-terra">Terra</strong></td>
+            <td><span class="tag ground" data-i18n="t_ground">🪨 Spighe</span></td>
+            <td>Pebbo</td>
+            <td>Bouldmole <em data-i18n="t_deer1">(+ corna di cervo + gemma fronte)</em></td>
+            <td>Terragolem <em data-i18n="t_rock1">(+ lastre rocciose dorsali)</em></td>
+            <td data-i18n="t_accent7">Sopracciglio spesso, corna ramificate</td>
+          </tr>
+          <tr>
+            <td><span class="dot" style="background:#7C5BE0"></span><strong class="sp-astra">Astra</strong></td>
+            <td><span class="tag star" data-i18n="t_star">⭐ Stelle</span></td>
+            <td>Twinkle</td>
+            <td>Nebufox <em data-i18n="t_star1">(+ antenne a stella)</em></td>
+            <td>Stellaron <em data-i18n="t_halo1">(+ aureola + stelle orbitanti)</em></td>
+            <td data-i18n="t_accent8">Stelle orbitanti, aureola dorata</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 data-i18n="tbl3_title">Cambio visivo per stadio</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="tbl3_th1">Stadio</th>
+            <th data-i18n="tbl3_th2">Scala corpo</th>
+            <th data-i18n="tbl3_th3">Colore corpo</th>
+            <th data-i18n="tbl3_th4">Colore pancia</th>
+            <th data-i18n="tbl3_th5">Segni evolutivi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-grey" data-i18n="st_b">0 – Base</span></td>
+            <td>85%</td>
+            <td>Base palette</td>
+            <td>Light palette</td>
+            <td data-i18n="st_b_n">Nessuno</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-blue" data-i18n="st_i">1 – Intermedio</span></td>
+            <td>85%</td>
+            <td>Shade palette</td>
+            <td>Light palette</td>
+            <td data-i18n="st_i_n">2 puntini accent sui fianchi</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-purple" data-i18n="st_f">2 – Finale</span></td>
+            <td>97%</td>
+            <td>Shade palette</td>
+            <td>Base palette</td>
+            <td data-i18n="st_f_n">2 puntini fianchi + 3 puntini ventre</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section" id="xp">
+    <h2 data-i18n="sec3_title">📈 Formula XP per evoluzione</h2>
+
+    <p data-i18n="sec3_desc">L'XP è la misura dell'impegno fisico giornaliero. Ogni giorno contribuisce fino a unax di <strong>220 XP</strong>; l'inattività fa decadere i punti.</p>
+
+    <div class="formula-box">
+      <strong data-i18n="f1_title">XP giornaliero lordo</strong>
+      <div class="formula-main">XP = (minuti_attivi × 4) + (passi ÷ 150) [+ bonus VO₂max]</div>
+      <ul class="formula-vars">
+        <li data-i18n="f1_v1"><code>minuti_attivi</code> – minuti di attività moderata/intensa del giorno (ActivityMonitor)</li>
+        <li data-i18n="f1_v2"><code>passi</code> – conteggio passi cumulativo del giorno</li>
+        <li data-i18n="f1_v3">Bonus VO₂max (opzionale, se abilitato in impostazioni): <code>(vo2max − 30) × 3</code> se <code>vo2max &gt; 30</code></li>
+        <li data-i18n="f1_v4">Cap giornaliero: <strong>220 XP</strong> — giornate di super-allenamento non saltano tappe</li>
+      </ul>
+    </div>
+
+    <div class="formula-box">
+      <strong data-i18n="f2_title">Soglie evoluzione</strong>
+      <div class="formula-main">Stadio 1 → XP ≥ 300 &nbsp;|&nbsp; Stadio 2 → XP ≥ 1200</div>
+      <ul class="formula-vars">
+        <li data-i18n="f2_v1">Stadio 0 → 1: ~2–3 settimane di allenamento regolare (30 min/die)</li>
+        <li data-i18n="f2_v2">Stadio 1 → 2: ~5–6 settimane di allenamento regolare</li>
+        <li data-i18n="f2_v3">De-evoluzione: giornata pigra (&lt; 20 XP) = −90 XP cumulativi</li>
+        <li data-i18n="f2_v4">Giorni saltati (face non mostrata): −90 XP/die, massimo 5 giorni consecutivi</li>
+      </ul>
+    </div>
+
+    <div class="xp-bar-wrap">
+      <div class="xp-label" data-i18n="xp_lbl">Visualizzazione progresso XP (esempio: 750 XP)</div>
+      <div style="position:relative; padding-top: 30px;">
+        <div style="position:absolute; left: calc(300/1200*100%); top:0;" class="xp-stage-marker">
+          <span><span data-i18n="xp_st1">Stadio 1</span><br/>300 XP</span>
+          <div class="line"></div>
+        </div>
+        <div style="position:absolute; left: calc(1200/1500*100%); top:0;" class="xp-stage-marker">
+          <span><span data-i18n="xp_st2">Stadio 2</span><br/>1200 XP</span>
+          <div class="line"></div>
+        </div>
+        <div class="xp-bar-track">
+          <div class="xp-bar-fill" style="width: calc(750/1500*100%)"></div>
+        </div>
+      </div>
+      <div class="xp-markers"><span>0</span><span>375</span><span>750</span><span>1125</span><span>1500</span></div>
+    </div>
+
+    <h3 data-i18n="tbl4_title">Obiettivo giornaliero (streak)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th data-i18n="tbl4_th1">Costante</th><th data-i18n="tbl4_th2">Valore</th><th data-i18n="tbl4_th3">Descrizione</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>GOAL_MINUTES</code></td><td>30 min</td><td data-i18n="tbl4_r1">Minuti attivi/giorno per mantenere la streak</td></tr>
+          <tr><td><code>goalXp()</code></td><td>120 XP</td><td data-i18n="tbl4_r2">30 × 4 – XP minimo per "giornata buona"</td></tr>
+          <tr><td><code>INACTIVITY_FLOOR</code></td><td>20 XP</td><td data-i18n="tbl4_r3">Sotto questa soglia il giorno conta come "pigro"</td></tr>
+          <tr><td><code>DECAY</code></td><td>−90 XP</td><td data-i18n="tbl4_r4">Penalità per ogni giorno pigro o saltato</td></tr>
+          <tr><td><code>DAILY_CAP</code></td><td>220 XP</td><td data-i18n="tbl4_r5">Massimo XP da un singolo giorno</td></tr>
+          <tr><td><code>T1</code></td><td>300 XP</td><td data-i18n="tbl4_r6">Soglia evoluzione stadio 1</td></tr>
+          <tr><td><code>T2</code></td><td>1200 XP</td><td data-i18n="tbl4_r7">Soglia evoluzione stadio 2</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel panel-info">
+      <div class="panel-icon">💡</div>
+      <div data-i18n="sec3_panel">Il <strong>Livello (LVL)</strong> mostrato sul quadrante è separato dagli stadi evolutivi: <code>level = 1 + (effectiveXp ÷ 10)</code>. Cresce in modo continuo e non regredisce.</div>
+    </div>
+  </div>
+
+  <div class="section" id="calorie">
+    <h2 data-i18n="sec4_title">🔥 Formula calorie attive</h2>
+
+    <p data-i18n="sec4_desc">Le <strong>calorie attive</strong> escludono il metabolismo basale (BMR) e rappresentano solo le calorie bruciate con il movimento. Kibo usa una strategia a cascata:</p>
+
+    <div class="formula-box">
+      <strong data-i18n="f3_title">Strategia 1 – Campo nativo del dispositivo (preferito)</strong>
+      <div class="formula-main">calorie_attive = ActivityMonitor.activeCalories</div>
+      <ul class="formula-vars">
+        <li data-i18n="f3_v1">Disponibile su Fenix 7 / Epix / MARQ e dispositivi di fascia alta</li>
+        <li data-i18n="f3_v2">Se non disponibile → si passa alla Strategia 2</li>
+      </ul>
+    </div>
+
+    <div class="formula-box">
+      <strong data-i18n="f4_title">Strategia 2 – Calcolo con BMR Mifflin-St Jeor</strong>
+      <div class="formula-main">calorie_attive = calorie_totali − BMR × (secondi_trascorsi ÷ 86400)</div>
+      <ul class="formula-vars">
+        <li data-i18n="f4_v1"><code>calorie_totali</code> – calorie bruciate dall'ActivityMonitor dall'inizio del giorno</li>
+        <li data-i18n="f4_v2"><code>secondi_trascorsi</code> – secondi dall'inizio del giorno (ore × 3600 + min × 60 + sec)</li>
+        <li data-i18n="f4_v3">Se il profilo utente non è disponibile → stima grezza: <code>calorie_attive ≈ calorie_totali × 0.40</code></li>
+      </ul>
+    </div>
+
+    <div class="formula-box">
+      <strong data-i18n="f5_title">BMR – Equazione di Mifflin-St Jeor</strong>
+      <div class="formula-main">BMR = 10 × kg + 6.25 × cm − 5 × età + offset</div>
+      <ul class="formula-vars">
+        <li data-i18n="f5_v1"><code>kg</code> – peso in kg (profilo utente Garmin: grammi ÷ 1000)</li>
+        <li data-i18n="f5_v2"><code>cm</code> – altezza in cm</li>
+        <li data-i18n="f5_v3"><code>età</code> – anno corrente − anno di nascita</li>
+        <li data-i18n="f5_v4"><code>offset</code>: <strong>+5</strong> (maschio) / <strong>−161</strong> (femmina) / <strong>−78</strong> (neutro/non definito)</li>
+      </ul>
+    </div>
+
+    <div class="code-block"><span class="cm">// Pseudo-codice MetricsProvider.activeCaloriesCalc()</span>
+<span class="kw">if</span> nativeActiveCalories != <span class="nb">null</span>:
+    <span class="kw">return</span> nativeActiveCalories                        <span class="cm">// campo diretto</span>
+
+<span class="nm">total</span>  = ActivityMonitor.calories
+<span class="nm">bmrDay</span> = <span class="nb">10</span>*kg + <span class="nb">6.25</span>*cm - <span class="nb">5</span>*age + offset      <span class="cm">// Mifflin-St Jeor</span>
+<span class="nm">elapsed</span> = hour*<span class="nb">3600</span> + min*<span class="nb">60</span> + sec
+<span class="nm">resting</span> = bmrDay * elapsed / <span class="nb">86400.0</span>
+<span class="kw">return</span> max(<span class="nb">0</span>, total - resting)</div>
+  </div>
+
+  <div class="section" id="meteo">
+    <h2 data-i18n="sec5_title">🌤 Animazioni meteo</h2>
+
+    <p data-i18n="sec5_desc">Le animazioni meteo si attivano solo in modalità <strong>high-power (schermo acceso)</strong> per non impattare la batteria. Pioggia e neve sono overlay full-screen animati; le altre condizioni sono icone vettoriali statiche accanto al badge della temperatura.</p>
+
+    <div class="weather-grid">
+
+      <div class="weather-card">
+        <svg width="80" height="80" viewBox="0 0 80 80">
+          <circle cx="40" cy="40" r="14" fill="#FFF176"/>
+          <line x1="40" y1="10" x2="40" y2="18" stroke="#FFF176" stroke-width="3" stroke-linecap="round"/>
+          <line x1="40" y1="62" x2="40" y2="70" stroke="#FFF176" stroke-width="3" stroke-linecap="round"/>
+          <line x1="10" y1="40" x2="18" y2="40" stroke="#FFF176" stroke-width="3" stroke-linecap="round"/>
+          <line x1="62" y1="40" x2="70" y2="40" stroke="#FFF176" stroke-width="3" stroke-linecap="round"/>
+          <line x1="18" y1="18" x2="24" y2="24" stroke="#FFF176" stroke-width="3" stroke-linecap="round"/>
+          <line x1="56" y1="56" x2="62" y2="62" stroke="#FFF176" stroke-width="3" stroke-linecap="round"/>
+          <line x1="62" y1="18" x2="56" y2="24" stroke="#FFF176" stroke-width="3" stroke-linecap="round"/>
+          <line x1="18" y1="62" x2="24" y2="56" stroke="#FFF176" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <h4 data-i18n="w0_g_t">☀️ Sereno – Giorno</h4>
+        <p data-i18n="w0_g_d">Icona sole con raggi</p>
+        <div style="margin-top:6px"><span class="badge badge-grey">code = 0</span></div>
+      </div>
+
+      <div class="weather-card">
+        <svg width="80" height="80" viewBox="0 0 80 80">
+          <circle cx="38" cy="40" r="18" fill="#E8DFBE"/>
+          <circle cx="48" cy="34" r="14" fill="#060A18"/>
+        </svg>
+        <h4 data-i18n="w0_n_t">🌙 Sereno – Notte</h4>
+        <p data-i18n="w0_n_d">Icona luna crescente</p>
+        <div style="margin-top:6px"><span class="badge badge-grey">code = 0</span></div>
+      </div>
+
+      <div class="weather-card">
+        <svg width="80" height="80" viewBox="0 0 80 80">
+          <circle cx="28" cy="46" r="12" fill="#9BBCD4"/>
+          <circle cx="52" cy="46" r="12" fill="#9BBCD4"/>
+          <circle cx="40" cy="36" r="15" fill="#9BBCD4"/>
+          <rect x="16" y="46" width="48" height="12" fill="#9BBCD4"/>
+        </svg>
+        <h4 data-i18n="w1_t">☁️ Nuvoloso</h4>
+        <p data-i18n="w1_d">Icona nuvola statica</p>
+        <div style="margin-top:6px"><span class="badge badge-blue">code = 1</span></div>
+      </div>
+
+      <div class="weather-card">
+        <svg width="80" height="80" viewBox="0 0 80 80">
+          <circle cx="26" cy="34" r="10" fill="#9BBCD4"/>
+          <circle cx="50" cy="34" r="10" fill="#9BBCD4"/>
+          <circle cx="38" cy="26" r="13" fill="#9BBCD4"/>
+          <rect x="16" y="34" width="48" height="10" fill="#9BBCD4"/>
+          <line x1="20" y1="52" x2="16" y2="64" stroke="#7CC0FF" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="33" y1="52" x2="29" y2="64" stroke="#7CC0FF" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="46" y1="52" x2="42" y2="64" stroke="#7CC0FF" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="59" y1="52" x2="55" y2="64" stroke="#7CC0FF" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <h4 data-i18n="w2_t">🌧 Pioggia</h4>
+        <p data-i18n="w2_d"><strong>Full-screen animato</strong> — 14 linee diagonali scorrono</p>
+        <div style="margin-top:6px"><span class="badge badge-blue">code = 2</span></div>
+      </div>
+
+      <div class="weather-card">
+        <svg width="80" height="80" viewBox="0 0 80 80">
+          <circle cx="26" cy="34" r="10" fill="#9BBCD4" opacity=".8"/>
+          <circle cx="50" cy="34" r="10" fill="#9BBCD4" opacity=".8"/>
+          <circle cx="38" cy="26" r="13" fill="#9BBCD4" opacity=".8"/>
+          <rect x="16" y="34" width="48" height="10" fill="#9BBCD4" opacity=".8"/>
+          <circle cx="22" cy="56" r="3.5" fill="white"/>
+          <circle cx="38" cy="64" r="3.5" fill="white"/>
+          <circle cx="54" cy="56" r="3.5" fill="white"/>
+          <circle cx="30" cy="70" r="2.5" fill="white"/>
+          <circle cx="48" cy="72" r="2.5" fill="white"/>
+        </svg>
+        <h4 data-i18n="w3_t">❄️ Neve</h4>
+        <p data-i18n="w3_d"><strong>Full-screen animato</strong> — 16 fiocchi oscillano scendendo</p>
+        <div style="margin-top:6px"><span class="badge badge-blue">code = 3</span></div>
+      </div>
+
+      <div class="weather-card">
+        <svg width="80" height="80" viewBox="0 0 80 80">
+          <circle cx="26" cy="34" r="10" fill="#9BBCD4" opacity=".7"/>
+          <circle cx="50" cy="34" r="10" fill="#9BBCD4" opacity=".7"/>
+          <circle cx="38" cy="26" r="13" fill="#9BBCD4" opacity=".7"/>
+          <rect x="16" y="34" width="48" height="10" fill="#9BBCD4" opacity=".7"/>
+          <line x1="14" y1="56" x2="66" y2="56" stroke="#9BBCD4" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+          <line x1="18" y1="64" x2="62" y2="64" stroke="#9BBCD4" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+          <line x1="22" y1="72" x2="58" y2="72" stroke="#9BBCD4" stroke-width="3" stroke-linecap="round" opacity=".4"/>
+        </svg>
+        <h4 data-i18n="w5_t">🌫 Nebbia / Vento</h4>
+        <p data-i18n="w5_d">Icona nuvola con bande orizzontali</p>
+        <div style="margin-top:6px"><span class="badge badge-grey">code = 5</span></div>
+      </div>
+
+    </div><h3 data-i18n="tbl5_title">Mappatura condizioni Garmin → codice animazione</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="tbl5_th1">Codice</th>
+            <th data-i18n="tbl5_th2">Animazione</th>
+            <th data-i18n="tbl5_th3">Tipo</th>
+            <th data-i18n="tbl5_th4">Condizioni Garmin incluse</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-grey">0 – Clear</span></td>
+            <td data-i18n="tbl5_r1_c2">☀️ Sole (giorno) / 🌙 Luna (notte)</td>
+            <td data-i18n="tbl5_stat">Icona statica</td>
+            <td>Tutto il resto (sunny, fair, mostly clear…)</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-blue">1 – Cloudy</span></td>
+            <td data-i18n="tbl5_r2_c2">☁️ Nuvola</td>
+            <td data-i18n="tbl5_stat">Icona statica</td>
+            <td>PARTLY_CLOUDY, MOSTLY_CLOUDY, CLOUDY, THIN_CLOUDS</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-blue">2 – Rain</span></td>
+            <td data-i18n="tbl5_r3_c2">🌧 Pioggia full-screen</td>
+            <td><strong data-i18n="tbl5_anim">Animazione full-screen</strong></td>
+            <td>RAIN, LIGHT_RAIN, HEAVY_RAIN, SHOWERS, DRIZZLE, THUNDERSTORMS, SCATTERED_THUNDERSTORMS…</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-blue">3 – Snow</span></td>
+            <td data-i18n="tbl5_r4_c2">❄️ Neve full-screen</td>
+            <td><strong data-i18n="tbl5_anim">Animazione full-screen</strong></td>
+            <td>SNOW, LIGHT_SNOW, HEAVY_SNOW, RAIN_SNOW, WINTRY_MIX, FLURRIES, ICE</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-grey">5 – Fog/Wind</span></td>
+            <td data-i18n="tbl5_r5_c2">🌫 Nebbia</td>
+            <td data-i18n="tbl5_stat">Icona statica</td>
+            <td>FOG, HAZY, MIST, WINDY</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel panel-info">
+      <div class="panel-icon">ℹ️</div>
+      <div data-i18n="sec5_panel">
+        Le animazioni full-screen usano <strong>particelle deterministiche</strong> derivate dal frame-counter — zero allocazioni per frame, zero stato per particella.<br>
+        <strong>Pioggia:</strong> 14 linee diagonali (<code>x−4, y+12</code>) che scorrono in base a <code>phase = frame % 24</code>.<br>
+        <strong>Neve:</strong> 16 cerchi con oscillazione sinusoidale laterale + caduta verticale.
+      </div>
+    </div>
+
+    <h3 data-i18n="sec5_sub">Distinzione giorno / notte</h3>
+    <p data-i18n="sec5_sub_d">Per il codice <code>0 (clear)</code> il parametro <code>isDay</code> — calcolato come <code>ora ∈ [7, 19]</code> — seleziona tra il disegno del sole e quello della luna crescente.</p>
+  </div>
+
+  <footer data-i18n="footer">
+    Kibo · Connect IQ Watch Face · Design Reference · Giugno 2025
+  </footer>
+
+</div>
+
+<script>
+  const dict = {
+    it: {
+      doc_ref: "Design Reference", main_title: "Kibo – Design Reference", last_mod: "Ultima modifica:", author: "Autore:",
+      toc_title: "Contenuti", toc_1: "Stati / Emozioni del mostro", toc_2: "Tabella evoluzioni", toc_3: "Formula XP per evoluzione", toc_4: "Formula calorie attive", toc_5: "Animazioni meteo",
+      sec1_title: "🎭 Stati / Emozioni del mostro", sec1_desc: "Il mostro ha 5 stati emotivi determinati in tempo reale da Body Battery e livello di stress del Garmin. Lo stress ha priorità: se ≥ 65 il mostro è Stressato indipendentemente dalla Body Battery.", sec1_panel: "La priorità di lettura è: Stress ≥ 65 → Stressato. Altrimenti si usa la Body Battery: ≥70 → Iper, ≥20 → Attivo, ≥10 → Stanco, <10 → Esausto.",
+      mood0_t: "😴 Esausto", mood0_d: "Occhi chiusi, bocca aperta, ZZZ fluttuanti", mood1_t: "😪 Stanco", mood1_d: "Occhi socchiusi con palpebra pesante, bocca neutra", mood2_t: "😊 Attivo", mood2_d: "Occhi aperti e vivaci, sorriso aperto", mood3_t: "🤩 Iper", mood3_d: "Occhi spalancati, mega sorriso, sparkles brillanti", mood4_t: "😰 Stressato", mood4_d: "Sopracciglia arcuate, bocca giù, goccia di sudore",
+      tbl1_title: "Tabella riassuntiva stati", tbl1_th2: "Nome", tbl1_th4: "Occhi", tbl1_th5: "Bocca", tbl1_m0_n: "Esausto", tbl1_m0_e: "Archi chiusi, palpebra abbassata", tbl1_m0_m: "Yawn aperto (cerchio scuro + interno rosso)", tbl1_m0_ex: "ZZZ bianchi fluttuanti", tbl1_m1_n: "Stanco", tbl1_m1_e: "Aperti, iride bassa + palpebra a metà", tbl1_m1_m: "Linea retta (neutrale)", tbl1_m2_n: "Attivo", tbl1_m2_e: "Aperti, iride centrata", tbl1_m2_m: "Mezzaluna sorridente", tbl1_m3_n: "Iper", tbl1_m3_e: "Spalancati, iride grande", tbl1_m3_m: "Mezzaluna grande sorridente", tbl1_m3_ex: "Sparkle dorati ai lati della testa", tbl1_m4_n: "Stressato", tbl1_m4_e: "Aperti, sopracciglia inclinate (\\ /)", tbl1_m4_m: "Arco rovesciato (frown)", tbl1_m4_ex: "Goccia sudore animata + segni tensione rossi",
+      sec1_note: "Quando il dispositivo non ha ancora dati (prima accensione / simulatore) il mostro mostra il mood Attivo (2) di default.",
+      sec2_title: "🌱 Tabella evoluzioni", sec2_desc: "Ogni famiglia ha 3 stadi evolutivi (0 → 1 → 2). L'evoluzione è guidata dall'XP cumulativo; la de-evoluzione avviene se l'XP scende sotto la soglia per inattività.",
+      tbl2_th1: "Famiglia", tbl2_th2: "Tipo", tbl2_th3: "Stadio 0 – Base", tbl2_th4: "Stadio 1 – Intermedio", tbl2_th5: "Stadio 2 – Finale", tbl2_th6: "Accento visivo",
+      t_fire: "🔥 Fiamma", t_horns1: "(+ corna ariete)", t_crest1: "(+ cresta di fiamme)", t_accent1: "Coda fiamma, cresta animata", t_water: "💧 Pinne", t_fin1: "(+ pinna dorsale)", t_gills1: "(+ branchie + pinne pettorali)", t_accent2: "Pinna dorsale, coda squalo", t_grass: "🍃 Foglia", t_leaf1: "(+ orecchie fogliari)", t_flower1: "(+ fiore sbocciato)", t_accent3: "Gemma sulla testa, petali", t_elec: "⚡ Folgore", t_light1: "(+ orecchie fulmine)", t_spark1: "(+ scintille guance)", t_accent4: "Coda fulmine, scintille animate", t_ice: "🧊 Cristallo", t_cryst1: "(+ 2 cristalli-corna)", t_crown1: "(+ corona centrale + schegge dorsali)", t_accent5: "Schegge di ghiaccio, cristalli", t_air: "🌬 Ali", t_wings1: "(+ ali piccole)", t_wings2: "(+ ali grandi + aureola)", t_accent6: "Nuvola sotto i piedi, aureola", t_ground: "🪨 Spighe", t_deer1: "(+ corna di cervo + gemma fronte)", t_rock1: "(+ lastre rocciose dorsali)", t_accent7: "Sopracciglio spesso, corna ramificate", t_star: "⭐ Stelle", t_star1: "(+ antenne a stella)", t_halo1: "(+ aureola + stelle orbitanti)", t_accent8: "Stelle orbitanti, aureola dorata",
+      tbl3_title: "Cambio visivo per stadio", tbl3_th1: "Stadio", tbl3_th2: "Scala corpo", tbl3_th3: "Colore corpo", tbl3_th4: "Colore pancia", tbl3_th5: "Segni evolutivi",
+      st_b: "0 – Base", st_b_n: "Nessuno", st_i: "1 – Intermedio", st_i_n: "2 puntini accent sui fianchi", st_f: "2 – Finale", st_f_n: "2 puntini fianchi + 3 puntini ventre",
+      sec3_title: "📈 Formula XP per evoluzione", sec3_desc: "L'XP è la misura dell'impegno fisico giornaliero. Ogni giorno contribuisce fino a un massimo di 220 XP; l'inattività fa decadere i punti.",
+      f1_title: "XP giornaliero lordo", f1_v1: "minuti_attivi – minuti di attività moderata/intensa del giorno (ActivityMonitor)", f1_v2: "passi – conteggio passi cumulativo del giorno", f1_v3: "Bonus VO₂max (opzionale, se abilitato in impostazioni): (vo2max − 30) × 3 se vo2max > 30", f1_v4: "Cap giornaliero: 220 XP — giornate di super-allenamento non saltano tappe",
+      f2_title: "Soglie evoluzione", f2_v1: "Stadio 0 → 1: ~2–3 settimane di allenamento regolare (30 min/die)", f2_v2: "Stadio 1 → 2: ~5–6 settimane di allenamento regolare", f2_v3: "De-evoluzione: giornata pigra (< 20 XP) = −90 XP cumulativi", f2_v4: "Giorni saltati (face non mostrata): −90 XP/die, massimo 5 giorni consecutivi",
+      xp_lbl: "Visualizzazione progresso XP (esempio: 750 XP)", xp_st1: "Stadio 1", xp_st2: "Stadio 2",
+      tbl4_title: "Obiettivo giornaliero (streak)", tbl4_th1: "Costante", tbl4_th2: "Valore", tbl4_th3: "Descrizione",
+      tbl4_r1: "Minuti attivi/giorno per mantenere la streak", tbl4_r2: "30 × 4 – XP minimo per 'giornata buona'", tbl4_r3: "Sotto questa soglia il giorno conta come 'pigro'", tbl4_r4: "Penalità per ogni giorno pigro o saltato", tbl4_r5: "Massimo XP da un singolo giorno", tbl4_r6: "Soglia evoluzione stadio 1", tbl4_r7: "Soglia evoluzione stadio 2", sec3_panel: "Il Livello (LVL) mostrato sul quadrante è separato dagli stadi evolutivi: level = 1 + (effectiveXp ÷ 10). Cresce in modo continuo e non regredisce.",
+      sec4_title: "🔥 Formula calorie attive", sec4_desc: "Le calorie attive escludono il metabolismo basale (BMR) e rappresentano solo le calorie bruciate con il movimento. Kibo usa una strategia a cascata:",
+      f3_title: "Strategia 1 – Campo nativo del dispositivo (preferito)", f3_v1: "Disponibile su Fenix 7 / Epix / MARQ e dispositivi di fascia alta", f3_v2: "Se non disponibile → si passa alla Strategia 2",
+      f4_title: "Strategia 2 – Calcolo con BMR Mifflin-St Jeor", f4_v1: "calorie_totali – calorie bruciate dall'ActivityMonitor dall'inizio del giorno", f4_v2: "secondi_trascorsi – secondi dall'inizio del giorno (ore × 3600 + min × 60 + sec)", f4_v3: "Se il profilo utente non è disponibile → stima grezza: calorie_attive ≈ calorie_totali × 0.40",
+      f5_title: "BMR – Equazione di Mifflin-St Jeor", f5_v1: "kg – peso in kg (profilo utente Garmin: grammi ÷ 1000)", f5_v2: "cm – altezza in cm", f5_v3: "età – anno corrente − anno di nascita", f5_v4: "offset: +5 (maschio) / −161 (femmina) / −78 (neutro/non definito)",
+      sec5_title: "🌤 Animazioni meteo", sec5_desc: "Le animazioni meteo si attivano solo in modalità high-power (schermo acceso) per non impattare la batteria. Pioggia e neve sono overlay full-screen animati; le altre condizioni sono icone vettoriali statiche accanto al badge della temperatura.",
+      w0_g_t: "☀️ Sereno – Giorno", w0_g_d: "Icona sole con raggi", w0_n_t: "🌙 Sereno – Notte", w0_n_d: "Icona luna crescente", w1_t: "☁️ Nuvoloso", w1_d: "Icona nuvola statica", w2_t: "🌧 Pioggia", w2_d: "Full-screen animato — 14 linee diagonali scorrono", w3_t: "❄️ Neve", w3_d: "Full-screen animato — 16 fiocchi oscillano scendendo", w5_t: "🌫 Nebbia / Vento", w5_d: "Icona nuvola con bande orizzontali",
+      tbl5_title: "Mappatura condizioni Garmin → codice animazione", tbl5_th1: "Codice", tbl5_th2: "Animazione", tbl5_th3: "Tipo", tbl5_th4: "Condizioni Garmin incluse",
+      tbl5_r1_c2: "☀️ Sole (giorno) / 🌙 Luna (notte)", tbl5_stat: "Icona statica", tbl5_r2_c2: "☁️ Nuvola", tbl5_r3_c2: "🌧 Pioggia full-screen", tbl5_anim: "Animazione full-screen", tbl5_r4_c2: "❄️ Neve full-screen", tbl5_r5_c2: "🌫 Nebbia", sec5_panel: "Le animazioni full-screen usano particelle deterministiche derivate dal frame-counter — zero allocazioni per frame, zero stato per particella. Pioggia: 14 linee diagonali (x−4, y+12) che scorrono in base a phase = frame % 24. Neve: 16 cerchi con oscillazione sinusoidale laterale + caduta verticale.", sec5_sub: "Distinzione giorno / notte", sec5_sub_d: "Per il codice 0 (clear) il parametro isDay — calcolato come ora ∈ [7, 19] — seleziona tra il disegno del sole e quello della luna crescente.",
+      footer: "Kibo · Connect IQ Watch Face · Design Reference · Giugno 2025"
+    },
+    en: {
+      doc_ref: "Design Reference", main_title: "Kibo – Design Reference", last_mod: "Last modified:", author: "Author:",
+      toc_title: "Contents", toc_1: "Monster States / Emotions", toc_2: "Evolution Table", toc_3: "XP Formula per Evolution", toc_4: "Active Calories Formula", toc_5: "Weather Animations",
+      sec1_title: "🎭 Monster States / Emotions", sec1_desc: "The monster has 5 emotional states determined in real-time by Garmin's Body Battery and Stress level. Stress takes priority: if ≥ 65, the monster is Stressed regardless of the Body Battery.", sec1_panel: "Reading priority is: Stress ≥ 65 → Stressed. Otherwise, Body Battery is checked: ≥70 → Hyper, ≥20 → Active, ≥10 → Tired, <10 → Exhausted.",
+      mood0_t: "😴 Exhausted", mood0_d: "Closed eyes, open mouth, floating ZZZs", mood1_t: "😪 Tired", mood1_d: "Half-closed eyes with heavy eyelids, neutral mouth", mood2_t: "😊 Active", mood2_d: "Open and bright eyes, open smile", mood3_t: "🤩 Hyper", mood3_d: "Wide open eyes, mega smile, shining sparkles", mood4_t: "😰 Stressed", mood4_d: "Arched eyebrows, mouth down, sweat drop",
+      tbl1_title: "States Summary Table", tbl1_th2: "Name", tbl1_th4: "Eyes", tbl1_th5: "Mouth", tbl1_m0_n: "Exhausted", tbl1_m0_e: "Closed arches, lowered eyelid", tbl1_m0_m: "Open yawn (dark circle + red interior)", tbl1_m0_ex: "Floating white ZZZs", tbl1_m1_n: "Tired", tbl1_m1_e: "Open, low iris + half-lid", tbl1_m1_m: "Straight line (neutral)", tbl1_m2_n: "Active", tbl1_m2_e: "Open, centered iris", tbl1_m2_m: "Smiling crescent", tbl1_m3_n: "Hyper", tbl1_m3_e: "Wide open, large iris", tbl1_m3_m: "Large smiling crescent", tbl1_m3_ex: "Golden sparkles on the sides of the head", tbl1_m4_n: "Stressed", tbl1_m4_e: "Open, slanted eyebrows (\\ /)", tbl1_m4_m: "Inverted arch (frown)", tbl1_m4_ex: "Animated sweat drop + red tension marks",
+      sec1_note: "When the device has no data yet (first boot / simulator), the monster shows the Active (2) mood by default.",
+      sec2_title: "🌱 Evolution Table", sec2_desc: "Each family has 3 evolutionary stages (0 → 1 → 2). Evolution is driven by cumulative XP; devolution occurs if XP drops below the threshold due to inactivity.",
+      tbl2_th1: "Family", tbl2_th2: "Type", tbl2_th3: "Stage 0 – Base", tbl2_th4: "Stage 1 – Intermediate", tbl2_th5: "Stage 2 – Final", tbl2_th6: "Visual Accent",
+      t_fire: "🔥 Flame", t_horns1: "(+ ram horns)", t_crest1: "(+ flame crest)", t_accent1: "Flame tail, animated crest", t_water: "💧 Fins", t_fin1: "(+ dorsal fin)", t_gills1: "(+ gills + pectoral fins)", t_accent2: "Dorsal fin, shark tail", t_grass: "🍃 Leaf", t_leaf1: "(+ leaf ears)", t_flower1: "(+ bloomed flower)", t_accent3: "Head gem, petals", t_elec: "⚡ Lightning", t_light1: "(+ lightning ears)", t_spark1: "(+ cheek sparks)", t_accent4: "Lightning tail, animated sparks", t_ice: "🧊 Crystal", t_cryst1: "(+ 2 crystal-horns)", t_crown1: "(+ central crown + dorsal shards)", t_accent5: "Ice shards, crystals", t_air: "🌬 Wings", t_wings1: "(+ small wings)", t_wings2: "(+ large wings + halo)", t_accent6: "Cloud under feet, halo", t_ground: "🪨 Spikes", t_deer1: "(+ deer antlers + forehead gem)", t_rock1: "(+ dorsal rock plates)", t_accent7: "Thick eyebrow, branched horns", t_star: "⭐ Stars", t_star1: "(+ star antennas)", t_halo1: "(+ halo + orbiting stars)", t_accent8: "Orbiting stars, golden halo",
+      tbl3_title: "Visual Change per Stage", tbl3_th1: "Stage", tbl3_th2: "Body Scale", tbl3_th3: "Body Color", tbl3_th4: "Belly Color", tbl3_th5: "Evolutionary Marks",
+      st_b: "0 – Base", st_b_n: "None", st_i: "1 – Intermediate", st_i_n: "2 accent dots on hips", st_f: "2 – Final", st_f_n: "2 hip dots + 3 belly dots",
+      sec3_title: "📈 XP Formula per Evolution", sec3_desc: "XP is the measure of daily physical effort. Each day contributes up to a max of 220 XP; inactivity decays points.",
+      f1_title: "Gross Daily XP", f1_v1: "minuti_attivi – daily moderate/vigorous activity minutes (ActivityMonitor)", f1_v2: "passi – cumulative step count of the day", f1_v3: "VO₂max Bonus (optional, if enabled in settings): (vo2max − 30) × 3 if vo2max > 30", f1_v4: "Daily Cap: 220 XP — super-workout days don't skip stages",
+      f2_title: "Evolution Thresholds", f2_v1: "Stage 1 → XP ≥ 300 | Stage 2 → XP ≥ 1200", f2_v2: "Stage 0 → 1: ~2–3 weeks of regular training (30 min/day)", f2_v3: "Devolution: lazy day (< 20 XP) = −90 cumulative XP", f2_v4: "Skipped days (face not shown): −90 XP/day, maximum 5 consecutive days",
+      xp_lbl: "XP Progress Visualization (example: 750 XP)", xp_st1: "Stage 1", xp_st2: "Stage 2",
+      tbl4_title: "Daily Goal (streak)", tbl4_th1: "Constant", tbl4_th2: "Value", tbl4_th3: "Description",
+      tbl4_r1: "Active minutes/day to maintain the streak", tbl4_r2: "30 × 4 – minimum XP for a 'good day'", tbl4_r3: "Below this threshold the day counts as 'lazy'", tbl4_r4: "Penalty for each lazy or skipped day", tbl4_r5: "Maximum XP from a single day", tbl4_r6: "Stage 1 evolution threshold", tbl4_r7: "Stage 2 evolution threshold", sec3_panel: "The Level (LVL) shown on the dial is separate from the evolutionary stages: level = 1 + (effectiveXp ÷ 10). It grows continuously and does not regress.",
+      sec4_title: "🔥 Active Calories Formula", sec4_desc: "Active calories exclude Basal Metabolic Rate (BMR) and represent only calories burned through movement. Kibo uses a cascade strategy:",
+      f3_title: "Strategy 1 – Device Native Field (preferred)", f3_v1: "Available on Fenix 7 / Epix / MARQ and high-end devices", f3_v2: "If not available → switches to Strategy 2",
+      f4_title: "Strategy 2 – Calculation with Mifflin-St Jeor BMR", f4_v1: "calorie_totali – total calories burned from ActivityMonitor since start of day", f4_v2: "secondi_trascorsi – seconds since start of day (hours × 3600 + min × 60 + sec)", f4_v3: "If user profile is unavailable → rough estimate: active_calories ≈ total_calories × 0.40",
+      f5_title: "BMR – Mifflin-St Jeor Equation", f5_v1: "kg – weight in kg (Garmin user profile: grams ÷ 1000)", f5_v2: "cm – height in cm", f5_v3: "età – current year − birth year", f5_v4: "offset: +5 (male) / −161 (female) / −78 (neutral/undefined)",
+      sec5_title: "🌤 Weather Animations", sec5_desc: "Weather animations only activate in high-power mode (screen on) to save battery. Rain and snow are full-screen animated overlays; other conditions are static vector icons next to the temperature badge.",
+      w0_g_t: "☀️ Clear – Day", w0_g_d: "Sun icon with rays", w0_n_t: "🌙 Clear – Night", w0_n_d: "Crescent moon icon", w1_t: "☁️ Cloudy", w1_d: "Static cloud icon", w2_t: "🌧 Rain", w2_d: "Full-screen animated — 14 diagonal lines scrolling", w3_t: "❄️ Snow", w3_d: "Full-screen animated — 16 flakes oscillating downwards", w5_t: "🌫 Fog / Wind", w5_d: "Cloud icon with horizontal bands",
+      tbl5_title: "Garmin Conditions to Animation Code Mapping", tbl5_th1: "Code", tbl5_th2: "Animation", tbl5_th3: "Type", tbl5_th4: "Included Garmin Conditions",
+      tbl5_r1_c2: "☀️ Sun (day) / 🌙 Moon (night)", tbl5_stat: "Static icon", tbl5_r2_c2: "☁️ Cloud", tbl5_r3_c2: "🌧 Full-screen rain", tbl5_anim: "Full-screen animation", tbl5_r4_c2: "❄️ Full-screen snow", tbl5_r5_c2: "🌫 Fog", sec5_panel: "Full-screen animations use deterministic particles derived from the frame-counter — zero allocations per frame, zero state per particle. Rain: 14 diagonal lines (x−4, y+12) scrolling based on phase = frame % 24. Snow: 16 circles with lateral sinusoidal oscillation + vertical fall.", sec5_sub: "Day / Night Distinction", sec5_sub_d: "For code 0 (clear), the isDay parameter — calculated as hour ∈ [7, 19] — selects between the sun drawing and the crescent moon drawing.",
+      footer: "Kibo · Connect IQ Watch Face · Design Reference · June 2025"
+    },
+    es: {
+      doc_ref: "Referencia de Diseño", main_title: "Kibo – Referencia de Diseño", last_mod: "Última modificación:", author: "Autor:",
+      toc_title: "Contenidos", toc_1: "Estados / Emociones del monstruo", toc_2: "Tabla de evoluciones", toc_3: "Fórmula de XP para evolución", toc_4: "Fórmula de calorías activ", toc_5: "Animaciones meteorológicas",
+      sec1_title: "🎭 Estados / Emociones del monstruo", sec1_desc: "El monstruo tiene 5 estados emocionales determinados en tiempo real por la Body Battery y el nivel de estrés de Garmin. El estrés tiene prioridad: si es ≥ 65, el monstruo está Estresado independientemente de la Body Battery.", sec1_panel: "La prioridad de lectura es: Estrés ≥ 65 → Estresado. De lo contrario, se usa la Body Battery: ≥70 → Hiper, ≥20 → Activo, ≥10 → Cansado, <10 → Agotado.",
+      mood0_t: "😴 Agotado", mood0_d: "Ojos cerrados, boca abierta, ZZZ flotantes", mood1_t: "😪 Cansado", mood1_d: "Ojos entreabiertos con párpados pesados, boca neutra", mood2_t: "😊 Activo", mood2_d: "Ojos abiertos y vivos, sonrisa abierta", mood3_t: "🤩 Hiper", mood3_d: "Ojos abiertos de par en par, mega sonrisa, destellos brillantes", mood4_t: "😰 Estresado", mood4_d: "Cejas arqueadas, boca abajo, gota de sudor",
+      tbl1_title: "Tabla resumen de estados", tbl1_th2: "Nombre", tbl1_th4: "Ojos", tbl1_th5: "Boca", tbl1_m0_n: "Agotado", tbl1_m0_e: "Arcos cerrados, párpado bajado", tbl1_m0_m: "Bostezo abierto (círculo oscuro + interior rojo)", tbl1_m0_ex: "ZZZ blancas flotantes", tbl1_m1_n: "Cansado", tbl1_m1_e: "Abiertos, iris bajo + medio párpado", tbl1_m1_m: "Línea recta (neutral)", tbl1_m2_n: "Activo", tbl1_m2_e: "Abiertos, iris centrado", tbl1_m2_m: "Media luna sonriente", tbl1_m3_n: "Hiper", tbl1_m3_e: "Abiertos de par en par, iris grande", tbl1_m3_m: "Media luna grande sonriente", tbl1_m3_ex: "Destellos dorados a los lados de la cabeza", tbl1_m4_n: "Estresado", tbl1_m4_e: "Abiertos, cejas inclinadas (\\ /)", tbl1_m4_m: "Arco invertido (frown)", tbl1_m4_ex: "Gota de sudor animada + marcas de tensión rojas",
+      sec1_note: "Cuando el dispositivo aún no tiene datos (primer encendido / simulador), el monstruo muestra el estado Activo (2) por defecto.",
+      sec2_title: "🌱 Tabla de evoluciones", sec2_desc: "Cada familia tiene 3 etapas evolutivas (0 → 1 → 2). La evolución está guiada por el XP acumulado; la devolución ocurre si el XP cae por debajo del umbral debido a la inactividad.",
+      tbl2_th1: "Familia", tbl2_th2: "Tipo", tbl2_th3: "Etapa 0 – Base", tbl2_th4: "Etapa 1 – Intermedia", tbl2_th5: "Etapa 2 – Final", tbl2_th6: "Acento visual",
+      t_fire: "🔥 Llama", t_horns1: "(+ cuernos de carnero)", t_crest1: "(+ cresta de fuego)", t_accent1: "Cola de fuego, cresta animada", t_water: "💧 Aletas", t_fin1: "(+ aleta dorsal)", t_gills1: "(+ branquias + aletas pectorales)", t_accent2: "Aleta dorsal, cola de tiburón", t_grass: "🍃 Hoja", t_leaf1: "(+ orejas de hoja)", t_flower1: "(+ flor abierta)", t_accent3: "Gema en la cabeza, pétalos", t_elec: "⚡ Rayo", t_light1: "(+ orejas de rayo)", t_spark1: "(+ chispas en las mejillas)", t_accent4: "Cola de rayo, chispas animadas", t_ice: "🧊 Cristal", t_cryst1: "(+ 2 cuernos de cristal)", t_crown1: "(+ corona central + fragmentos dorsales)", t_accent5: "Fragmentos de hielo, cristales", t_air: "🌬 Alas", t_wings1: "(+ alas pequeñas)", t_wings2: "(+ alas grandes + aureola)", t_accent6: "Nube bajo los pies, aureola", t_ground: "🪨 Espigas", t_deer1: "(+ astas de ciervo + gema en la frente)", t_rock1: "(+ placas rocosas dorsales)", t_accent7: "Ceja gruesa, cuernos ramificados", t_star: "⭐ Estrellas", t_star1: "(+ antenas de estrella)", t_halo1: "(+ aureola + estrellas orbitando)", t_accent8: "Estrellas orbitando, aureola dorada",
+      tbl3_title: "Cambio visual por etapa", tbl3_th1: "Etapa", tbl3_th2: "Escala cuerpo", tbl3_th3: "Color cuerpo", tbl3_th4: "Color vientre", tbl3_th5: "Marcas evolutivas",
+      st_b: "0 – Base", st_b_n: "Ninguno", st_i: "1 – Intermedia", st_i_n: "2 puntos de acento en las caderas", st_f: "2 – Final", st_f_n: "2 puntos en caderas + 3 puntos en vientre",
+      sec3_title: "📈 Fórmula de XP para evolución", sec3_desc: "El XP es la medida del esfuerzo físico diario. Cada día contribuye hasta un máximo de 220 XP; la inactividad disminuye los puntos.",
+      f1_title: "XP diario bruto", f1_v1: "minuti_attivi – minutos de actividad moderada/intensa del día (ActivityMonitor)", f1_v2: "passi – conteo de pasos acumulativo del día", f1_v3: "Bono VO₂max (opcional, si está habilitado en la configuración): (vo2max − 30) × 3 si vo2max > 30", f1_v4: "Límite diario: 220 XP — los días de súper entrenamiento no saltan etapas",
+      f2_title: "Umbrales de evolución", f2_v1: "Etapa 1 → XP ≥ 300 | Etapa 2 → XP ≥ 1200", f2_v2: "Etapa 0 → 1: ~2–3 semanas de entrenamiento regular (30 min/día)", f2_v3: "Devolución: día perezoso (< 20 XP) = −90 XP acumulados", f2_v4: "Días saltados (cara no mostrada): −90 XP/día, máximo 5 días consecutivos",
+      xp_lbl: "Visualización del progreso de XP (ejemplo: 750 XP)", xp_st1: "Etapa 1", xp_st2: "Etapa 2",
+      tbl4_title: "Objetivo diario (racha)", tbl4_th1: "Constante", tbl4_th2: "Valor", tbl4_th3: "Descripción",
+      tbl4_r1: "Minutos activos/día para mantener la racha", tbl4_r2: "30 × 4 – XP mínimo para un 'buen día'", tbl4_r3: "Por debajo de este umbral el día cuenta como 'perezoso'", tbl4_r4: "Penalización por cada día perezoso o saltado", tbl4_r5: "Máximo XP de un solo día", tbl4_r6: "Umbral de evolución etapa 1", tbl4_r7: "Umbral de evolución etapa 2", sec3_panel: "El Nivel (LVL) mostrado en la pantalla es independiente de las etapas evolutivas: level = 1 + (effectiveXp ÷ 10). Crece continuamente y no retrocede.",
+      sec4_title: "🔥 Fórmula de calorías activas", sec4_desc: "Las calorías activas excluyen la Tasa Metabólica Basal (BMR) y representan solo las calorías quemadas con el movimiento. Kibo usa una estrategia en cascada:",
+      f3_title: "Estrategia 1 – Campo nativo del dispositivo (preferido)", f3_v1: "Disponible en Fenix 7 / Epix / MARQ y dispositivos de gama alta", f3_v2: "Si no está disponible → pasa a la Estrategia 2",
+      f4_title: "Estrategia 2 – Cálculo con BMR Mifflin-St Jeor", f4_v1: "calorie_totali – calorías totales quemadas desde el ActivityMonitor desde el inicio del día", f4_v2: "secondi_trascorsi – segundos transcurridos desde el inicio del día (horas × 3600 + min × 60 + sec)", f4_v3: "Si el perfil de usuario no está disponible → estimación aproximada: calorías_activas ≈ calorías_totales × 0.40",
+      f5_title: "BMR – Ecuación de Mifflin-St Jeor", f5_v1: "kg – peso en kg (perfil de usuario de Garmin: gramos ÷ 1000)", f5_v2: "cm – altura en cm", f5_v3: "età – año actual − año de nacimiento", f5_v4: "offset: +5 (masculino) / −161 (femenino) / −78 (neutro/no definido)",
+      sec5_title: "🌤 Animaciones meteorológicas", sec5_desc: "Las animaciones meteorológicas solo se activan en modo de alta potencia (pantalla encendida) para no afectar la batería. La lluvia y la nieve son superposiciones animadas a pantalla completa; las demás condiciones son iconos vectoriales estáticos junto a la insignia de temperatura.",
+      w0_g_t: "☀️ Despejado – Día", w0_g_d: "Icono de sol con rayos", w0_n_t: "🌙 Despejado – Noche", w0_n_d: "Icono de luna creciente", w1_t: "☁️ Nublado", w1_d: "Icono de nube estático", w2_t: "🌧 Lluvia", w2_d: "Pantalla completa animada — 14 líneas diagonales fluyen", w3_t: "❄️ Nieve", w3_d: "Pantalla completa animada — 16 copos oscilan bajando", w5_t: "🌫 Niebla / Vento", w5_d: "Icono de nube con bandas horizontales",
+      tbl5_title: "Mapeo de condiciones Garmin → código de animación", tbl5_th1: "Código", tbl5_th2: "Animación", tbl5_th3: "Tipo", tbl5_th4: "Condiciones Garmin incluidas",
+      tbl5_r1_c2: "☀️ Sol (día) / 🌙 Luna (noche)", tbl5_stat: "Icono estático", tbl5_r2_c2: "☁️ Nube", tbl5_r3_c2: "🌧 Lluvia a pantalla completa", tbl5_anim: "Animación a pantalla completa", tbl5_r4_c2: "❄️ Nieve a pantalla completa", tbl5_r5_c2: "🌫 Niebla", sec5_panel: "Las animaciones a pantalla completa usan partículas deterministas derivadas del contador de fotogramas — cero asignaciones por fotograma, cero estado por partícula. Lluvia: 14 líneas diagonales (x−4, y+12) que fluyen según phase = frame % 24. Nieve: 16 círculos con oscilación sinusoidal lateral + caída vertical.", sec5_sub: "Distinción día / noche", sec5_sub_d: "Para el código 0 (clear), el parámetro isDay — calculado como hora ∈ [7, 19] — selecciona entre el dibujo del sol y el de la luna creciente.",
+      footer: "Kibo · Connect IQ Watch Face · Referencia de Diseño · Junio 2025"
+    },
+    fr: {
+      doc_ref: "Référence de Design", main_title: "Kibo – Référence de Design", last_mod: "Dernière modification :", author: "Auteur :",
+      toc_title: "Contenu", toc_1: "États / Émotions du monstre", toc_2: "Tableau des évolutions", toc_3: "Formule XP pour évolution", toc_4: "Formule des calories actives", toc_5: "Animations météo",
+      sec1_title: "🎭 États / Émotions du monstre", sec1_desc: "Le monstre a 5 états émotionnels déterminés en temps réel par la Body Battery et le niveau de stress Garmin. Le stress a la priorité : si ≥ 65, le monstre est Stressé indépendamment de la Body Battery.", sec1_panel: "La priorité de lecture est : Stress ≥ 65 → Stressé. Sinon, la Body Battery est utilisée : ≥70 → Hyper, ≥20 → Actif, ≥10 → Fatigué, <10 → Épuisé.",
+      mood0_t: "😴 Épuisé", mood0_d: "Yeux fermés, bouche ouverte, ZZZ flottants", mood1_t: "😪 Fatigué", mood1_d: "Yeux mi-clos avec paupières lourdes, bouche neutre", mood2_t: "😊 Actif", mood2_d: "Yeux ouverts et vifs, sourire ouvert", mood3_t: "🤩 Hyper", mood3_d: "Yeux grands ouverts, méga sourire, éclats brillants", mood4_t: "😰 Stressé", mood4_d: "Sourcils arqués, bouche vers le bas, goutte de sueur",
+      tbl1_title: "Tableau récapitulatif des états", tbl1_th2: "Nom", tbl1_th4: "Yeux", tbl1_th5: "Bouche", tbl1_m0_n: "Épuisé", tbl1_m0_e: "Arcs fermés, paupière baissée", tbl1_m0_m: "Baillement ouvert (cercle sombre + intérieur rouge)", tbl1_m0_ex: "ZZZ blancs flottants", tbl1_m1_n: "Fatigué", tbl1_m1_e: "Ouverts, iris bas + demi-paupière", tbl1_m1_m: "Ligne droite (neutre)", tbl1_m2_n: "Actif", tbl1_m2_e: "Ouverts, iris centré", tbl1_m2_m: "Croissant souriant", tbl1_m3_n: "Hyper", tbl1_m3_e: "Grands ouverts, grand iris", tbl1_m3_m: "Grand croissant souriant", tbl1_m3_ex: "Éclats dorés sur les côtés de la tête", tbl1_m4_n: "Stressé", tbl1_m4_e: "Ouverts, sourcils inclinés (\\ /)", tbl1_m4_m: "Arc inversé (frown)", tbl1_m4_ex: "Goutte de sueur animée + marques de tension rouges",
+      sec1_note: "Lorsque l'appareil n'a pas encore de données (premier démarrage / simulateur), le monstre affiche l'état Actif (2) par défaut.",
+      sec2_title: "🌱 Tableau des évolutions", sec2_desc: "Chaque famille a 3 stades évolutifs (0 → 1 → 2). L'évolution est guidée par l'XP cumulé ; la régression se produit si l'XP tombe en dessous du seuil pour inactivité.",
+      tbl2_th1: "Famille", tbl2_th2: "Type", tbl2_th3: "Stade 0 – Base", tbl2_th4: "Stade 1 – Intermédiaire", tbl2_th5: "Stade 2 – Final", tbl2_th6: "Accent visuel",
+      t_fire: "🔥 Flamme", t_horns1: "(+ cornes de bélier)", t_crest1: "(+ crête de feu)", t_accent1: "Queue de feu, crête animée", t_water: "💧 Nageoires", t_fin1: "(+ nageoire dorsale)", t_gills1: "(+ branchies + nageoires pectorales)", t_accent2: "Nageoire dorsale, queue de requin", t_grass: "🍃 Feuille", t_leaf1: "(+ oreilles de feuille)", t_flower1: "(+ fleur épanouie)", t_accent3: "Gemme sur la tête, pétales", t_elec: "⚡ Éclair", t_light1: "(+ oreilles d'éclair)", t_spark1: "(+ étincelles aux joues)", t_accent4: "Queue d'éclair, étincelles animées", t_ice: "🧊 Cristal", t_cryst1: "(+ 2 cornes de cristal)", t_crown1: "(+ couronne centrale + éclats dorsaux)", t_accent5: "Éclats de glace, cristaux", t_air: "🌬 Ailes", t_wings1: "(+ petites ailes)", t_wings2: "(+ grandes ailes + auréole)", t_accent6: "Nuage sous les pieds, auréole", t_ground: "🪨 Épis", t_deer1: "(+ bois de cerf + gemme sur le front)", t_rock1: "(+ plaques rocheuses dorsales)", t_accent7: "Sourcil épais, cornes ramifiées", t_star: "⭐ Étoiles", t_star1: "(+ antennes en étoile)", t_halo1: "(+ auréole + étoiles en orbite)", t_accent8: "Étoiles en orbite, auréole dorée",
+      tbl3_title: "Changement visuel par stade", tbl3_th1: "Stade", tbl3_th2: "Taille corps", tbl3_th3: "Couleur corps", tbl3_th4: "Couleur ventre", tbl3_th5: "Marques évolutives",
+      st_b: "0 – Base", st_b_n: "Aucun", st_i: "1 – Intermédiaire", st_i_n: "2 points d'accent sur les flancs", st_f: "2 – Final", st_f_n: "2 points sur les flancs + 3 points sur le ventre",
+      sec3_title: "📈 Formule XP pour évolution", sec3_desc: "L'XP est la mesure de l'effort physique quotidien. Chaque jour contribue jusqu'à un maximum de 220 XP ; l'inactivité fait baisser les points.",
+      f1_title: "XP quotidien brut", f1_v1: "minuti_attivi – minutes d'activité modérée/intense du jour (ActivityMonitor)", f1_v2: "passi – nombre de pas cumulé du jour", f1_v3: "Bonus VO₂max (optionnel, si activé dans les paramètres) : (vo2max − 30) × 3 si vo2max > 30", f1_v4: "Plafond quotidien : 220 XP — les jours de super-entraînement ne sautent pas de stades",
+      f2_title: "Seuils d'évolution", f2_v1: "Stade 1 → XP ≥ 300 | Stade 2 → XP ≥ 1200", f2_v2: "Stade 0 → 1: ~2–3 semaines d'entraînement régulier (30 min/jour)", f2_v3: "Régression : journée paresseuse (< 20 XP) = −90 XP cumulés", f2_v4: "Jours sautés (cadran non affiché) : −90 XP/jour, maximum 5 jours consécutifs",
+      xp_lbl: "Visualisation de la progression de l'XP (exemple : 750 XP)", xp_st1: "Stade 1", xp_st2: "Stade 2",
+      tbl4_title: "Objectif quotidien (série)", tbl4_th1: "Constante", tbl4_th2: "Valeur", tbl4_th3: "Description",
+      tbl4_r1: "Minutes actives/jour pour maintenir la série", tbl4_r2: "30 × 4 – XP minimum pour une 'bonne journée'", tbl4_r3: "En dessous de ce seuil, la journée compte comme 'paresseuse'", tbl4_r4: "Pénalité pour chaque journée paresseuse ou sautée", tbl4_r5: "XP maximum d'une seule journée", tbl4_r6: "Seuil d'évolution stade 1", tbl4_r7: "Seuil d'évolution stade 2", sec3_panel: "Le Niveau (LVL) affiché sur le cadran est distinct des stades évolutifs : level = 1 + (effectiveXp ÷ 10). Il grandit continuellement et ne régresse pas.",
+      sec4_title: "🔥 Formule des calories actives", sec4_desc: "Les calories actives excluent le métabolisme de base (BMR) et représentent uniquement les calories brûlées par le mouvement. Kibo utilise une stratégie en cascade :",
+      f3_title: "Stratégie 1 – Champ natif de l'appareil (préféré)", f3_v1: "Disponible sur Fenix 7 / Epix / MARQ et appareils haut de gamme", f3_v2: "Si non disponible → passe à la Stratégie 2",
+      f4_title: "Stratégie 2 – Calcul avec le BMR Mifflin-St Jeor", f4_v1: "calorie_totali – calories totales brûlées via l'ActivityMonitor depuis le début de la journée", f4_v2: "secondi_trascorsi – secondes écoulées depuis le début de la journée (heures × 3600 + min × 60 + sec)", f4_v3: "Si le profil utilisateur n'est pas disponible → estimation brute : calories_actives ≈ calories_totales × 0.40",
+      f5_title: "BMR – Équation de Mifflin-St Jeor", f5_v1: "kg – poids en kg (profil utilisateur Garmin : grammes ÷ 1000)", f5_v2: "cm – hauteur en cm", f5_v3: "età – année en cours − année de naissance", f5_v4: "offset : +5 (homme) / −161 (femme) / −78 (neutre/non défini)",
+      sec5_title: "🌤 Animations météo", sec5_desc: "Les animations météo ne s'activent qu'en mode haute puissance (écran allumé) pour ne pas affecter la batterie. La pluie et la neige sont des superpositions animées en plein écran ; les autres conditions sont des icônes vectorielles statiques à côté du badge de température.",
+      w0_g_t: "☀️ Dégagé – Jour", w0_g_d: "Icône de soleil avec rayons", w0_n_t: "🌙 Dégagé – Nuit", w0_n_d: "Icône de croissant de lune", w1_t: "☁️ Nuageux", w1_d: "Icône de nuage statique", w2_t: "🌧 Pluie", w2_d: "Plein écran animé — 14 lignes diagonales défilent", w3_t: "❄️ Neige", w3_d: "Plein écran animé — 16 flocons oscillent en descendant", w5_t: "🌫 Brouillard / Vent", w5_d: "Icône de nuage avec bandes horizontales",
+      tbl5_title: "Mappage des conditions Garmin → code d'animation", tbl5_th1: "Code", tbl5_th2: "Animation", tbl5_th3: "Type", tbl5_th4: "Conditions Garmin incluses",
+      tbl5_r1_c2: "☀️ Soleil (jour) / 🌙 Lune (nuit)", tbl5_stat: "Icône statique", tbl5_r2_c2: "☁️ Nuage", tbl5_r3_c2: "🌧 Pluie plein écran", tbl5_anim: "Animation plein écran", tbl5_r4_c2: "❄️ Neige plein écran", tbl5_r5_c2: "🌫 Brouillard", sec5_panel: "Les animations en plein écran utilisent des particules déterministes dérivées du compteur de cadres — zéro allocation par cadre, zéro état par particule. Pluie : 14 lignes diagonales (x−4, y+12) défilant selon phase = frame % 24. Neige : 16 cercles avec oscillation sinusoïdale latérale + chute verticale.", sec5_sub: "Distinction jour / nuit", sec5_sub_d: "Pour le code 0 (clear), le paramètre isDay — calculé comme heure ∈ [7, 19] — sélectionne entre le dessin du soleil et celui du croissant de lune.",
+      footer: "Kibo · Connect IQ Watch Face · Référence de Design · Juin 2025"
+    },
+    de: {
+      doc_ref: "Design-Referenz", main_title: "Kibo – Design-Referenz", last_mod: "Zuletzt geändert:", author: "Autor:",
+      toc_title: "Inhalt", toc_1: "Zustände / Emotionen des Monsters", toc_2: "Evolutionstabelle", toc_3: "XP-Formel für Evolution", toc_4: "Formel für aktive Kalorien", toc_5: "Wetteranimationen",
+      sec1_title: "🎭 Zustände / Emotionen des Monsters", sec1_desc: "Das Monster hat 5 emotionale Zustände, die in Echtzeit durch die Body Battery und das Stresslevel von Garmin bestimmt werden. Stress hat Priorität: Wenn ≥ 65, ist das Monster gestresst, unabhängig von der Body Battery.", sec1_panel: "Die Lesepriorität ist: Stress ≥ 65 → Gestresst. Andernfalls wird die Body Battery verwendet: ≥70 → Hyper, ≥20 → Aktiv, ≥10 → Müde, <10 → Erschöpft.",
+      mood0_t: "😴 Erschöpft", mood0_d: "Geschlossene Augen, offener Mund, schwebende ZZZs", mood1_t: "😪 Müde", mood1_d: "Halbgeschlossene Augen mit schweren Augenlidern, neutraler Mund", mood2_t: "😊 Aktiv", mood2_d: "Offene und lebendige Augen, offenes Lächeln", mood3_t: "🤩 Hyper", mood3_d: "Weit geöffnete Augen, Mega-Lächeln, leuchtende Funken", mood4_t: "😰 Gestresst", mood4_d: "Gezogene Augenbrauen, Mund nach unten, Schweißtropfen",
+      tbl1_title: "Zusammenfassungstabelle der Zustände", tbl1_th2: "Name", tbl1_th4: "Augen", tbl1_th5: "Mund", tbl1_m0_n: "Erschöpft", tbl1_m0_e: "Geschlossene Bögen, gesenktes Augenlid", tbl1_m0_m: "Offenes Gähnen (dunkler Kreis + rotes Inneres)", tbl1_m0_ex: "Schwebende weiße ZZZs", tbl1_m1_n: "Müde", tbl1_m1_e: "Offen, niedrige Iris + halbes Augenlid", tbl1_m1_m: "Gerade Linie (neutral)", tbl1_m2_n: "Aktiv", tbl1_m2_e: "Offen, zentrierte Iris", tbl1_m2_m: "Lächelnder Halbmond", tbl1_m3_n: "Hyper", tbl1_m3_e: "Weit geöffnet, große Iris", tbl1_m3_m: "Großer lächelnder Halbmond", tbl1_m3_ex: "Goldene Funken an den Seiten des Kopfes", tbl1_m4_n: "Gestresst", tbl1_m4_e: "Offen, geneigte Augenbrauen (\\ /)", tbl1_m4_m: "Invertierter Bogen (frown)", tbl1_m4_ex: "Animierter Schweißtropfen + rote Spannungszeichen",
+      sec1_note: "Wenn das Gerät noch keine Daten hat (erster Start / Simulator), zeigt das Monster standardmäßig den Zustand Aktiv (2).",
+      sec2_title: "🌱 Evolutionstabelle", sec2_desc: "Jede Familie hat 3 Evolutionsstufen (0 → 1 → 2). Die Evolution wird durch die kumulierten XP gesteuert; eine Devolution findet statt, wenn die XP aufgrund von Inaktivität unter den Schwellenwert fallen.",
+      tbl2_th1: "Familie", tbl2_th2: "Typ", tbl2_th3: "Stufe 0 – Basis", tbl2_th4: "Stufe 1 – Zwischenstufe", tbl2_th5: "Stufe 2 – Finale", tbl2_th6: "Visueller Akzent",
+      t_fire: "🔥 Flamme", t_horns1: "(+ Widderhörner)", t_crest1: "(+ Flammenkamm)", t_accent1: "Flammenschwanz, animierter Kamm", t_water: "💧 Flossen", t_fin1: "(+ Rückenflosse)", t_gills1: "(+ Kiemen + Brustflossen)", t_accent2: "Rückenflosse, Haifischschwanz", t_grass: "🍃 Blatt", t_leaf1: "(+ Blattohren)", t_flower1: "(+ aufgeblühte Blume)", t_accent3: "Kopfjuwel, Blütenblätter", t_elec: "⚡ Blitz", t_light1: "(+ Blitzohren)", t_spark1: "(+ Wangenfunken)", t_accent4: "Blitzschwanz, animierte Funken", t_ice: "🧊 Kristall", t_cryst1: "(+ 2 Kristallhörner)", t_crown1: "(+ zentrale Krone + Rückensplitter)", t_accent5: "Eissplitter, Kristalle", t_air: "🌬 Flügel", t_wings1: "(+ kleine Flügel)", t_wings2: "(+ große Flügel + Heiligenschein)", t_accent6: "Wolke unter den Füßen, Heiligenschein", t_ground: "🪨 Ähren", t_deer1: "(+ Hirschgeweih + Stirnjuwel)", t_rock1: "(+ dorsale Felsplatten)", t_accent7: "Dicke Augenbraue, verzweigte Hörner", t_star: "⭐ Sterne", t_star1: "(+ Antennenstern)", t_halo1: "(+ Heiligenschein + umlaufende Sterne)", t_accent8: "Umlaufende Sterne, goldener Heiligenschein",
+      tbl3_title: "Visuelle Änderung pro Stufe", tbl3_th1: "Stufe", tbl3_th2: "Körperskalierung", tbl3_th3: "Körperfarbe", tbl3_th4: "Bauchfarbe", tbl3_th5: "Evolutionszeichen",
+      st_b: "0 – Basis", st_b_n: "Keine", st_i: "1 – Zwischenstufe", st_i_n: "2 Akzentpunkte auf den Hüften", st_f: "2 – Finale", st_f_n: "2 Hüftpunkte + 3 Bauchpunkte",
+      sec3_title: "📈 XP-Formel für Evolution", sec3_desc: "Die XP sind das Maß für den täglichen körperlichen Einsatz. Jeder Tag trägt bis zu einem Maximum von 220 XP bei; Inaktivität führt zu Punkteverfall.",
+      f1_title: "Brutto-Tages-XP", f1_v1: "minuti_attivi – Minuten mit moderater/intensiver Aktivität des Tages (ActivityMonitor)", f1_v2: "passi – kumulierte Schrittzählung des Tages", f1_v3: "VO₂max-Bonus (optional, falls in den Einstellungen aktiviert): (vo2max − 30) × 3 wenn vo2max > 30", f1_v4: "Tageslimit: 220 XP — Super-Trainingstage überspringen keine Stufen",
+      f2_title: "Evolutionsschwellen", f2_v1: "Stufe 1 → XP ≥ 300 | Stufe 2 → XP ≥ 1200", f2_v2: "Stufe 0 → 1: ~2–3 Wochen regelmäßiges Training (30 Min./Tag)", f2_v3: "Devolution: fauler Tag (< 20 XP) = −90 kumulierte XP", f2_v4: "Übersprungene Tage (Zifferblatt nicht angezeigt): −90 XP/Tag, maximal 5 aufeinanderfolgende Tage",
+      xp_lbl: "Visualisierung des XP-Fortschritts (Beispiel: 750 XP)", xp_st1: "Stufe 1", xp_st2: "Stufe 2",
+      tbl4_title: "Tagesziel (Streak)", tbl4_th1: "Konstante", tbl4_th2: "Wert", tbl4_th3: "Beschreibung",
+      tbl4_r1: "Aktive Minuten/Tag zur Aufrechterhaltung der Streak", tbl4_r2: "30 × 4 – Mindest-XP für einen 'guten Tag'", tbl4_r3: "Unter diesem Schwellenwert gilt der Tag als 'faul'", tbl4_r4: "Strafe für jeden faulen oder ausgelassenen Tag", tbl4_r5: "Maximale XP an einem einzelnen Tag", tbl4_r6: "Evolutionsschwelle Stufe 1", tbl4_r7: "Evolutionsschwelle Stufe 2", sec3_panel: "Das auf dem Zifferblatt angezeigte Level (LVL) ist unabhängig von den Evolutionsstufen: level = 1 + (effectiveXp ÷ 10). Es wächst kontinuierlich und sinkt nicht.",
+      sec4_title: "🔥 Formel für aktive Kalorien", sec4_desc: "Aktive Kalorien schließen den Grundumsatz (BMR) aus und stellen nur die durch Bewegung verbrannten Kalorien dar. Kibo verwendet eine Kaskadenstrategie:",
+      f3_title: "Strategie 1 – Natives Feld des Geräts (bevorzugt)", f3_v1: "Verfügbar auf Fenix 7 / Epix / MARQ und High-End-Geräten", f3_v2: "Falls nicht verfügbar → Wechsel zu Strategie 2",
+      f4_title: "Strategie 2 – Berechnung mit BMR Mifflin-St Jeor", f4_v1: "calorie_totali – Gesamtkalorien, die seit Beginn des Tages vom ActivityMonitor verbrannt wurden", f4_v2: "secondi_trascorsi – vergangene Sekunden seit Beginn des Tages (Stunden × 3600 + Min. × 60 + Sek.)", f4_v3: "Wenn das Benutzerprofil nicht verfügbar ist → grobe Schätzung: aktive_Kalorien ≈ Gesamtkalorien × 0.40",
+      f5_title: "BMR – Mifflin-St-Jeor-Gleichung", f5_v1: "kg – Gewicht in kg (Garmin-Benutzerprofil: Gramm ÷ 1000)", f5_v2: "cm – Höhe in cm", f5_v3: "età – aktuelles Jahr − Geburtsjahr", f5_v4: "Offset: +5 (männlich) / −161 (weiblich) / −78 (neutral/nicht definiert)",
+      sec5_title: "🌤 Wetteranimationen", sec5_desc: "Wetteranimationen werden nur im High-Power-Modus (Bildschirm an) aktiviert, um den Akku zu schonen. Regen und Schnee sind animierte Vollbild-Overlays; andere Bedingungen sind statische Vektorsymbole neben dem Temperatur-Badge.",
+      w0_g_t: "☀️ Klar – Tag", w0_g_d: "Sonnensymbol mit Strahlen", w0_n_t: "🌙 Klar – Nacht", w0_n_d: "Sichelmondsymbol", w1_t: "☁️ Bewölkt", w1_d: "Statisches Wolkensymbol", w2_t: "🌧 Regen", w2_d: "Animiertes Vollbild — 14 diagonale Linien fließen", w3_t: "❄️ Schnee", w3_d: "Animiertes Vollbild — 16 Flocken oszillieren beim Absteigen", w5_t: "🌫 Nebel / Wind", w5_d: "Wolkensymbol mit horizontalen Streifen",
+      tbl5_title: "Zuordnung der Garmin-Bedingungen → Animationscode", tbl5_th1: "Code", tbl5_th2: "Animation", tbl5_th3: "Typ", tbl5_th4: "Enthaltene Garmin-Bedingungen",
+      tbl5_r1_c2: "☀️ Sonne (Tag) / 🌙 Mond (Nacht)", tbl5_stat: "Statisches Symbol", tbl5_r2_c2: "☁️ Wolke", tbl5_r3_c2: "🌧 Vollbildregen", tbl5_anim: "Vollbildanimation", tbl5_r4_c2: "❄️ Vollbildschnee", tbl5_r5_c2: "🌫 Nebbel", sec5_panel: "Vollbildanimationen verwenden deterministische Partikel, die aus dem Frame-Counter abgeleitet werden — keine Zuweisungen pro Frame, kein Zustand pro Partikel. Regen: 14 diagonale Linien (x−4, y+12), die basierend auf phase = frame % 24 fließen. Schnee: 16 Kreise mit seitlicher Sinusschwingung + vertikalem Fall.", sec5_sub: "Unterscheidung Tag / Nacht", sec5_sub_d: "Für Code 0 (clear) wählt der Parameter isDay — berechnet als Stunde ∈ [7, 19] — zwischen der Zeichnung der Sonne und der des Sichelmonds.",
+      footer: "Kibo · Connect IQ Watch Face · Design-Referenz · Juni 2025"
+    },
+    ja: {
+      doc_ref: "デザイン仕様書", main_title: "Kibo – デザイン仕様書", last_mod: "最終更新日:", author: "著者:",
+      toc_title: "コンテンツ", toc_1: "モンスターの状態 / 感情", toc_2: "進化マトリクス表", toc_3: "進化のためのXP計算式", toc_4: "アクティブカロリー計算式", toc_5: "天候アニメーション",
+      sec1_title: "🎭 モンスターの状態 / 感情", sec1_desc: "モンスターには、GarminのBody Batteryとストレスレベルによってリアルタイムに決定される5つの感情状態があります。ストレスが最優先され、65以上の場合はBody Batteryに関係なく「ストレス検知」状態になります。", sec1_panel: "読み取りの優先順位は次のとおりです：ストレス ≥ 65 → ストレス検知。それ以外はBody Batteryを参照：≥70 → ハイパー、≥20 → アクティブ、≥10 → 疲労、<10 → 疲弊。",
+      mood0_t: "😴 疲弊", mood0_d: "目を閉じ、口を開け、ZZZが浮遊している状態", mood1_t: "😪 疲労", mood1_d: "重い瞼の半開き、ニュートラルな口元", mood2_t: "😊 アクティブ", mood2_d: "生き生きと開いた目、明るい笑顔", mood3_t: "🤩 ハイパー", mood3_d: "見開いた目、メガスマイル、輝く火花", mood4_t: "😰 ストレス検知", mood4_d: "ひそめられた眉、下がった口元、冷や汗",
+      tbl1_title: "状態一覧表", tbl1_th2: "名称", tbl1_th4: "目", tbl1_th5: "口", tbl1_m0_n: "疲弊", tbl1_m0_e: "閉じた目、下がった瞼", tbl1_m0_m: "大きく開けたあくび（暗い円＋内側が赤）", tbl1_m0_ex: "浮遊する白いZZZ", tbl1_m1_n: "疲労", tbl1_m1_e: "開いた目、下がった虹彩＋半開き瞼", tbl1_m1_m: "直線（ニュートラル）", tbl1_m2_n: "アクティブ", tbl1_m2_e: "開いた目、中央の虹彩", tbl1_m2_m: "笑顔の三日月", tbl1_m3_n: "ハイパー", tbl1_m3_e: "見開いた大きな目、大きな虹彩", tbl1_m3_m: "大きな笑顔の三日月", tbl1_m3_ex: "頭の横に金色のスパークル", tbl1_m4_n: "ストレス検知", tbl1_m4_e: "開いた目、傾いた眉（\\ /）", tbl1_m4_m: "逆アーチ（への字口）", tbl1_m4_ex: "アニメーションする汗のしずく＋赤の緊張マーク",
+      sec1_note: "デバイスにまだデータがない場合（初回起動 / シミュレーター）、モンスターはデフォルトで「アクティブ (2)」の状態を表示します。",
+      sec2_title: "🌱 進化マトリクス表", sec2_desc: "各系統には3つの進化段階（0 → 1 → 2）があります。進化は累積XPによって変化し、不活動によりXPが閾値を下回ると退化が起こります。",
+      tbl2_th1: "系統", tbl2_th2: "属性", tbl2_th3: "段階 0 – ベース", tbl2_th4: "段階 1 – 中期", tbl2_th5: "段階 2 – 最終", tbl2_th6: "視覚的特徴",
+      t_fire: "🔥 火炎", t_horns1: "（＋牡羊の角）", t_crest1: "（＋炎のたてがみ）", t_accent1: "炎の尾、アニメーションするたてがみ", t_water: "💧 水流", t_fin1: "（＋背びれ）", t_gills1: "（＋エラ＋胸びれ）", t_accent2: "背びれ、サメの尾", t_grass: "🍃 若葉", t_leaf1: "（＋葉の耳）", t_flower1: "（＋開いた花）", t_accent3: "頭の宝石、花びら", t_elec: "⚡ 雷電", t_light1: "（＋稲妻の耳）", t_spark1: "（＋頬の火花）", t_accent4: "稲妻の尾、アニメーションする火花", t_ice: "🧊 氷晶", t_cryst1: "（＋2本の氷晶の角）", t_crown1: "（＋中央の冠＋背面の氷片）", t_accent5: "氷の破片、クリスタル", t_air: "🌬 疾風", t_wings1: "（＋小さな翼）", t_wings2: "（＋大きな翼＋光輪）", t_accent6: "足元の雲、光輪", t_ground: "🪨 岩石", t_deer1: "（＋鹿の角＋額の宝石）", t_rock1: "（＋背面の岩板）", t_accent7: "太い眉、分かれた角", t_star: "⭐ 星座", t_star1: "（＋星のアンテナ）", t_halo1: "（＋光輪＋軌道星）", t_accent8: "軌道上の星、金色の光輪",
+      tbl3_title: "段階ごとのビジュアル変化", tbl3_th1: "段階", tbl3_th2: "体サイズ", tbl3_th3: "体の色", tbl3_th4: "お腹の色", tbl3_th5: "進化の印",
+      st_b: "0 – ベース", st_b_n: "なし", st_i: "1 – 中期", st_i_n: "腰に2つのアクセントドット", st_f: "2 – 最終", st_f_n: "腰に2ドット＋お腹に3ドット",
+      sec3_title: "📈 進化のためのXP計算式", sec3_desc: "XPは日々の運動量の指標です。1日最大220 XPまで獲得可能ですが、活動しない日が続くとポイントが減少します。",
+      f1_title: "1日の総獲得XP", f1_v1: "minuti_attivi – 1日の中強度・高強度の活動時間（分）（ActivityMonitor）", f1_v2: "passi – 1日の累積歩数", f1_v3: "VO₂maxボーナス（オプション、設定で有効な場合）：vo2max > 30 の場合、(vo2max − 30) × 3", f1_v4: "1日上限：220 XP — 非常に激しいトレーニングを行った日でも段階をスキップすることはありません",
+      f2_title: "進化の閾値", f2_v1: "段階 1 → XP ≥ 300 | 段階 2 → XP ≥ 1200", f2_v2: "段階 0 → 1: 約2〜3週間の定期的なトレーニング（30分/日）", f2_v3: "退化: 運動不足の日（< 20 XP） = 累積XPから −90 XP", f2_v4: "スキップされた日数（ウォッチフェイスが表示されなかった日）: −90 XP/日、最大5連続日まで",
+      xp_lbl: "XP進捗の視覚化（例：750 XP）", xp_st1: "段階 1", xp_st2: "段階 2",
+      tbl4_title: "デイリー目標（継続）", tbl4_th1: "定数", tbl4_th2: "値", tbl4_th3: "説明",
+      tbl4_r1: "目標を維持するための1日のアクティブ時間", tbl4_r2: "30 × 4 – 「良い日」とするための最小XP", tbl4_r3: "この閾値を下回ると「運動不足」とみなされます", tbl4_r4: "運動不足またはスキップされた日へのペナルティ", tbl4_r5: "1日に獲得できる最大XP", tbl4_r6: "段階1への進化閾値", tbl4_r7: "段階2への進化閾値", sec3_panel: "画面に表示されるレベル（LVL）は、進化段階とは別に計算されます：level = 1 + (effectiveXp ÷ 10)。これは継続的に増加し、減少することはありません。",
+      sec4_title: "🔥 アクティブカロリー計算式", sec4_desc: "アクティブカロリーは基礎代謝量（BMR）を除外し、運動による消費カロリーのみを表します。Kiboではカスケード戦略を使用します：",
+      f3_title: "戦略 1 – デバイス固有のネイティブデータ（推奨）", f3_v1: "Fenix 7 / Epix / MARQなどのハイエンドデバイスで利用可能", f3_v2: "利用できない場合 → 戦略2へ移行",
+      f4_title: "戦略 2 – Mifflin-St Jeor式によるBMR計算", f4_v1: "calorie_totali – その日の開始時からのActivityMonitorによる総消費カロリー", f4_v2: "secondi_trascorsi – その日の開始時からの経過秒数（時間 × 3600 ＋ 分 × 60 ＋ 秒）", f4_v3: "ユーザープロファイルが利用できない場合 → 概算値：アクティブカロリー ≒ 総消費カロリー × 0.40",
+      f5_title: "BMR – Mifflin-St Jeorの計算式", f5_v1: "kg – 体重（kg）（Garminユーザープロファイル：グラム ÷ 1000）", f5_v2: "cm – 身長（cm）", f5_v3: "età – 現在の年 − 生まれ年", f5_v4: "オフセット: ＋5（男性）/ −161（女性）/ −78（未定義/その他）",
+      sec5_title: "🌤 天候アニメーション", sec5_desc: "天候アニメーションは、バッテリーへの影響を防ぐため、ハイパワーモード（画面点灯時）のみで作動します。雨と雪はフルスクリーンのアニメーションオーバーレイで、その他の状態は温度バッジの横に静的ベクターアイコンとして表示されます。",
+      w0_g_t: "☀️ 快晴 – 昼", w0_g_d: "光線付きの太陽アイコン", w0_n_t: "🌙 快晴 – 夜", w0_n_d: "三日月アイコン", w1_t: "☁️ 曇り", w1_d: "静的な雲アイコン", w2_t: "🌧 雨", w2_d: "フルスクリーンアニメーション — 14本の斜線が流れる", w3_t: "❄️ 雪", w3_d: "フルスクリーンアニメーション — 16個の雪の結晶が揺れながら落ちる", w5_t: "🌫 霧 / 強風", w5_d: "水平方向の帯が付いた雲アイコン",
+      tbl5_title: "Garmin天候条件 → アニメーションコードのマッピング", tbl5_th1: "コード", tbl5_th2: "アニメーション", tbl5_th3: "タイプ", tbl5_th4: "対象となるGarminの天候条件",
+      tbl5_r1_c2: "☀️ 太陽（昼）/ 🌙 月（夜）", tbl5_stat: "静的アイコン", tbl5_r2_c2: "☁️ 雲", tbl5_r3_c2: "🌧 フルスクリーン雨", tbl5_anim: "フルスクリーンアニメーション", tbl5_r4_c2: "❄️ フルスクリーン雪", tbl5_r5_c2: "🌫 霧", sec5_panel: "フルスクリーンアニメーションは、フレームカウンターから派生した決定論的パーティクルを使用します。これにより、フレームごとのメモリ割り当てはゼロになり、パーティクルごとの状態保持も不要になります。雨：phase = frame % 24 に基づいて14本の斜線（x−4, y+12）が流れます。雪：横方向の正弦波振動＋垂直落下の16個の円。", sec5_sub: "昼夜の判別", sec5_sub_d: "コード0（clear）の場合、時間 ∈ [7, 19] として計算される isDay パラメータにより、太陽の描画か三日月の描画かが選択されます。",
+      footer: "Kibo · Connect IQ Watch Face · デザイン仕様書 · 2025年6月"
+    },
+    zh: {
+      doc_ref: "设计参考规范", main_title: "Kibo – 设计参考规范", last_mod: "最后修改:", author: "作者:",
+      toc_title: "目录", toc_1: "怪物状态与情绪映射", toc_2: "进化矩阵分支表", toc_3: "进化经验值计算公式", toc_4: "动态活动热量公式", toc_5: "高能天气动画渲染",
+      sec1_title: "🎭 宠物状态与情绪映射", sec1_desc: "宠物拥有5种不同的情感状态，这些状态通过连接到Garmin底层的身体电量和压力指标进行实时解算。压力指标具备最高系统优先级：一旦压力 ≥ 65，宠物立即切入高压焦虑状态，无视当前的身体电量状况。", sec1_panel: "读取优先级规则为：压力 ≥ 65 → 高压焦虑。其余情况下使用身体电量：≥70 → 亢奋，≥20 → 活跃，≥10 → 疲惫，<10 → 力竭。",
+      mood0_t: "😴 力竭", mood0_d: "双眼闭合、有规律张嘴，并有ZZZ符号在头部上方悬浮漂移", mood1_t: "😪 疲惫", mood1_d: "眼睑下垂呈半睁开状态，嘴角保持水平中性", mood2_t: "😊 活跃", mood2_d: "双眼睁开、神采奕奕，嘴角上扬露出标准微笑", mood3_t: "🤩 亢奋", mood3_d: "双眼由于兴奋放大，大范围微笑嘴角，同时面部两侧生成金色星星闪烁特效", mood4_t: "😰 高压焦虑", mood4_d: "眉头紧锁、下撇嘴角，同时额头一侧浮现动态汗滴与红色张力线条",
+      tbl1_title: "状态参数全局对照表", tbl1_th2: "名称", tbl1_th4: "眼部图形", tbl1_th5: "嘴部图形", tbl1_m0_n: "力竭", tbl1_m0_e: "闭合圆弧、模拟深睡眼睑", tbl1_m0_m: "大开哈欠（深色外圈 + 红色内里）", tbl1_m0_ex: "白色悬浮动态 ZZZ 字符", tbl1_m1_n: "疲惫", tbl1_m1_e: "睁开、瞳孔靠下 + 遮挡一半的眼睑", tbl1_m1_m: "扁平横线（中性状态）", tbl1_m2_n: "活跃", tbl1_m2_e: "常规睁开、瞳孔居中", tbl1_m2_m: "常规上扬月牙微笑", tbl1_m3_n: "亢奋", tbl1_m3_e: "放大版圆睁、高亮大瞳孔", tbl1_m3_m: "夸张版大月牙微笑", tbl1_m3_ex: "头部两侧对称环绕金色十字闪烁星光", tbl1_m4_n: "高压焦虑", tbl1_m4_e: "常规睁开、额外叠加倒八字倾斜眉毛 (\\ /)", tbl1_m4_m: "倒扣月牙嘴角（哭脸弧度）", tbl1_m4_ex: "高亮蓝色动态水滴 + 额头红晕张力表现线",
+      sec1_note: "当可穿戴设备初始化未获取到任何有效底层数据时（例如首次开机或模拟器开辟全新环境），宠物默认展示活跃(2)状态。",
+      sec2_title: "🌱 进化矩阵分支表", sec2_desc: "每个属性家族均严格划分3个进化阶段（0阶 → 1阶 → 2阶）。宠物的成长和蜕变完全依赖累计XP经验值的盈亏，若因长期缺乏运动导致经验值跌破安全线，将会执行退化规则。",
+      tbl2_th1: "家族", tbl2_th2: "属性类型", tbl2_th3: "0阶 – 基础形态", tbl2_th4: "1阶 – 中期变异", tbl2_th5: "2阶 – 终极形态", tbl2_th6: "特有全局图像资源",
+      t_fire: "🔥 火焰分支", t_horns1: "（+ 盘旋大羊角）", t_crest1: "（+ 动态燃烧背鳍）", t_accent1: "尾部火焰粒子、火焰背鳍动画", t_water: "💧 水流分支", t_fin1: "（+ 鲨鱼脊鳍）", t_gills1: "（+ 侧边鳃裂 + 宽大胸鳍）", t_accent2: "高耸背鳍、海洋流线型尾部", t_grass: "🍃 绿植分支", t_leaf1: "（+ 树叶状耳朵）", t_flower1: "（+ 盛开的向日葵）", t_accent3: "头顶发光晶核、飘落花瓣", t_elec: "⚡ 雷电分支", t_light1: "（+ 折线闪电耳）", t_spark1: "（+ 脸颊闪电斑纹）", t_accent4: "闪电分叉尾、高频电火花", t_ice: "🧊 冰霜分支", t_cryst1: "（+ 对称双晶状角）", t_crown1: "（+ 核心冰晶冰冕 + 沿脊柱冰晶碎屑）", t_accent5: "悬浮冰晶碎片、晶体反光层", t_air: "🌬 气流分支", t_wings1: "（+ 背部微型翅膀）", t_wings2: "（+ 宽展大羽翼 + 环形天使天环）", t_accent6: "底部悬浮云雾托盘、头部发光天环", t_ground: "🪨 岩石分支", t_deer1: "（+ 鹿角状分叉 + 额头核心宝石）", t_rock1: "（+ 全包裹悬浮岩石甲片）", t_accent7: "粗犷坚硬岩石眉、分叉角状外骨骼", t_star: "⭐ 星宿分支", t_star1: "（+ 环绕式星体触角）", t_halo1: "（+ 日冕金环 + 独立星体轨道）", t_accent8: "自转黄道轨道、外围自发光星系",
+      tbl3_title: "形态跨度参数映射", tbl3_th1: "阶段", tbl3_th2: "全局缩放比例", tbl3_th3: "身体主色", tbl3_th4: "腹部配色", tbl3_th5: "迭代物理标志",
+      st_b: "0 – 基础形态", st_b_n: "无任何额外部件", st_i: "1 – 中期形态", st_i_n: "左右躯干两侧分别生成2枚发光能量点", st_f: "2 – 终极形态", st_f_n: "躯干两侧2枚能量点 + 腹部区域增生3枚发光矩阵点",
+      sec3_title: "📈 进化经验值计算公式", sec3_desc: "XP经验值作为衡量用户每日真实运动量的核心数据。每日获取上限硬性锁死为 220 XP，单日过渡训练不会导致宠物暴走式连跳，旨在引导规律性健身。",
+      f1_title: "单日总获取XP计算法则", f1_v1: "minuti_attivi – 用户当日产生的中高强度有效运动总分钟数（调取底层 ActivityMonitor 模块）", f1_v2: "passi – 当日步行计数器累计总步数", f1_v3: "VO₂max 最大摄氧量奖赏（可选，需在高级控制台开启）：当 vo2max > 30 时，额外斩获 (vo2max − 30) × 3 经验加成", f1_v4: "日加总上限：220 XP — 即使单日进行极限铁人三项训练，溢出部分亦直接熔断，无法带入次日",
+      f2_title: "阶梯解锁经验阈值线", f2_v1: "1阶门槛 → XP ≥ 300 | 2阶门槛 → XP ≥ 1200", f2_v2: "由0阶升至1阶：需保持约 2~3 周的规律性训练（推荐指标为单日满30分钟活动）", f2_v3: "触发退化惩罚：若单日结算总XP未达到 20 XP（被系统定义为极度懈怠日），则累积XP直接强制扣减 90 XP", f2_v4: "未佩戴滑落：若长达数日未进入表盘视图，系统将以 −90 XP/天 持续折损，连续惩罚最多挂钩 5 天",
+      xp_lbl: "经验进化条阶梯映射（示例：当前累计 750 XP）", xp_st1: "1阶突破", xp_st2: "2阶满载",
+      tbl4_title: "单日运动目标常数表", tbl4_th1: "系统常数", tbl4_th2: "设定阈值", tbl4_th3: "逻辑解释",
+      tbl4_r1: "每日需达标的有效中高强度运动分钟数，用以维持连击火苗", tbl4_r2: "30 × 4 – 被系统认定为'充实健身日'所需的最低经验红线", tbl4_r3: "步入该经验值以下则直接判定单日活动水平触及'懈怠底线'", tbl4_r4: "懈怠日或长期不进入表盘导致的总累积经验衰减惩罚额度", tbl4_r5: "单日可吸纳的最大经验上限熔断器", tbl4_r6: "解锁1阶变异形态所需的累积XP门槛", tbl4_r7: "解锁2阶终极形态所需的累积XP门槛", sec3_panel: "表盘主UI上呈现的宠物角色等级（LVL）与各形态阶梯互不干扰：level = 1 + (effectiveXp ÷ 10)。等级为线性正向累加且永久锁死，绝不因懈怠退化而发生等级滑落。",
+      sec4_title: "🔥 动态活动热量公式", sec4_desc: "活动热量计算已深度剔除人体基础代谢率（BMR）功耗，精准映射因外部物理运动导致的纯粹净燃卡路里。Kibo 核心固件执行三级降级策略：",
+      f3_title: "降级策略 1 – 提取硬件原生计算通道（最高优先）", f3_v1: "全面兼容 Fenix 7 / Epix / MARQ 等自带高阶运动处理芯片的旗舰机型", f3_v2: "若硬件底层未开放此项参数接口 → 自动降级至第二策略解算",
+      f4_title: "降级策略 2 – Mifflin-St Jeor 算法离线模拟", f4_v1: "calorie_totali – 截至当前秒，ActivityMonitor 模块统计到的当天消耗的总卡路里（包含BMR）", f4_v2: "secondi_trascorsi – 当天已度过的总秒数（小时 × 3600 + 分钟 × 60 + 当前秒）", f4_v3: "若设备处于极端环境导致用户离线配置文件丢失 → 开启兜底黑盒估算：活动燃脂 ≈ 总卡路里 × 0.40",
+      f5_title: "BMR – Mifflin-St Jeor 核心数学基准线", f5_v1: "kg – 用户当前体重（Garmin原生单位：克 ÷ 1000 转换）", f5_v2: "cm – 静态净身高厘米数", f5_v3: "età – 当年年份 − 出生年份", f5_v4: "性别修正常数（offset）：男性为 +5 / 女性为 −161 / 未定义或隐藏性别用户取标准值 −78",
+      sec5_title: "🌤 高能天气动画渲染", sec5_desc: "由于实时像素刷写对可穿戴设备具有极高功耗负担，天气动态动效仅在表盘切入高亮（High-Power，即抬腕亮屏）状态下全效开启。降雨与降雪表现为覆盖全局的动态粒子层，其余气象在数字温度角标旁由静态矢量图标表达。",
+      w0_g_t: "☀️ 晴空万里 – 白昼", w0_g_d: "包含标准外扩辐射光芒线的太阳矢量图标", w0_n_t: "🌙 月朗星稀 – 夜间", w0_n_d: "带阴影剪裁视角的月牙矢量图标", w1_t: "☁️ 阴云密布", w1_d: "静态层叠积雨云矢量图标", w2_t: "🌧 暴雨倾盆", w2_d: "全屏高能动画动效 — 14条斜向雨丝矩阵在亮屏状态下高速循环下坠", w3_t: "❄️ 漫天大雪", w3_d: "全屏高能动画动效 — 16枚冰晶粒子按照正弦波轨迹做钟摆式降落摆动", w5_t: "🌫 浓雾/大风吹袭", w5_d: "积雨云下方叠加三道高低错落的水平气流湍流横线",
+      tbl5_title: "Garmin 硬件天气代码到动效核心编解码映射", tbl5_th1: "硬件参数", tbl5_th2: "表盘具体表现形式", tbl5_th3: "气象大类", tbl5_th4: "包含的 Garmin 原生气象状态集",
+      tbl5_r1_c2: "☀️ 艳阳（白昼状态下） / 🌙 弯月（夜间状态下）", tbl5_stat: "静态图标", tbl5_r2_c2: "☁️ 积云", tbl5_r3_c2: "🌧 全屏动态降雨粒子束", tbl5_anim: "全局动画动效", tbl5_r4_c2: "❄️ 全屏正弦波粒子降雪", tbl5_r5_c2: "🌫 雾气横线", sec5_panel: "为了在微型手表处理器上实现丝滑流畅的满帧动画且不产生多余运存开销，全屏动效摒弃了传统对象创建，采用完全基于当前帧步进计数器（Frame Counter）的确定性公式进行像素刷写。降雨：14条斜向线条根据 phase = frame % 24 严格推算像素坐标偏置。降雪：16枚圆形粒子做正弦波（Sin）横向位移与纵向平移叠加。", sec5_sub: "昼夜状态自动切分规则", sec5_sub_d: "当底层抛出 0 (晴朗) 代码时，固件会根据当前系统时间执行 isDay 判定（标准边界规定在 [7, 19] 点区间），据此自动在艳阳和弯月两套全矢量画作之间完成透明切换。",
+      footer: "Kibo · Garmin Connect IQ 表盘开发团队 · 核心架构设计参考手册 · 2025年6月"
+    }
+  };
+
+  function translatePage(lang) {
+    document.documentElement.lang = lang;
+    const elements = document.querySelectorAll('[data-i18n]');
+    
+    elements.forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[lang] && dict[lang][key]) {
+        el.innerHTML = dict[lang][key];
+      }
+    });
+  }
+
+  // Avvio iniziale in Italiano
+  translatePage('it');
+</script>
+</body>
+</html>
