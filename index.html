@@ -755,15 +755,6 @@
       </ul>
     </div>
 
-    <div class="code-block"><span class="cm">// Pseudo-codice MetricsProvider.activeCaloriesCalc()</span>
-<span class="kw">if</span> nativeActiveCalories != <span class="nb">null</span>:
-    <span class="kw">return</span> nativeActiveCalories                        <span class="cm">// campo diretto</span>
-
-<span class="nm">total</span>  = ActivityMonitor.calories
-<span class="nm">bmrDay</span> = <span class="nb">10</span>*kg + <span class="nb">6.25</span>*cm - <span class="nb">5</span>*age + offset      <span class="cm">// Mifflin-St Jeor</span>
-<span class="nm">elapsed</span> = hour*<span class="nb">3600</span> + min*<span class="nb">60</span> + sec
-<span class="nm">resting</span> = bmrDay * elapsed / <span class="nb">86400.0</span>
-<span class="kw">return</span> max(<span class="nb">0</span>, total - resting)</div>
   </div>
 
   <div class="section" id="meteo">
