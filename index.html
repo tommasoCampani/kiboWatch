@@ -219,7 +219,7 @@
 
   <div class="page-header">
     <div class="page-title-group">
-      <h1 data-i18n="main_title">Kibo – Design Reference</h1>
+      <h1 data-i18n="main_title">Kibo – WatchFace</h1>
       <div class="page-meta"><span data-i18n="author">Autore:</span> <strong>Team Kibo</strong> · <span class="tag">v1.0</span></div>
     </div>
     
@@ -972,7 +972,7 @@
 <script>
   const dict = {
     it: {
-      doc_ref: "Design Reference", main_title: "Kibo – Design Reference", last_mod: "Ultima modifica:", author: "Autore:",
+      doc_ref: "Design Reference", main_title: "Kibo – Watch Face", last_mod: "Ultima modifica:", author: "Autore:",
       toc_title: "Contenuti", toc_1: "Stati / Emozioni del mostro", toc_2: "Tabella evoluzioni", toc_3: "Formula XP per evoluzione", toc_4: "Formula calorie attive", toc_5: "Animazioni meteo",
       sec1_title: "🎭 Stati / Emozioni del mostro", sec1_desc: "Il mostro ha 5 stati emotivi determinati in tempo reale da Body Battery e livello di stress del Garmin. Lo stress ha priorità: se ≥ 70 il mostro è Stressato indipendentemente dalla Body Battery.", sec1_panel: "La priorità di lettura è: Stress ≥ 70 → Stressato. Altrimenti si usa la Body Battery: ≥70 → Iper, ≥20 → Attivo, ≥10 → Stanco, <10 → Esausto.",
       mood0_t: "😴 Esausto", mood0_d: "Occhi chiusi, bocca aperta, ZZZ fluttuanti", mood1_t: "😪 Stanco", mood1_d: "Occhi socchiusi con palpebra pesante, bocca neutra", mood2_t: "😊 Attivo", mood2_d: "Occhi aperti e vivaci, sorriso aperto", mood3_t: "🤩 Iper", mood3_d: "Occhi spalancati, mega sorriso, sparkles brillanti", mood4_t: "😰 Stressato", mood4_d: "Sopracciglia arcuate, bocca giù, goccia di sudore",
@@ -1037,10 +1037,10 @@
       toc_8: "Setting quadrante", sec8_title: "⚙️ Setting quadrante", sec8_desc: "Il quadrante espone cinque slot configurabili, ognuno selezionabile dall'app Connect IQ.", sec8_slots_t: "I cinque slot — valori selezionabili", sec8_slots: "nessuno, passi, calorie, HR, distanza, piani, batteria orologio, Body Battery (energia), data, minuti attivi, XP, notifiche, calorie attive (calcolate), tempo di recupero.", sec8_other: "Altre impostazioni: famiglia di partenza, mostra animazioni meteo, uso del VO₂max.",
       note1: "<strong>Dati non disponibili → default.</strong> Se un dispositivo non espone la Body Battery, la creatura mostra sempre lo stato Attivo (mood 2). Lo stesso vale per tutti gli altri servizi (stress, meteo, VO₂max, recupero, sonno, ecc.): se riusciamo a recuperarli da Garmin li usiamo, altrimenti ricorriamo a un valore di default o nascondiamo il campo. Tutto questo dipende dai dispositivi e da quali funzioni hanno in modo nativo: lo stesso codice gira su un Fenix di fascia alta e su un Instinct base, adattandosi a ciò che l'orologio può misurare.",
       note2: "<strong>Calorie attive ≠ quelle di Garmin.</strong> Il valore delle calorie attive mostrato da Kibo può non corrispondere a quello visualizzato nell'app/widget Garmin, perché la nostra è una formula custom (calorie totali − BMR Mifflin-St Jeor sul tempo trascorso, con fallback). I dettagli del calcolo sono quelli descritti nella sezione 'Formula calorie attive' qui sopra.",
-      footer: "Kibo · Connect IQ Watch Face · Design Reference"
+      footer: "Kibo · Connect IQ Watch Face · Tommaso Campani"
     },
     en: {
-      doc_ref: "Design Reference", main_title: "Kibo – Design Reference", last_mod: "Last modified:", author: "Author:",
+      doc_ref: "Design Reference", main_title: "Kibo – Watch Face", last_mod: "Last modified:", author: "Author:",
       toc_title: "Contents", toc_1: "Monster States / Emotions", toc_2: "Evolution Table", toc_3: "XP Formula per Evolution", toc_4: "Active Calories Formula", toc_5: "Weather Animations",
       sec1_title: "🎭 Monster States / Emotions", sec1_desc: "The monster has 5 emotional states determined in real-time by Garmin's Body Battery and Stress level. Stress takes priority: if ≥ 70, the monster is Stressed regardless of the Body Battery.", sec1_panel: "Reading priority is: Stress ≥ 70 → Stressed. Otherwise, Body Battery is checked: ≥70 → Hyper, ≥20 → Active, ≥10 → Tired, <10 → Exhausted.",
       mood0_t: "😴 Exhausted", mood0_d: "Closed eyes, open mouth, floating ZZZs", mood1_t: "😪 Tired", mood1_d: "Half-closed eyes with heavy eyelids, neutral mouth", mood2_t: "😊 Active", mood2_d: "Open and bright eyes, open smile", mood3_t: "🤩 Hyper", mood3_d: "Wide open eyes, mega smile, shining sparkles", mood4_t: "😰 Stressed", mood4_d: "Arched eyebrows, mouth down, sweat drop",
@@ -1106,10 +1106,10 @@
       note3: "Estimated data, not real-time. The displayed values are estimated and refreshed once a minute. Exceptions: steps, updated every 10 seconds, and heart rate, updated every 3 seconds.",
       note1: "<strong>Data unavailable → default.</strong> If a device does not expose Body Battery, the creature always shows the Active state (mood 2). The same applies to every other service (stress, weather, VO₂max, recovery, sleep, etc.): if we can fetch them from Garmin we use them, otherwise we fall back to a default value or hide the field. This all depends on the devices and which features they support natively: the same code runs on a high-end Fenix and a basic Instinct, adapting to what the watch can measure.",
       note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo may not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
-      footer: "Kibo · Connect IQ Watch Face · Design Reference"
+      footer: "Kibo · Connect IQ Watch Face · Tommaso Campani"
     },
     es: {
-      doc_ref: "Referencia de Diseño", main_title: "Kibo – Referencia de Diseño", last_mod: "Última modificación:", author: "Autor:",
+      doc_ref: "Referencia de Diseño", main_title: "Kibo – Watch Face", last_mod: "Última modificación:", author: "Autor:",
       toc_title: "Contenidos", toc_1: "Estados / Emociones del monstruo", toc_2: "Tabla de evoluciones", toc_3: "Fórmula de XP para evolución", toc_4: "Fórmula de calorías activ", toc_5: "Animaciones meteorológicas",
       sec1_title: "🎭 Estados / Emociones del monstruo", sec1_desc: "El monstruo tiene 7 estados emocionales determinados en tiempo real por la Body Battery y el nivel de estrés de Garmin. El estrés tiene prioridad: si es ≥ 70, el monstruo está Estresado independientemente de la Body Battery.", sec1_panel: "La prioridad de lectura es: Estrés ≥ 70 → Estresado. De lo contrario, se usa la Body Battery: ≥70 → Hiper, ≥20 → Activo, ≥10 → Cansado, <10 → Agotado.",
       mood0_t: "😴 Agotado", mood0_d: "Ojos cerrados, boca abierta, ZZZ flotantes", mood1_t: "😪 Cansado", mood1_d: "Ojos entreabiertos con párpados pesados, boca neutra", mood2_t: "😊 Activo", mood2_d: "Ojos abiertos y vivos, sonrisa abierta", mood3_t: "🤩 Hiper", mood3_d: "Ojos abiertos de par en par, mega sonrisa, destellos brillantes", mood4_t: "😰 Estresado", mood4_d: "Cejas arqueadas, boca abajo, gota de sudor",
@@ -1172,10 +1172,10 @@
       note3: "Datos estimados, no en tiempo real. Los valores mostrados son estimados y se actualizan una vez por minuto. Excepciones: los pasos, actualizados cada 10 segundos, y la frecuencia cardíaca, actualizada cada 3 segundos.",
       note1: "<strong>Data unavailable → default.</strong> If a device does not expose Body Battery, the creature always shows the Active state (mood 2). The same applies to every other service (stress, weather, VO₂max, recovery, sleep, etc.): if we can fetch them from Garmin we use them, otherwise we fall back to a default value or hide the field. This all depends on the devices and which features they support natively: the same code runs on a high-end Fenix and a basic Instinct, adapting to what the watch can measure.",
       note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo may not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
-      footer: "Kibo · Connect IQ Watch Face · Referencia de Diseño"
+      footer: "Kibo · Connect IQ Watch Face · Tommaso Campani"
     },
     fr: {
-      doc_ref: "Référence de Design", main_title: "Kibo – Référence de Design", last_mod: "Dernière modification :", author: "Auteur :",
+      doc_ref: "Référence de Design", main_title: "Kibo – Watch Face", last_mod: "Dernière modification :", author: "Auteur :",
       toc_title: "Contenu", toc_1: "États / Émotions du monstre", toc_2: "Tableau des évolutions", toc_3: "Formule XP pour évolution", toc_4: "Formule des calories actives", toc_5: "Animations météo",
       sec1_title: "🎭 États / Émotions du monstre", sec1_desc: "Le monstre a 7 états émotionnels déterminés en temps réel par la Body Battery et le niveau de stress Garmin. Le stress a la priorité : si ≥ 70, le monstre est Stressé indépendamment de la Body Battery.", sec1_panel: "La priorité de lecture est : Stress ≥ 70 → Stressé. Sinon, la Body Battery est utilisée : ≥70 → Hyper, ≥20 → Actif, ≥10 → Fatigué, <10 → Épuisé.",
       mood0_t: "😴 Épuisé", mood0_d: "Yeux fermés, bouche ouverte, ZZZ flottants", mood1_t: "😪 Fatigué", mood1_d: "Yeux mi-clos avec paupières lourdes, bouche neutre", mood2_t: "😊 Actif", mood2_d: "Yeux ouverts et vifs, sourire ouvert", mood3_t: "🤩 Hyper", mood3_d: "Yeux grands ouverts, méga sourire, éclats brillants", mood4_t: "😰 Stressé", mood4_d: "Sourcils arqués, bouche vers le bas, goutte de sueur",
@@ -1238,10 +1238,10 @@
       note3: "Données estimées, pas en temps réel. Les valeurs affichées sont estimées et actualisées une fois par minute. Exceptions : les pas, mis à jour toutes les 10 secondes, et la fréquence cardiaque, mise à jour toutes les 3 secondes.",
       note1: "<strong>Data unavailable → default.</strong> If a device does not expose Body Battery, the creature always shows the Active state (mood 2). The same applies to every other service (stress, weather, VO₂max, recovery, sleep, etc.): if we can fetch them from Garmin we use them, otherwise we fall back to a default value or hide the field. This all depends on the devices and which features they support natively: the same code runs on a high-end Fenix and a basic Instinct, adapting to what the watch can measure.",
       note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo may not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
-      footer: "Kibo · Connect IQ Watch Face · Référence de Design"
+      footer: "Kibo · Connect IQ Watch Face · Tommaso Campani"
     },
     de: {
-      doc_ref: "Design-Referenz", main_title: "Kibo – Design-Referenz", last_mod: "Zuletzt geändert:", author: "Autor:",
+      doc_ref: "Design-Referenz", main_title: "Kibo – Watch Face", last_mod: "Zuletzt geändert:", author: "Autor:",
       toc_title: "Inhalt", toc_1: "Zustände / Emotionen des Monsters", toc_2: "Evolutionstabelle", toc_3: "XP-Formel für Evolution", toc_4: "Formel für aktive Kalorien", toc_5: "Wetteranimationen",
       sec1_title: "🎭 Zustände / Emotionen des Monsters", sec1_desc: "Das Monster hat 7 emotionale Zustände, die in Echtzeit durch die Body Battery und das Stresslevel von Garmin bestimmt werden. Stress hat Priorität: Wenn ≥ 70, ist das Monster gestresst, unabhängig von der Body Battery.", sec1_panel: "Die Lesepriorität ist: Stress ≥ 70 → Gestresst. Andernfalls wird die Body Battery verwendet: ≥70 → Hyper, ≥20 → Aktiv, ≥10 → Müde, <10 → Erschöpft.",
       mood0_t: "😴 Erschöpft", mood0_d: "Geschlossene Augen, offener Mund, schwebende ZZZs", mood1_t: "😪 Müde", mood1_d: "Halbgeschlossene Augen mit schweren Augenlidern, neutraler Mund", mood2_t: "😊 Aktiv", mood2_d: "Offene und lebendige Augen, offenes Lächeln", mood3_t: "🤩 Hyper", mood3_d: "Weit geöffnete Augen, Mega-Lächeln, leuchtende Funken", mood4_t: "😰 Gestresst", mood4_d: "Gezogene Augenbrauen, Mund nach unten, Schweißtropfen",
@@ -1304,10 +1304,10 @@
       note3: "Geschätzte Daten, nicht in Echtzeit. Die angezeigten Werte sind geschätzt und werden einmal pro Minute aktualisiert. Ausnahmen: Schritte, alle 10 Sekunden aktualisiert, und Herzfrequenz, alle 3 Sekunden aktualisiert.",
       note1: "<strong>Data unavailable → default.</strong> If a device does not expose Body Battery, the creature always shows the Active state (mood 2). The same applies to every other service (stress, weather, VO₂max, recovery, sleep, etc.): if we can fetch them from Garmin we use them, otherwise we fall back to a default value or hide the field. This all depends on the devices and which features they support natively: the same code runs on a high-end Fenix and a basic Instinct, adapting to what the watch can measure.",
       note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo may not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
-      footer: "Kibo · Connect IQ Watch Face · Design-Referenz"
+      footer: "Kibo · Connect IQ Watch Face · Tommaso Campani"
     },
     ja: {
-      doc_ref: "デザイン仕様書", main_title: "Kibo – デザイン仕様書", last_mod: "最終更新日:", author: "著者:",
+      doc_ref: "デザイン仕様書", main_title: "Kibo – Watch Face", last_mod: "最終更新日:", author: "著者:",
       toc_title: "コンテンツ", toc_1: "モンスターの状態 / 感情", toc_2: "進化マトリクス表", toc_3: "進化のためのXP計算式", toc_4: "アクティブカロリー計算式", toc_5: "天候アニメーション",
       sec1_title: "🎭 モンスターの状態 / 感情", sec1_desc: "モンスターには、GarminのBody Batteryとストレスレベルによってリアルタイムに決定される7つの感情状態があります。ストレスが最優先され、70以上の場合はBody Batteryに関係なく「ストレス検知」状態になります。", sec1_panel: "読み取りの優先順位は次のとおりです：ストレス ≥ 70 → ストレス検知。それ以外はBody Batteryを参照：≥70 → ハイパー、≥20 → アクティブ、≥10 → 疲労、<10 → 疲弊。",
       mood0_t: "😴 疲弊", mood0_d: "目を閉じ、口を開け、ZZZが浮遊している状態", mood1_t: "😪 疲労", mood1_d: "重い瞼の半開き、ニュートラルな口元", mood2_t: "😊 アクティブ", mood2_d: "生き生きと開いた目、明るい笑顔", mood3_t: "🤩 ハイパー", mood3_d: "見開いた目、メガスマイル、輝く火花", mood4_t: "😰 ストレス検知", mood4_d: "ひそめられた眉、下がった口元、冷や汗",
@@ -1370,10 +1370,10 @@
       note3: "推定値であり、リアルタイムではありません。表示される値は推定値で、1分ごとに更新されます。例外として、歩数は10秒ごと、心拍数は3秒ごとに更新されます。",
       note1: "<strong>Data unavailable → default.</strong> If a device does not expose Body Battery, the creature always shows the Active state (mood 2). The same applies to every other service (stress, weather, VO₂max, recovery, sleep, etc.): if we can fetch them from Garmin we use them, otherwise we fall back to a default value or hide the field. This all depends on the devices and which features they support natively: the same code runs on a high-end Fenix and a basic Instinct, adapting to what the watch can measure.",
       note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo may not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
-      footer: "Kibo · Connect IQ Watch Face · デザイン仕様書"
+      footer: "Kibo · Connect IQ Watch Face · Tommaso Campani"
     },
     zh: {
-      doc_ref: "设计参考规范", main_title: "Kibo – 设计参考规范", last_mod: "最后修改:", author: "作者:",
+      doc_ref: "设计参考规范", main_title: "Kibo – Watch Face", last_mod: "最后修改:", author: "作者:",
       toc_title: "目录", toc_1: "怪物状态与情绪映射", toc_2: "进化矩阵分支表", toc_3: "进化经验值计算公式", toc_4: "动态活动热量公式", toc_5: "高能天气动画渲染",
       sec1_title: "🎭 宠物状态与情绪映射", sec1_desc: "宠物拥有7种不同的情感状态，这些状态通过连接到Garmin底层的身体电量和压力指标进行实时解算。压力指标具备最高系统优先级：一旦压力 ≥ 70，宠物立即切入高压焦虑状态，无视当前的身体电量状况。", sec1_panel: "读取优先级规则为：压力 ≥ 70 → 高压焦虑。其余情况下使用身体电量：≥70 → 亢奋，≥20 → 活跃，≥10 → 疲惫，<10 → 力竭。",
       mood0_t: "😴 力竭", mood0_d: "双眼闭合、有规律张嘴，并有ZZZ符号在头部上方悬浮漂移", mood1_t: "😪 疲惫", mood1_d: "眼睑下垂呈半睁开状态，嘴角保持水平中性", mood2_t: "😊 活跃", mood2_d: "双眼睁开、神采奕奕，嘴角上扬露出标准微笑", mood3_t: "🤩 亢奋", mood3_d: "双眼由于兴奋放大，大范围微笑嘴角，同时面部两侧生成金色星星闪烁特效", mood4_t: "😰 高压焦虑", mood4_d: "眉头紧锁、下撇嘴角，同时额头一侧浮现动态汗滴与红色张力线条",
@@ -1436,7 +1436,7 @@
       note3: "数据为估算值，非实时。显示的数值为估算值，每分钟更新一次。例外：步数每10秒更新一次，心率每3秒更新一次。",
       note1: "<strong>Data unavailable → default.</strong> If a device does not expose Body Battery, the creature always shows the Active state (mood 2). The same applies to every other service (stress, weather, VO₂max, recovery, sleep, etc.): if we can fetch them from Garmin we use them, otherwise we fall back to a default value or hide the field. This all depends on the devices and which features they support natively: the same code runs on a high-end Fenix and a basic Instinct, adapting to what the watch can measure.",
       note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo may not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
-      footer: "Kibo · Garmin Connect IQ 表盘开发团队 · 核心架构设计参考手册"
+      footer: "Kibo · Garmin Connect IQ 表盘开发团队 · Tommaso Campani"
     }
   };
 
