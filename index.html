@@ -247,6 +247,8 @@
       <li><a href="#xp" data-i18n="toc_3">Formula XP per evoluzione</a></li>
       <li><a href="#calorie" data-i18n="toc_4">Formula calorie attive</a></li>
       <li><a href="#meteo" data-i18n="toc_5">Animazioni meteo</a></li>
+      <li><a href="#profilo" data-i18n="toc_6">Profilo utente & Giorno/Notte</a></li>
+      <li><a href="#note" data-i18n="toc_7">Note bene · compatibilità</a></li>
     </ol>
   </div>
 
@@ -917,8 +919,75 @@
     <p data-i18n="sec5_sub_d">Per il codice <code>0 (clear)</code> il parametro <code>isDay</code> — calcolato come <code>ora ∈ [7, 21]</code> — seleziona tra il disegno del sole e quello della luna crescente.</p>
   </div>
 
+  <div class="section" id="profilo">
+    <h2 data-i18n="sec6_title">👤 Profilo utente & Giorno / Notte</h2>
+
+    <p data-i18n="sec6_desc">Kibo distingue <strong>due meccanismi diversi e indipendenti</strong>: lo <strong>sfondo</strong> giorno/notte e il <strong>sonno della creatura</strong>. Il primo è puramente orario; il secondo legge la finestra di sonno dal <strong>profilo utente Garmin</strong>.</p>
+
+    <div class="formula-box">
+      <strong data-i18n="f6_title">Sfondo giorno / notte (orario, NON dal profilo)</strong>
+      <div class="formula-main">isDay = ora ≥ 7 &amp;&amp; ora &lt; 21</div>
+      <ul class="formula-vars">
+        <li data-i18n="f6_v1">Di <strong>giorno</strong> (07:00–21:00) il cielo è più chiaro con un bagliore verso l'orizzonte.</li>
+        <li data-i18n="f6_v2">Di <strong>notte</strong> lo sfondo si scurisce e compare il campo stellato animato.</li>
+        <li data-i18n="f6_v3">Lo stesso flag sceglie l'icona meteo del cielo sereno: ☀️ sole (giorno) / 🌙 luna (notte).</li>
+      </ul>
+    </div>
+
+    <div class="formula-box">
+      <strong data-i18n="f7_title">Sonno della creatura (dal profilo utente)</strong>
+      <div class="formula-main">dorme se: sleepTime ≤ ora &lt; wakeTime</div>
+      <ul class="formula-vars">
+        <li data-i18n="f7_v1">Gli orari <code>sleepTime</code> e <code>wakeTime</code> arrivano dal <strong>profilo utente Garmin</strong> (UserProfile), non dalle impostazioni dell'app.</li>
+        <li data-i18n="f7_v2">Durante la finestra di sonno la creatura <strong>dorme</strong> (mood 0, con berretto da notte), a prescindere dallo sfondo.</li>
+        <li data-i18n="f7_v3">Se il profilo non espone gli orari, il default è sveglio <strong>08:00 → 00:00</strong> (quindi addormentato 00:00 → 08:00).</li>
+      </ul>
+    </div>
+
+    <h3 data-i18n="tbl6_title">Cosa leggiamo dal profilo utente (UserProfile)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="tbl6_th1">Campo profilo</th>
+            <th data-i18n="tbl6_th2">Default se assente</th>
+            <th data-i18n="tbl6_th3">A cosa serve</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>restingHeartRate</code></td><td>60 bpm</td><td data-i18n="tbl6_r1">Soglie di rilevamento allenamento: riposo +25 → leggero, riposo +50 → intenso</td></tr>
+          <tr><td><code>vo2maxRunning</code></td><td>—</td><td data-i18n="tbl6_r2">Bonus XP: (vo2max − 30) × 3, se &gt; 30 e l'opzione è attiva</td></tr>
+          <tr><td><code>sleepTime</code> / <code>wakeTime</code></td><td data-i18n="tbl6_r3d">sveglio 08:00 → 00:00</td><td data-i18n="tbl6_r3">Finestra di sonno → la creatura dorme (mood 0)</td></tr>
+          <tr><td><code>weight</code></td><td>—</td><td data-i18n="tbl6_r4">Peso (grammi ÷ 1000 = kg) per il BMR delle calorie attive</td></tr>
+          <tr><td><code>height</code></td><td>—</td><td data-i18n="tbl6_r5">Altezza (cm) per il BMR</td></tr>
+          <tr><td><code>birthYear</code></td><td>—</td><td data-i18n="tbl6_r6">Età (anno corrente − anno di nascita) per il BMR</td></tr>
+          <tr><td><code>gender</code></td><td data-i18n="tbl6_r7d">neutro (−78)</td><td data-i18n="tbl6_r7">Offset BMR: +5 (uomo) / −161 (donna)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel panel-info">
+      <div class="panel-icon">ℹ️</div>
+      <div data-i18n="sec6_panel"><strong>Profilo ≠ Impostazioni app.</strong> I dati qui sopra vengono dal profilo utente Garmin. Le opzioni di gioco/visualizzazione (famiglia iniziale, campi dati, meteo on/off, uso del VO₂max) vengono invece dalle <strong>impostazioni dell'app</strong> Connect IQ (Properties). La cache del profilo si aggiorna quando rientri nel quadrante o cambi le impostazioni, e una volta al giorno (così FC a riposo e VO₂max restano aggiornati).</div>
+    </div>
+  </div>
+
+  <div class="section" id="note">
+    <h2 data-i18n="sec7_title">⚠️ Note bene · compatibilità dispositivi</h2>
+
+    <div class="panel panel-note">
+      <div class="panel-icon">⚠️</div>
+      <div data-i18n="note1"><strong>Dati non disponibili → default.</strong> Se un dispositivo non espone la <strong>Body Battery</strong>, la creatura mostra sempre lo stato <strong>Attivo</strong> (mood 2). Lo stesso vale per tutti gli altri servizi (stress, meteo, VO₂max, recupero, sonno, ecc.): se riusciamo a recuperarli da Garmin li usiamo, altrimenti ricorriamo a un valore di default o nascondiamo il campo. Tutto questo dipende dai dispositivi e da quali funzioni hanno in modo nativo: lo stesso codice gira su un Fenix di fascia alta e su un Instinct base, adattandosi a ciò che l'orologio può misurare.</div>
+    </div>
+
+    <div class="panel panel-note">
+      <div class="panel-icon">⚠️</div>
+      <div data-i18n="note2"><strong>Calorie attive ≠ quelle di Garmin.</strong> Il valore delle calorie attive mostrato da Kibo <strong>non corrisponde</strong> a quello visualizzato nell'app/widget Garmin, perché la nostra è una <strong>formula custom</strong> (calorie totali − BMR Mifflin-St Jeor sul tempo trascorso, con fallback). I dettagli del calcolo sono quelli descritti nella sezione "Formula calorie attive" qui sopra.</div>
+    </div>
+  </div>
+
   <footer data-i18n="footer">
-    Kibo · Connect IQ Watch Face · Design Reference · Giugno 2025
+    Kibo · Connect IQ Watch Face · Design Reference
   </footer>
 
 </div>
@@ -968,7 +1037,31 @@
       mood1_d: "Occhi chiusi (curva dolce verso il basso) + piccolo sbadiglio",
       tbl1_m1_e: "Chiusi, arco dolce verso il basso", tbl1_m1_m: "Piccolo sbadiglio",
       mood5_d: "Muove i piedi camminando — alterna il passo (camminata, yoga, pesi)",
-      footer: "Kibo · Connect IQ Watch Face · Design Reference · Giugno 2025"
+      toc_6: "Profilo utente & Giorno/Notte",
+      sec6_title: "👤 Profilo utente & Giorno / Notte",
+      sec6_desc: "Kibo distingue due meccanismi diversi e indipendenti: lo sfondo giorno/notte e il sonno della creatura. Il primo è puramente orario; il secondo legge la finestra di sonno dal profilo utente Garmin.",
+      f6_title: "Sfondo giorno / notte (orario, NON dal profilo)",
+      f6_v1: "Di giorno (07:00–21:00) il cielo è più chiaro con un bagliore verso l'orizzonte.",
+      f6_v2: "Di notte lo sfondo si scurisce e compare il campo stellato animato.",
+      f6_v3: "Lo stesso flag sceglie l'icona meteo del cielo sereno: ☀️ sole (giorno) / 🌙 luna (notte).",
+      f7_title: "Sonno della creatura (dal profilo utente)",
+      f7_v1: "Gli orari sleepTime e wakeTime arrivano dal profilo utente Garmin (UserProfile), non dalle impostazioni dell'app.",
+      f7_v2: "Durante la finestra di sonno la creatura dorme (mood 0, con berretto da notte), a prescindere dallo sfondo.",
+      f7_v3: "Se il profilo non espone gli orari, il default è sveglio 08:00 → 00:00 (quindi addormentato 00:00 → 08:00).",
+      tbl6_title: "Cosa leggiamo dal profilo utente (UserProfile)", tbl6_th1: "Campo profilo", tbl6_th2: "Default se assente", tbl6_th3: "A cosa serve",
+      tbl6_r1: "Soglie di rilevamento allenamento: riposo +25 → leggero, riposo +50 → intenso",
+      tbl6_r2: "Bonus XP: (vo2max − 30) × 3, se > 30 e l'opzione è attiva",
+      tbl6_r3: "Finestra di sonno → la creatura dorme (mood 0)", tbl6_r3d: "sveglio 08:00 → 00:00",
+      tbl6_r4: "Peso (grammi ÷ 1000 = kg) per il BMR delle calorie attive",
+      tbl6_r5: "Altezza (cm) per il BMR",
+      tbl6_r6: "Età (anno corrente − anno di nascita) per il BMR",
+      tbl6_r7: "Offset BMR: +5 (uomo) / −161 (donna)", tbl6_r7d: "neutro (−78)",
+      sec6_panel: "Profilo ≠ Impostazioni app. I dati qui sopra vengono dal profilo utente Garmin. Le opzioni di gioco/visualizzazione (famiglia iniziale, campi dati, meteo on/off, uso del VO₂max) vengono invece dalle impostazioni dell'app Connect IQ (Properties). La cache del profilo si aggiorna quando rientri nel quadrante o cambi le impostazioni, e una volta al giorno.",
+      toc_7: "Note bene · compatibilità",
+      sec7_title: "⚠️ Note bene · compatibilità dispositivi",
+      note1: "<strong>Dati non disponibili → default.</strong> Se un dispositivo non espone la Body Battery, la creatura mostra sempre lo stato Attivo (mood 2). Lo stesso vale per tutti gli altri servizi (stress, meteo, VO₂max, recupero, sonno, ecc.): se riusciamo a recuperarli da Garmin li usiamo, altrimenti ricorriamo a un valore di default o nascondiamo il campo. Tutto questo dipende dai dispositivi e da quali funzioni hanno in modo nativo: lo stesso codice gira su un Fenix di fascia alta e su un Instinct base, adattandosi a ciò che l'orologio può misurare.",
+      note2: "<strong>Calorie attive ≠ quelle di Garmin.</strong> Il valore delle calorie attive mostrato da Kibo non corrisponde a quello visualizzato nell'app/widget Garmin, perché la nostra è una formula custom (calorie totali − BMR Mifflin-St Jeor sul tempo trascorso, con fallback). I dettagli del calcolo sono quelli descritti nella sezione 'Formula calorie attive' qui sopra.",
+      footer: "Kibo · Connect IQ Watch Face · Design Reference"
     },
     en: {
       doc_ref: "Design Reference", main_title: "Kibo – Design Reference", last_mod: "Last modified:", author: "Author:",
@@ -1013,7 +1106,31 @@
       mood1_d: "Closed eyes (soft downward curve) + small yawn",
       tbl1_m1_e: "Closed, soft downward arc", tbl1_m1_m: "Small yawn",
       mood5_d: "Steps its feet while walking — alternating stride (walking, yoga, weights)",
-      footer: "Kibo · Connect IQ Watch Face · Design Reference · June 2025"
+      toc_6: "User Profile & Day/Night",
+      sec6_title: "👤 User Profile & Day / Night",
+      sec6_desc: "Kibo distinguishes two separate, independent mechanisms: the day/night background and the creature's sleep. The first is purely time-of-day; the second reads the sleep window from the Garmin user profile.",
+      f6_title: "Day / night background (time-based, NOT from profile)",
+      f6_v1: "By day (07:00–21:00) the sky is lighter with a glow toward the horizon.",
+      f6_v2: "At night the background darkens and the animated star field appears.",
+      f6_v3: "The same flag picks the clear-sky weather icon: ☀️ sun (day) / 🌙 moon (night).",
+      f7_title: "Creature sleep (from the user profile)",
+      f7_v1: "sleepTime and wakeTime come from the Garmin user profile (UserProfile), not the app settings.",
+      f7_v2: "During the sleep window the creature sleeps (mood 0, with a nightcap), regardless of the background.",
+      f7_v3: "If the profile exposes no times, the default is awake 08:00 → 00:00 (i.e. asleep 00:00 → 08:00).",
+      tbl6_title: "What we read from the user profile (UserProfile)", tbl6_th1: "Profile field", tbl6_th2: "Default if missing", tbl6_th3: "What it's used for",
+      tbl6_r1: "Activity-detection thresholds: resting +25 → light, resting +50 → intense",
+      tbl6_r2: "XP bonus: (vo2max − 30) × 3, if > 30 and the option is enabled",
+      tbl6_r3: "Sleep window → the creature sleeps (mood 0)", tbl6_r3d: "awake 08:00 → 00:00",
+      tbl6_r4: "Weight (grams ÷ 1000 = kg) for the active-calorie BMR",
+      tbl6_r5: "Height (cm) for the BMR",
+      tbl6_r6: "Age (current year − birth year) for the BMR",
+      tbl6_r7: "BMR offset: +5 (male) / −161 (female)", tbl6_r7d: "neutral (−78)",
+      sec6_panel: "Profile ≠ App settings. The data above comes from the Garmin user profile. Game/display options (starter family, data fields, weather on/off, VO₂max use) come instead from the Connect IQ app settings (Properties). The profile cache refreshes when you return to the watch face or change settings, and once a day.",
+      toc_7: "Notes · compatibility",
+      sec7_title: "⚠️ Notes · device compatibility",
+      note1: "<strong>Data unavailable → default.</strong> If a device does not expose Body Battery, the creature always shows the Active state (mood 2). The same applies to every other service (stress, weather, VO₂max, recovery, sleep, etc.): if we can fetch them from Garmin we use them, otherwise we fall back to a default value or hide the field. This all depends on the devices and which features they support natively: the same code runs on a high-end Fenix and a basic Instinct, adapting to what the watch can measure.",
+      note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo does not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
+      footer: "Kibo · Connect IQ Watch Face · Design Reference"
     },
     es: {
       doc_ref: "Referencia de Diseño", main_title: "Kibo – Referencia de Diseño", last_mod: "Última modificación:", author: "Autor:",
@@ -1055,7 +1172,31 @@
       evo_up_t: "⬆️ Evolution", evo_up_d: "Earn XP by training: active_minutes × 4 + steps ÷ 150 (+ VO₂max bonus). A day is worth at most 220 XP. Above 300 XP → Stage 1, above 1200 XP → Stage 2.",
       evo_down_t: "⬇️ Devolution", evo_down_d: "A lazy day (below 20 XP) subtracts 90 XP and resets the streak. Skipped days (face not shown) also decay 90 XP/day (max 5). Below the threshold the monster devolves. XP never goes below zero.",
       evo_panel: "XP-generating activity is detected by combining step cadence and heart rate (relative to resting), confirmed by rising active calories or low stress. So cycling, weights and yoga count, while stress while still is not mistaken for training.",
-      footer: "Kibo · Connect IQ Watch Face · Referencia de Diseño · Junio 2025"
+      toc_6: "User Profile & Day/Night",
+      sec6_title: "👤 User Profile & Day / Night",
+      sec6_desc: "Kibo distinguishes two separate, independent mechanisms: the day/night background and the creature's sleep. The first is purely time-of-day; the second reads the sleep window from the Garmin user profile.",
+      f6_title: "Day / night background (time-based, NOT from profile)",
+      f6_v1: "By day (07:00–21:00) the sky is lighter with a glow toward the horizon.",
+      f6_v2: "At night the background darkens and the animated star field appears.",
+      f6_v3: "The same flag picks the clear-sky weather icon: ☀️ sun (day) / 🌙 moon (night).",
+      f7_title: "Creature sleep (from the user profile)",
+      f7_v1: "sleepTime and wakeTime come from the Garmin user profile (UserProfile), not the app settings.",
+      f7_v2: "During the sleep window the creature sleeps (mood 0, with a nightcap), regardless of the background.",
+      f7_v3: "If the profile exposes no times, the default is awake 08:00 → 00:00 (i.e. asleep 00:00 → 08:00).",
+      tbl6_title: "What we read from the user profile (UserProfile)", tbl6_th1: "Profile field", tbl6_th2: "Default if missing", tbl6_th3: "What it's used for",
+      tbl6_r1: "Activity-detection thresholds: resting +25 → light, resting +50 → intense",
+      tbl6_r2: "XP bonus: (vo2max − 30) × 3, if > 30 and the option is enabled",
+      tbl6_r3: "Sleep window → the creature sleeps (mood 0)", tbl6_r3d: "awake 08:00 → 00:00",
+      tbl6_r4: "Weight (grams ÷ 1000 = kg) for the active-calorie BMR",
+      tbl6_r5: "Height (cm) for the BMR",
+      tbl6_r6: "Age (current year − birth year) for the BMR",
+      tbl6_r7: "BMR offset: +5 (male) / −161 (female)", tbl6_r7d: "neutral (−78)",
+      sec6_panel: "Profile ≠ App settings. The data above comes from the Garmin user profile. Game/display options (starter family, data fields, weather on/off, VO₂max use) come instead from the Connect IQ app settings (Properties). The profile cache refreshes when you return to the watch face or change settings, and once a day.",
+      toc_7: "Notes · compatibility",
+      sec7_title: "⚠️ Notes · device compatibility",
+      note1: "<strong>Data unavailable → default.</strong> If a device does not expose Body Battery, the creature always shows the Active state (mood 2). The same applies to every other service (stress, weather, VO₂max, recovery, sleep, etc.): if we can fetch them from Garmin we use them, otherwise we fall back to a default value or hide the field. This all depends on the devices and which features they support natively: the same code runs on a high-end Fenix and a basic Instinct, adapting to what the watch can measure.",
+      note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo does not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
+      footer: "Kibo · Connect IQ Watch Face · Referencia de Diseño"
     },
     fr: {
       doc_ref: "Référence de Design", main_title: "Kibo – Référence de Design", last_mod: "Dernière modification :", author: "Auteur :",
@@ -1097,7 +1238,31 @@
       evo_up_t: "⬆️ Evolution", evo_up_d: "Earn XP by training: active_minutes × 4 + steps ÷ 150 (+ VO₂max bonus). A day is worth at most 220 XP. Above 300 XP → Stage 1, above 1200 XP → Stage 2.",
       evo_down_t: "⬇️ Devolution", evo_down_d: "A lazy day (below 20 XP) subtracts 90 XP and resets the streak. Skipped days (face not shown) also decay 90 XP/day (max 5). Below the threshold the monster devolves. XP never goes below zero.",
       evo_panel: "XP-generating activity is detected by combining step cadence and heart rate (relative to resting), confirmed by rising active calories or low stress. So cycling, weights and yoga count, while stress while still is not mistaken for training.",
-      footer: "Kibo · Connect IQ Watch Face · Référence de Design · Juin 2025"
+      toc_6: "User Profile & Day/Night",
+      sec6_title: "👤 User Profile & Day / Night",
+      sec6_desc: "Kibo distinguishes two separate, independent mechanisms: the day/night background and the creature's sleep. The first is purely time-of-day; the second reads the sleep window from the Garmin user profile.",
+      f6_title: "Day / night background (time-based, NOT from profile)",
+      f6_v1: "By day (07:00–21:00) the sky is lighter with a glow toward the horizon.",
+      f6_v2: "At night the background darkens and the animated star field appears.",
+      f6_v3: "The same flag picks the clear-sky weather icon: ☀️ sun (day) / 🌙 moon (night).",
+      f7_title: "Creature sleep (from the user profile)",
+      f7_v1: "sleepTime and wakeTime come from the Garmin user profile (UserProfile), not the app settings.",
+      f7_v2: "During the sleep window the creature sleeps (mood 0, with a nightcap), regardless of the background.",
+      f7_v3: "If the profile exposes no times, the default is awake 08:00 → 00:00 (i.e. asleep 00:00 → 08:00).",
+      tbl6_title: "What we read from the user profile (UserProfile)", tbl6_th1: "Profile field", tbl6_th2: "Default if missing", tbl6_th3: "What it's used for",
+      tbl6_r1: "Activity-detection thresholds: resting +25 → light, resting +50 → intense",
+      tbl6_r2: "XP bonus: (vo2max − 30) × 3, if > 30 and the option is enabled",
+      tbl6_r3: "Sleep window → the creature sleeps (mood 0)", tbl6_r3d: "awake 08:00 → 00:00",
+      tbl6_r4: "Weight (grams ÷ 1000 = kg) for the active-calorie BMR",
+      tbl6_r5: "Height (cm) for the BMR",
+      tbl6_r6: "Age (current year − birth year) for the BMR",
+      tbl6_r7: "BMR offset: +5 (male) / −161 (female)", tbl6_r7d: "neutral (−78)",
+      sec6_panel: "Profile ≠ App settings. The data above comes from the Garmin user profile. Game/display options (starter family, data fields, weather on/off, VO₂max use) come instead from the Connect IQ app settings (Properties). The profile cache refreshes when you return to the watch face or change settings, and once a day.",
+      toc_7: "Notes · compatibility",
+      sec7_title: "⚠️ Notes · device compatibility",
+      note1: "<strong>Data unavailable → default.</strong> If a device does not expose Body Battery, the creature always shows the Active state (mood 2). The same applies to every other service (stress, weather, VO₂max, recovery, sleep, etc.): if we can fetch them from Garmin we use them, otherwise we fall back to a default value or hide the field. This all depends on the devices and which features they support natively: the same code runs on a high-end Fenix and a basic Instinct, adapting to what the watch can measure.",
+      note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo does not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
+      footer: "Kibo · Connect IQ Watch Face · Référence de Design"
     },
     de: {
       doc_ref: "Design-Referenz", main_title: "Kibo – Design-Referenz", last_mod: "Zuletzt geändert:", author: "Autor:",
@@ -1139,7 +1304,31 @@
       evo_up_t: "⬆️ Evolution", evo_up_d: "Earn XP by training: active_minutes × 4 + steps ÷ 150 (+ VO₂max bonus). A day is worth at most 220 XP. Above 300 XP → Stage 1, above 1200 XP → Stage 2.",
       evo_down_t: "⬇️ Devolution", evo_down_d: "A lazy day (below 20 XP) subtracts 90 XP and resets the streak. Skipped days (face not shown) also decay 90 XP/day (max 5). Below the threshold the monster devolves. XP never goes below zero.",
       evo_panel: "XP-generating activity is detected by combining step cadence and heart rate (relative to resting), confirmed by rising active calories or low stress. So cycling, weights and yoga count, while stress while still is not mistaken for training.",
-      footer: "Kibo · Connect IQ Watch Face · Design-Referenz · Juni 2025"
+      toc_6: "User Profile & Day/Night",
+      sec6_title: "👤 User Profile & Day / Night",
+      sec6_desc: "Kibo distinguishes two separate, independent mechanisms: the day/night background and the creature's sleep. The first is purely time-of-day; the second reads the sleep window from the Garmin user profile.",
+      f6_title: "Day / night background (time-based, NOT from profile)",
+      f6_v1: "By day (07:00–21:00) the sky is lighter with a glow toward the horizon.",
+      f6_v2: "At night the background darkens and the animated star field appears.",
+      f6_v3: "The same flag picks the clear-sky weather icon: ☀️ sun (day) / 🌙 moon (night).",
+      f7_title: "Creature sleep (from the user profile)",
+      f7_v1: "sleepTime and wakeTime come from the Garmin user profile (UserProfile), not the app settings.",
+      f7_v2: "During the sleep window the creature sleeps (mood 0, with a nightcap), regardless of the background.",
+      f7_v3: "If the profile exposes no times, the default is awake 08:00 → 00:00 (i.e. asleep 00:00 → 08:00).",
+      tbl6_title: "What we read from the user profile (UserProfile)", tbl6_th1: "Profile field", tbl6_th2: "Default if missing", tbl6_th3: "What it's used for",
+      tbl6_r1: "Activity-detection thresholds: resting +25 → light, resting +50 → intense",
+      tbl6_r2: "XP bonus: (vo2max − 30) × 3, if > 30 and the option is enabled",
+      tbl6_r3: "Sleep window → the creature sleeps (mood 0)", tbl6_r3d: "awake 08:00 → 00:00",
+      tbl6_r4: "Weight (grams ÷ 1000 = kg) for the active-calorie BMR",
+      tbl6_r5: "Height (cm) for the BMR",
+      tbl6_r6: "Age (current year − birth year) for the BMR",
+      tbl6_r7: "BMR offset: +5 (male) / −161 (female)", tbl6_r7d: "neutral (−78)",
+      sec6_panel: "Profile ≠ App settings. The data above comes from the Garmin user profile. Game/display options (starter family, data fields, weather on/off, VO₂max use) come instead from the Connect IQ app settings (Properties). The profile cache refreshes when you return to the watch face or change settings, and once a day.",
+      toc_7: "Notes · compatibility",
+      sec7_title: "⚠️ Notes · device compatibility",
+      note1: "<strong>Data unavailable → default.</strong> If a device does not expose Body Battery, the creature always shows the Active state (mood 2). The same applies to every other service (stress, weather, VO₂max, recovery, sleep, etc.): if we can fetch them from Garmin we use them, otherwise we fall back to a default value or hide the field. This all depends on the devices and which features they support natively: the same code runs on a high-end Fenix and a basic Instinct, adapting to what the watch can measure.",
+      note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo does not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
+      footer: "Kibo · Connect IQ Watch Face · Design-Referenz"
     },
     ja: {
       doc_ref: "デザイン仕様書", main_title: "Kibo – デザイン仕様書", last_mod: "最終更新日:", author: "著者:",
@@ -1181,7 +1370,31 @@
       evo_up_t: "⬆️ Evolution", evo_up_d: "Earn XP by training: active_minutes × 4 + steps ÷ 150 (+ VO₂max bonus). A day is worth at most 220 XP. Above 300 XP → Stage 1, above 1200 XP → Stage 2.",
       evo_down_t: "⬇️ Devolution", evo_down_d: "A lazy day (below 20 XP) subtracts 90 XP and resets the streak. Skipped days (face not shown) also decay 90 XP/day (max 5). Below the threshold the monster devolves. XP never goes below zero.",
       evo_panel: "XP-generating activity is detected by combining step cadence and heart rate (relative to resting), confirmed by rising active calories or low stress. So cycling, weights and yoga count, while stress while still is not mistaken for training.",
-      footer: "Kibo · Connect IQ Watch Face · デザイン仕様書 · 2025年6月"
+      toc_6: "User Profile & Day/Night",
+      sec6_title: "👤 User Profile & Day / Night",
+      sec6_desc: "Kibo distinguishes two separate, independent mechanisms: the day/night background and the creature's sleep. The first is purely time-of-day; the second reads the sleep window from the Garmin user profile.",
+      f6_title: "Day / night background (time-based, NOT from profile)",
+      f6_v1: "By day (07:00–21:00) the sky is lighter with a glow toward the horizon.",
+      f6_v2: "At night the background darkens and the animated star field appears.",
+      f6_v3: "The same flag picks the clear-sky weather icon: ☀️ sun (day) / 🌙 moon (night).",
+      f7_title: "Creature sleep (from the user profile)",
+      f7_v1: "sleepTime and wakeTime come from the Garmin user profile (UserProfile), not the app settings.",
+      f7_v2: "During the sleep window the creature sleeps (mood 0, with a nightcap), regardless of the background.",
+      f7_v3: "If the profile exposes no times, the default is awake 08:00 → 00:00 (i.e. asleep 00:00 → 08:00).",
+      tbl6_title: "What we read from the user profile (UserProfile)", tbl6_th1: "Profile field", tbl6_th2: "Default if missing", tbl6_th3: "What it's used for",
+      tbl6_r1: "Activity-detection thresholds: resting +25 → light, resting +50 → intense",
+      tbl6_r2: "XP bonus: (vo2max − 30) × 3, if > 30 and the option is enabled",
+      tbl6_r3: "Sleep window → the creature sleeps (mood 0)", tbl6_r3d: "awake 08:00 → 00:00",
+      tbl6_r4: "Weight (grams ÷ 1000 = kg) for the active-calorie BMR",
+      tbl6_r5: "Height (cm) for the BMR",
+      tbl6_r6: "Age (current year − birth year) for the BMR",
+      tbl6_r7: "BMR offset: +5 (male) / −161 (female)", tbl6_r7d: "neutral (−78)",
+      sec6_panel: "Profile ≠ App settings. The data above comes from the Garmin user profile. Game/display options (starter family, data fields, weather on/off, VO₂max use) come instead from the Connect IQ app settings (Properties). The profile cache refreshes when you return to the watch face or change settings, and once a day.",
+      toc_7: "Notes · compatibility",
+      sec7_title: "⚠️ Notes · device compatibility",
+      note1: "<strong>Data unavailable → default.</strong> If a device does not expose Body Battery, the creature always shows the Active state (mood 2). The same applies to every other service (stress, weather, VO₂max, recovery, sleep, etc.): if we can fetch them from Garmin we use them, otherwise we fall back to a default value or hide the field. This all depends on the devices and which features they support natively: the same code runs on a high-end Fenix and a basic Instinct, adapting to what the watch can measure.",
+      note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo does not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
+      footer: "Kibo · Connect IQ Watch Face · デザイン仕様書"
     },
     zh: {
       doc_ref: "设计参考规范", main_title: "Kibo – 设计参考规范", last_mod: "最后修改:", author: "作者:",
@@ -1223,7 +1436,31 @@
       evo_up_t: "⬆️ Evolution", evo_up_d: "Earn XP by training: active_minutes × 4 + steps ÷ 150 (+ VO₂max bonus). A day is worth at most 220 XP. Above 300 XP → Stage 1, above 1200 XP → Stage 2.",
       evo_down_t: "⬇️ Devolution", evo_down_d: "A lazy day (below 20 XP) subtracts 90 XP and resets the streak. Skipped days (face not shown) also decay 90 XP/day (max 5). Below the threshold the monster devolves. XP never goes below zero.",
       evo_panel: "XP-generating activity is detected by combining step cadence and heart rate (relative to resting), confirmed by rising active calories or low stress. So cycling, weights and yoga count, while stress while still is not mistaken for training.",
-      footer: "Kibo · Garmin Connect IQ 表盘开发团队 · 核心架构设计参考手册 · 2025年6月"
+      toc_6: "User Profile & Day/Night",
+      sec6_title: "👤 User Profile & Day / Night",
+      sec6_desc: "Kibo distinguishes two separate, independent mechanisms: the day/night background and the creature's sleep. The first is purely time-of-day; the second reads the sleep window from the Garmin user profile.",
+      f6_title: "Day / night background (time-based, NOT from profile)",
+      f6_v1: "By day (07:00–21:00) the sky is lighter with a glow toward the horizon.",
+      f6_v2: "At night the background darkens and the animated star field appears.",
+      f6_v3: "The same flag picks the clear-sky weather icon: ☀️ sun (day) / 🌙 moon (night).",
+      f7_title: "Creature sleep (from the user profile)",
+      f7_v1: "sleepTime and wakeTime come from the Garmin user profile (UserProfile), not the app settings.",
+      f7_v2: "During the sleep window the creature sleeps (mood 0, with a nightcap), regardless of the background.",
+      f7_v3: "If the profile exposes no times, the default is awake 08:00 → 00:00 (i.e. asleep 00:00 → 08:00).",
+      tbl6_title: "What we read from the user profile (UserProfile)", tbl6_th1: "Profile field", tbl6_th2: "Default if missing", tbl6_th3: "What it's used for",
+      tbl6_r1: "Activity-detection thresholds: resting +25 → light, resting +50 → intense",
+      tbl6_r2: "XP bonus: (vo2max − 30) × 3, if > 30 and the option is enabled",
+      tbl6_r3: "Sleep window → the creature sleeps (mood 0)", tbl6_r3d: "awake 08:00 → 00:00",
+      tbl6_r4: "Weight (grams ÷ 1000 = kg) for the active-calorie BMR",
+      tbl6_r5: "Height (cm) for the BMR",
+      tbl6_r6: "Age (current year − birth year) for the BMR",
+      tbl6_r7: "BMR offset: +5 (male) / −161 (female)", tbl6_r7d: "neutral (−78)",
+      sec6_panel: "Profile ≠ App settings. The data above comes from the Garmin user profile. Game/display options (starter family, data fields, weather on/off, VO₂max use) come instead from the Connect IQ app settings (Properties). The profile cache refreshes when you return to the watch face or change settings, and once a day.",
+      toc_7: "Notes · compatibility",
+      sec7_title: "⚠️ Notes · device compatibility",
+      note1: "<strong>Data unavailable → default.</strong> If a device does not expose Body Battery, the creature always shows the Active state (mood 2). The same applies to every other service (stress, weather, VO₂max, recovery, sleep, etc.): if we can fetch them from Garmin we use them, otherwise we fall back to a default value or hide the field. This all depends on the devices and which features they support natively: the same code runs on a high-end Fenix and a basic Instinct, adapting to what the watch can measure.",
+      note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo does not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
+      footer: "Kibo · Garmin Connect IQ 表盘开发团队 · 核心架构设计参考手册"
     }
   };
 
