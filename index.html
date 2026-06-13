@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kibo – Watch Face</title>
+<title>Kibo Pet – Watch Face</title>
 <style>
   :root {
     --c-bg: #F4F5F7;
@@ -215,12 +215,12 @@
 <div class="bg-creatures" id="bgCreatures" aria-hidden="true"></div>
 <div class="page-wrap">
 
-  <div class="hero"><img src="kibo-header.png" alt="Kibo" onerror="this.parentNode.style.display='none'"></div>
+  <div class="hero"><img src="kibo-header.png" alt="Kibo Pet" onerror="this.parentNode.style.display='none'"></div>
 
   <div class="page-header">
     <div class="page-title-group">
-      <h1 data-i18n="main_title">Kibo – WatchFace</h1>
-      <div class="page-meta"><span data-i18n="author">Autore:</span> <strong>Team Kibo</strong> · <span class="tag">v1.0</span></div>
+      <h1 data-i18n="main_title">Kibo Pet – WatchFace</h1>
+      <div class="page-meta"><span data-i18n="author">Autore:</span> <strong>Team Kibo Pet</strong> · <span class="tag">v1.0</span></div>
     </div>
     
     <div class="lang-select-wrap">
@@ -589,7 +589,7 @@
   <div class="section" id="evo-mechanic">
     <h2 data-i18n="evo_title">🔄 Evoluzione & Regressione</h2>
 
-    <p data-i18n="evo_desc">Kibo cresce con il tuo allenamento e regredisce con l'inattività. Ogni giornata di movimento aggiunge XP; le giornate pigre o i giorni saltati sottraggono XP, fino a riportare il mostro a uno stadio precedente. Il ciclo è quindi <strong>reversibile</strong>: non è una semplice progressione, ma uno specchio delle tue abitudini.</p>
+    <p data-i18n="evo_desc">Kibo Pet cresce con il tuo allenamento e regredisce con l'inattività. Ogni giornata di movimento aggiunge XP; le giornate pigre o i giorni saltati sottraggono XP, fino a riportare il mostro a uno stadio precedente. Il ciclo è quindi <strong>reversibile</strong>: non è una semplice progressione, ma uno specchio delle tue abitudini.</p>
 
     <figure class="evo-figure">
       <figcaption data-i18n="evo_cap">In alto: l'allenamento costante fa evolvere il mostro (Stadio 0 → 1 → 2). In basso: l'inattività prolungata lo fa regredire allo stadio precedente.</figcaption>
@@ -684,7 +684,7 @@
   <div class="section" id="calorie">
     <h2 data-i18n="sec4_title">🔥 Formula calorie attive</h2>
 
-    <p data-i18n="sec4_desc">Le <strong>calorie attive</strong> escludono il metabolismo basale (BMR) e rappresentano solo le calorie bruciate con il movimento. Kibo usa una strategia a cascata:</p>
+    <p data-i18n="sec4_desc">Le <strong>calorie attive</strong> escludono il metabolismo basale (BMR) e rappresentano solo le calorie bruciate con il movimento. Kibo Pet usa una strategia a cascata:</p>
 
     <div class="formula-box">
       <strong data-i18n="f3_title">Strategia 1 – Campo nativo del dispositivo (preferito)</strong>
@@ -874,7 +874,7 @@
   <div class="section" id="profilo">
     <h2 data-i18n="sec6_title">👤 Profilo utente & Giorno / Notte</h2>
 
-    <p data-i18n="sec6_desc">Kibo distingue <strong>due meccanismi diversi e indipendenti</strong>: lo <strong>sfondo</strong> giorno/notte e il <strong>sonno della creatura</strong>. Il primo è puramente orario; il secondo legge la finestra di sonno dal <strong>profilo utente Garmin</strong>.</p>
+    <p data-i18n="sec6_desc">Kibo Pet distingue <strong>due meccanismi diversi e indipendenti</strong>: lo <strong>sfondo</strong> giorno/notte e il <strong>sonno della creatura</strong>. Il primo è puramente orario; il secondo legge la finestra di sonno dal <strong>profilo utente Garmin</strong>.</p>
 
     <div class="formula-box">
       <strong data-i18n="f6_title">Sfondo giorno / notte (orario, NON dal profilo)</strong>
@@ -957,14 +957,14 @@
 
     <div class="panel panel-note">
       <div class="panel-icon">⚠️</div>
-      <div data-i18n="note2"><strong>Calorie attive ≠ quelle di Garmin.</strong> Il valore delle calorie attive mostrato da Kibo (per la strategia 2) <strong>può non corrispondere</strong> a quello visualizzato nell'app/widget Garmin, perché la nostra è una <strong>formula custom</strong> (calorie totali − BMR Mifflin-St Jeor sul tempo trascorso, con fallback). I dettagli del calcolo sono quelli descritti nella sezione "Formula calorie attive" qui sopra.</div>
+      <div data-i18n="note2"><strong>Calorie attive ≠ quelle di Garmin.</strong> Il valore delle calorie attive mostrato da Kibo Pet (per la strategia 2) <strong>può non corrispondere</strong> a quello visualizzato nell'app/widget Garmin, perché la nostra è una <strong>formula custom</strong> (calorie totali − BMR Mifflin-St Jeor sul tempo trascorso, con fallback). I dettagli del calcolo sono quelli descritti nella sezione "Formula calorie attive" qui sopra.</div>
     </div>
   </div>
 
   <div class="monster-row" id="monsterRow" aria-hidden="true"></div>
 
   <footer data-i18n="footer">
-    Kibo · Connect IQ Watch Face · Tommaso Campani
+    Kibo Pet · Connect IQ Watch Face · Tommaso Campani
   </footer>
 
 </div>
@@ -972,7 +972,7 @@
 <script>
   const dict = {
     it: {
-      doc_ref: "Design Reference", main_title: "Kibo – Watch Face", last_mod: "Ultima modifica:", author: "Autore:",
+      doc_ref: "Design Reference", main_title: "Kibo Pet – Watch Face", last_mod: "Ultima modifica:", author: "Autore:",
       toc_title: "Contenuti", toc_1: "Stati / Emozioni del mostro", toc_2: "Tabella evoluzioni", toc_3: "Formula XP per evoluzione", toc_4: "Formula calorie attive", toc_5: "Animazioni meteo",
       sec1_title: "🎭 Stati / Emozioni del mostro", sec1_desc: "Il mostro ha 5 stati emotivi determinati in tempo reale da Body Battery e livello di stress del Garmin. Lo stress ha priorità: se ≥ 70 il mostro è Stressato indipendentemente dalla Body Battery.", sec1_panel: "La priorità di lettura è: Stress ≥ 70 → Stressato. Altrimenti si usa la Body Battery: ≥70 → Iper, ≥20 → Attivo, ≥10 → Stanco, <10 → Esausto.",
       mood0_t: "😴 Esausto", mood0_d: "Occhi chiusi, bocca aperta, ZZZ fluttuanti", mood1_t: "😪 Stanco", mood1_d: "Occhi socchiusi con palpebra pesante, bocca neutra", mood2_t: "😊 Attivo", mood2_d: "Occhi aperti e vivaci, sorriso aperto", mood3_t: "🤩 Iper", mood3_d: "Occhi spalancati, mega sorriso, sparkles brillanti", mood4_t: "😰 Stressato", mood4_d: "Sopracciglia arcuate, bocca giù, goccia di sudore",
@@ -987,7 +987,7 @@
       xp_lbl: "Visualizzazione progresso XP (esempio: 750 XP)", xp_st1: "Stadio 1", xp_st2: "Stadio 2",
       tbl4_title: "Obiettivo giornaliero (streak)", tbl4_th1: "Costante", tbl4_th2: "Valore", tbl4_th3: "Descrizione",
       tbl4_r1: "Minuti attivi/giorno per mantenere la streak", tbl4_r2: "30 × 4 – XP minimo per 'giornata buona'", tbl4_r3: "Sotto questa soglia il giorno conta come 'pigro'", tbl4_r4: "Penalità per ogni giorno pigro o saltato", tbl4_r5: "Massimo XP da un singolo giorno", tbl4_r6: "Soglia evoluzione stadio 1", tbl4_r7: "Soglia evoluzione stadio 2", sec3_panel: "Il Livello (LVL) mostrato sul quadrante è separato dagli stadi evolutivi: level = 1 + (effectiveXp ÷ 10). Cresce in modo continuo e non regredisce.",
-      sec4_title: "🔥 Formula calorie attive", sec4_desc: "Le calorie attive escludono il metabolismo basale (BMR) e rappresentano solo le calorie bruciate con il movimento. Kibo usa una strategia a cascata:",
+      sec4_title: "🔥 Formula calorie attive", sec4_desc: "Le calorie attive escludono il metabolismo basale (BMR) e rappresentano solo le calorie bruciate con il movimento. Kibo Pet usa una strategia a cascata:",
       f3_title: "Strategia 1 – Campo nativo del dispositivo (preferito)", f3_v1: "Disponibile su Fenix 7 / Epix / MARQ e dispositivi di fascia alta", f3_v2: "Se non disponibile → si passa alla Strategia 2",
       f4_title: "Strategia 2 – Calcolo con BMR Mifflin-St Jeor", f4_v1: "calorie_totali – calorie bruciate dall'ActivityMonitor dall'inizio del giorno", f4_v2: "secondi_trascorsi – secondi dall'inizio del giorno (ore × 3600 + min × 60 + sec)", f4_v3: "Se il profilo utente non è disponibile → stima grezza: calorie_attive ≈ calorie_totali × 0.40",
       f5_title: "BMR – Equazione di Mifflin-St Jeor", f5_v1: "kg – peso in kg (profilo utente Garmin: grammi ÷ 1000)", f5_v2: "cm – altezza in cm", f5_v3: "età – anno corrente − anno di nascita", f5_v4: "offset: +5 (maschio) / −161 (femmina) / −78 (neutro/non definito)",
@@ -1004,7 +1004,7 @@
       st_f_n: "2 puntini fianchi + 3 puntini ventre (eccetto Volt)",
       sec3_panel: "Il valore XP sul quadrante è l'effectiveXp = XP consolidato + contributo del giorno corrente. Il gauge mostra il progresso verso lo stadio successivo (stageProgress); non esiste un livello separato.",
       evo_title: "🔄 Evoluzione & Regressione",
-      evo_desc: "Kibo cresce con il tuo allenamento e regredisce con l'inattività. Ogni giornata di movimento aggiunge XP; le giornate pigre o i giorni saltati sottraggono XP, fino a riportare il mostro a uno stadio precedente. Il ciclo è reversibile: uno specchio delle tue abitudini.",
+      evo_desc: "Kibo Pet cresce con il tuo allenamento e regredisce con l'inattività. Ogni giornata di movimento aggiunge XP; le giornate pigre o i giorni saltati sottraggono XP, fino a riportare il mostro a uno stadio precedente. Il ciclo è reversibile: uno specchio delle tue abitudini.",
       evo_cap: "In alto: l'allenamento costante fa evolvere il mostro (Stadio 0 → 1 → 2). In basso: l'inattività prolungata lo fa regredire allo stadio precedente.",
       evo_up_t: "⬆️ Evoluzione", evo_up_d: "Accumula XP allenandoti: minuti_attivi × 4 + passi ÷ 150 (+ bonus VO₂max). Una giornata vale al massimo 220 XP. Oltre 300 XP → Stadio 1, oltre 1200 XP → Stadio 2.",
       evo_down_t: "⬇️ Regressione", evo_down_d: "Una giornata pigra (sotto 20 XP) sottrae 90 XP e azzera la streak. Anche i giorni senza quadrante mostrato decadono di 90 XP/giorno (max 5). Sotto la soglia, il mostro regredisce. L'XP non va mai sotto zero.",
@@ -1014,7 +1014,7 @@
       mood5_d: "Muove i piedi camminando — alterna il passo (camminata, yoga, pesi)",
       toc_6: "Profilo utente & Giorno/Notte",
       sec6_title: "👤 Profilo utente & Giorno / Notte",
-      sec6_desc: "Kibo distingue due meccanismi diversi e indipendenti: lo sfondo giorno/notte e il sonno della creatura. Il primo è puramente orario; il secondo legge la finestra di sonno dal profilo utente Garmin.",
+      sec6_desc: "Kibo Pet distingue due meccanismi diversi e indipendenti: lo sfondo giorno/notte e il sonno della creatura. Il primo è puramente orario; il secondo legge la finestra di sonno dal profilo utente Garmin.",
       f6_title: "Sfondo giorno / notte (orario, NON dal profilo)",
       f6_v1: "Di giorno (07:00–21:00) il cielo è più chiaro con un bagliore verso l'orizzonte.",
       f6_v2: "Di notte lo sfondo si scurisce e compare il campo stellato animato.",
@@ -1036,11 +1036,11 @@
       sec7_title: "⚠️ Note bene · compatibilità dispositivi",
       toc_8: "Setting quadrante", sec8_title: "⚙️ Setting quadrante", sec8_desc: "Il quadrante espone cinque slot configurabili, ognuno selezionabile dall'app Connect IQ.", sec8_slots_t: "I cinque slot — valori selezionabili", sec8_slots: "nessuno, passi, calorie, HR, distanza, piani, batteria orologio, Body Battery (energia), data, minuti attivi, XP, notifiche, calorie attive (calcolate), tempo di recupero.", sec8_other: "Altre impostazioni: famiglia di partenza, mostra animazioni meteo, uso del VO₂max.",
       note1: "<strong>Dati non disponibili → default.</strong> Se un dispositivo non espone la Body Battery, la creatura mostra sempre lo stato Attivo (mood 2). Lo stesso vale per tutti gli altri servizi (stress, meteo, VO₂max, recupero, sonno, ecc.): se riusciamo a recuperarli da Garmin li usiamo, altrimenti ricorriamo a un valore di default o nascondiamo il campo. Tutto questo dipende dai dispositivi e da quali funzioni hanno in modo nativo: lo stesso codice gira su un Fenix di fascia alta e su un Instinct base, adattandosi a ciò che l'orologio può misurare.",
-      note2: "<strong>Calorie attive ≠ quelle di Garmin.</strong> Il valore delle calorie attive mostrato da Kibo può non corrispondere a quello visualizzato nell'app/widget Garmin, perché la nostra è una formula custom (calorie totali − BMR Mifflin-St Jeor sul tempo trascorso, con fallback). I dettagli del calcolo sono quelli descritti nella sezione 'Formula calorie attive' qui sopra.",
-      footer: "Kibo · Connect IQ Watch Face · Tommaso Campani"
+      note2: "<strong>Calorie attive ≠ quelle di Garmin.</strong> Il valore delle calorie attive mostrato da Kibo Pet può non corrispondere a quello visualizzato nell'app/widget Garmin, perché la nostra è una formula custom (calorie totali − BMR Mifflin-St Jeor sul tempo trascorso, con fallback). I dettagli del calcolo sono quelli descritti nella sezione 'Formula calorie attive' qui sopra.",
+      footer: "Kibo Pet · Connect IQ Watch Face · Tommaso Campani"
     },
     en: {
-      doc_ref: "Design Reference", main_title: "Kibo – Watch Face", last_mod: "Last modified:", author: "Author:",
+      doc_ref: "Design Reference", main_title: "Kibo Pet – Watch Face", last_mod: "Last modified:", author: "Author:",
       toc_title: "Contents", toc_1: "Monster States / Emotions", toc_2: "Evolution Table", toc_3: "XP Formula per Evolution", toc_4: "Active Calories Formula", toc_5: "Weather Animations",
       sec1_title: "🎭 Monster States / Emotions", sec1_desc: "The monster has 5 emotional states determined in real-time by Garmin's Body Battery and Stress level. Stress takes priority: if ≥ 70, the monster is Stressed regardless of the Body Battery.", sec1_panel: "Reading priority is: Stress ≥ 70 → Stressed. Otherwise, Body Battery is checked: ≥70 → Hyper, ≥20 → Active, ≥10 → Tired, <10 → Exhausted.",
       mood0_t: "😴 Exhausted", mood0_d: "Closed eyes, open mouth, floating ZZZs", mood1_t: "😪 Tired", mood1_d: "Half-closed eyes with heavy eyelids, neutral mouth", mood2_t: "😊 Active", mood2_d: "Open and bright eyes, open smile", mood3_t: "🤩 Hyper", mood3_d: "Wide open eyes, mega smile, shining sparkles", mood4_t: "😰 Stressed", mood4_d: "Arched eyebrows, mouth down, sweat drop",
@@ -1055,7 +1055,7 @@
       xp_lbl: "XP Progress Visualization (example: 750 XP)", xp_st1: "Stage 1", xp_st2: "Stage 2",
       tbl4_title: "Daily Goal (streak)", tbl4_th1: "Constant", tbl4_th2: "Value", tbl4_th3: "Description",
       tbl4_r1: "Active minutes/day to maintain the streak", tbl4_r2: "30 × 4 – minimum XP for a 'good day'", tbl4_r3: "Below this threshold the day counts as 'lazy'", tbl4_r4: "Penalty for each lazy or skipped day", tbl4_r5: "Maximum XP from a single day", tbl4_r6: "Stage 1 evolution threshold", tbl4_r7: "Stage 2 evolution threshold", sec3_panel: "The Level (LVL) shown on the dial is separate from the evolutionary stages: level = 1 + (effectiveXp ÷ 10). It grows continuously and does not regress.",
-      sec4_title: "🔥 Active Calories Formula", sec4_desc: "Active calories exclude Basal Metabolic Rate (BMR) and represent only calories burned through movement. Kibo uses a cascade strategy:",
+      sec4_title: "🔥 Active Calories Formula", sec4_desc: "Active calories exclude Basal Metabolic Rate (BMR) and represent only calories burned through movement. Kibo Pet uses a cascade strategy:",
       f3_title: "Strategy 1 – Device Native Field (preferred)", f3_v1: "Available on Fenix 7 / Epix / MARQ and high-end devices", f3_v2: "If not available → switches to Strategy 2",
       f4_title: "Strategy 2 – Calculation with Mifflin-St Jeor BMR", f4_v1: "calorie_totali – total calories burned from ActivityMonitor since start of day", f4_v2: "secondi_trascorsi – seconds since start of day (hours × 3600 + min × 60 + sec)", f4_v3: "If user profile is unavailable → rough estimate: active_calories ≈ total_calories × 0.40",
       f5_title: "BMR – Mifflin-St Jeor Equation", f5_v1: "kg – weight in kg (Garmin user profile: grams ÷ 1000)", f5_v2: "cm – height in cm", f5_v3: "età – current year − birth year", f5_v4: "offset: +5 (male) / −161 (female) / −78 (neutral/undefined)",
@@ -1072,7 +1072,7 @@
       st_f_n: "2 hip dots + 3 belly dots (except Volt)",
       sec3_panel: "The XP value on the dial is effectiveXp = committed XP + today's live contribution. The gauge shows progress toward the next stage (stageProgress); there is no separate level.",
       evo_title: "🔄 Evolution & Devolution",
-      evo_desc: "Kibo grows with your training and devolves with inactivity. Each active day adds XP; lazy or skipped days subtract XP, eventually dropping the monster to a previous stage. The cycle is reversible: a mirror of your habits.",
+      evo_desc: "Kibo Pet grows with your training and devolves with inactivity. Each active day adds XP; lazy or skipped days subtract XP, eventually dropping the monster to a previous stage. The cycle is reversible: a mirror of your habits.",
       evo_cap: "Top: consistent training evolves the monster (Stage 0 → 1 → 2). Bottom: prolonged inactivity devolves it to the previous stage.",
       evo_up_t: "⬆️ Evolution", evo_up_d: "Earn XP by training: active_minutes × 4 + steps ÷ 150 (+ VO₂max bonus). A day is worth at most 220 XP. Above 300 XP → Stage 1, above 1200 XP → Stage 2.",
       evo_down_t: "⬇️ Devolution", evo_down_d: "A lazy day (below 20 XP) subtracts 90 XP and resets the streak. Skipped days (face not shown) also decay 90 XP/day (max 5). Below the threshold the monster devolves. XP never goes below zero.",
@@ -1082,7 +1082,7 @@
       mood5_d: "Steps its feet while walking — alternating stride (walking, yoga, weights)",
       toc_6: "User Profile & Day/Night",
       sec6_title: "👤 User Profile & Day / Night",
-      sec6_desc: "Kibo distinguishes two separate, independent mechanisms: the day/night background and the creature's sleep. The first is purely time-of-day; the second reads the sleep window from the Garmin user profile.",
+      sec6_desc: "Kibo Pet distinguishes two separate, independent mechanisms: the day/night background and the creature's sleep. The first is purely time-of-day; the second reads the sleep window from the Garmin user profile.",
       f6_title: "Day / night background (time-based, NOT from profile)",
       f6_v1: "By day (07:00–21:00) the sky is lighter with a glow toward the horizon.",
       f6_v2: "At night the background darkens and the animated star field appears.",
@@ -1105,11 +1105,11 @@
       toc_8: "Dial settings", sec8_title: "⚙️ Dial settings", sec8_desc: "The watch face exposes five configurable slots, each selectable from the Connect IQ app.", sec8_slots_t: "The five slots — selectable values", sec8_slots: "none, steps, calories, HR, distance, floors, watch battery, Body Battery (energy), date, active minutes, XP, notifications, active calories (calculated), recovery time.", sec8_other: "Other settings: starting family, show weather animations, VO₂max usage.",
       note3: "Estimated data, not real-time. The displayed values are estimated and refreshed once a minute. Exceptions: steps, updated every 10 seconds, and heart rate, updated every 3 seconds.",
       note1: "<strong>Data unavailable → default.</strong> If a device does not expose Body Battery, the creature always shows the Active state (mood 2). The same applies to every other service (stress, weather, VO₂max, recovery, sleep, etc.): if we can fetch them from Garmin we use them, otherwise we fall back to a default value or hide the field. This all depends on the devices and which features they support natively: the same code runs on a high-end Fenix and a basic Instinct, adapting to what the watch can measure.",
-      note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo may not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
-      footer: "Kibo · Connect IQ Watch Face · Tommaso Campani"
+      note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo Pet may not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
+      footer: "Kibo Pet · Connect IQ Watch Face · Tommaso Campani"
     },
     es: {
-      doc_ref: "Referencia de Diseño", main_title: "Kibo – Watch Face", last_mod: "Última modificación:", author: "Autor:",
+      doc_ref: "Referencia de Diseño", main_title: "Kibo Pet – Watch Face", last_mod: "Última modificación:", author: "Autor:",
       toc_title: "Contenidos", toc_1: "Estados / Emociones del monstruo", toc_2: "Tabla de evoluciones", toc_3: "Fórmula de XP para evolución", toc_4: "Fórmula de calorías activ", toc_5: "Animaciones meteorológicas",
       sec1_title: "🎭 Estados / Emociones del monstruo", sec1_desc: "El monstruo tiene 7 estados emocionales determinados en tiempo real por la Body Battery y el nivel de estrés de Garmin. El estrés tiene prioridad: si es ≥ 70, el monstruo está Estresado independientemente de la Body Battery.", sec1_panel: "La prioridad de lectura es: Estrés ≥ 70 → Estresado. De lo contrario, se usa la Body Battery: ≥70 → Hiper, ≥20 → Activo, ≥10 → Cansado, <10 → Agotado.",
       mood0_t: "😴 Agotado", mood0_d: "Ojos cerrados, boca abierta, ZZZ flotantes", mood1_t: "😪 Cansado", mood1_d: "Ojos entreabiertos con párpados pesados, boca neutra", mood2_t: "😊 Activo", mood2_d: "Ojos abiertos y vivos, sonrisa abierta", mood3_t: "🤩 Hiper", mood3_d: "Ojos abiertos de par en par, mega sonrisa, destellos brillantes", mood4_t: "😰 Estresado", mood4_d: "Cejas arqueadas, boca abajo, gota de sudor",
@@ -1124,7 +1124,7 @@
       xp_lbl: "Visualización del progreso de XP (ejemplo: 750 XP)", xp_st1: "Etapa 1", xp_st2: "Etapa 2",
       tbl4_title: "Objetivo diario (racha)", tbl4_th1: "Constante", tbl4_th2: "Valor", tbl4_th3: "Descripción",
       tbl4_r1: "Minutos activos/día para mantener la racha", tbl4_r2: "30 × 4 – XP mínimo para un 'buen día'", tbl4_r3: "Por debajo de este umbral el día cuenta como 'perezoso'", tbl4_r4: "Penalización por cada día perezoso o saltado", tbl4_r5: "Máximo XP de un solo día", tbl4_r6: "Umbral de evolución etapa 1", tbl4_r7: "Umbral de evolución etapa 2", sec3_panel: "El Nivel (LVL) mostrado en la pantalla es independiente de las etapas evolutivas: level = 1 + (effectiveXp ÷ 10). Crece continuamente y no retrocede.",
-      sec4_title: "🔥 Fórmula de calorías activas", sec4_desc: "Las calorías activas excluyen la Tasa Metabólica Basal (BMR) y representan solo las calorías quemadas con el movimiento. Kibo usa una estrategia en cascada:",
+      sec4_title: "🔥 Fórmula de calorías activas", sec4_desc: "Las calorías activas excluyen la Tasa Metabólica Basal (BMR) y representan solo las calorías quemadas con el movimiento. Kibo Pet usa una estrategia en cascada:",
       f3_title: "Estrategia 1 – Campo nativo del dispositivo (preferido)", f3_v1: "Disponible en Fenix 7 / Epix / MARQ y dispositivos de gama alta", f3_v2: "Si no está disponible → pasa a la Estrategia 2",
       f4_title: "Estrategia 2 – Cálculo con BMR Mifflin-St Jeor", f4_v1: "calorie_totali – calorías totales quemadas desde el ActivityMonitor desde el inicio del día", f4_v2: "secondi_trascorsi – segundos transcurridos desde el inicio del día (horas × 3600 + min × 60 + sec)", f4_v3: "Si el perfil de usuario no está disponible → estimación aproximada: calorías_activas ≈ calorías_totales × 0.40",
       f5_title: "BMR – Ecuación de Mifflin-St Jeor", f5_v1: "kg – peso en kg (perfil de usuario de Garmin: gramos ÷ 1000)", f5_v2: "cm – altura en cm", f5_v3: "età – año actual − año de nacimiento", f5_v4: "offset: +5 (masculino) / −161 (femenino) / −78 (neutro/no definido)",
@@ -1141,14 +1141,14 @@
       st_f_n: "2 hip dots + 3 belly dots (except Volt)",
       sec3_panel: "The XP value on the dial is effectiveXp = committed XP + today's live contribution. The gauge shows progress toward the next stage (stageProgress); there is no separate level.",
       evo_title: "🔄 Evolution & Devolution",
-      evo_desc: "Kibo grows with your training and devolves with inactivity. Each active day adds XP; lazy or skipped days subtract XP, eventually dropping the monster to a previous stage. The cycle is reversible: a mirror of your habits.",
+      evo_desc: "Kibo Pet grows with your training and devolves with inactivity. Each active day adds XP; lazy or skipped days subtract XP, eventually dropping the monster to a previous stage. The cycle is reversible: a mirror of your habits.",
       evo_cap: "Top: consistent training evolves the monster (Stage 0 → 1 → 2). Bottom: prolonged inactivity devolves it to the previous stage.",
       evo_up_t: "⬆️ Evolution", evo_up_d: "Earn XP by training: active_minutes × 4 + steps ÷ 150 (+ VO₂max bonus). A day is worth at most 220 XP. Above 300 XP → Stage 1, above 1200 XP → Stage 2.",
       evo_down_t: "⬇️ Devolution", evo_down_d: "A lazy day (below 20 XP) subtracts 90 XP and resets the streak. Skipped days (face not shown) also decay 90 XP/day (max 5). Below the threshold the monster devolves. XP never goes below zero.",
       evo_panel: "XP-generating activity is detected by combining step cadence and heart rate (relative to resting), confirmed by rising active calories or low stress. So cycling, weights and yoga count, while stress while still is not mistaken for training.",
       toc_6: "User Profile & Day/Night",
       sec6_title: "👤 User Profile & Day / Night",
-      sec6_desc: "Kibo distinguishes two separate, independent mechanisms: the day/night background and the creature's sleep. The first is purely time-of-day; the second reads the sleep window from the Garmin user profile.",
+      sec6_desc: "Kibo Pet distinguishes two separate, independent mechanisms: the day/night background and the creature's sleep. The first is purely time-of-day; the second reads the sleep window from the Garmin user profile.",
       f6_title: "Day / night background (time-based, NOT from profile)",
       f6_v1: "By day (07:00–21:00) the sky is lighter with a glow toward the horizon.",
       f6_v2: "At night the background darkens and the animated star field appears.",
@@ -1171,11 +1171,11 @@
       toc_8: "Ajustes de la esfera", sec8_title: "⚙️ Ajustes de la esfera", sec8_desc: "La esfera expone cinco ranuras configurables, cada una seleccionable desde la app Connect IQ.", sec8_slots_t: "Las cinco ranuras — valores seleccionables", sec8_slots: "ninguno, pasos, calorías, FC, distancia, pisos, batería del reloj, Body Battery (energía), fecha, minutos activos, XP, notificaciones, calorías activas (calculadas), tiempo de recuperación.", sec8_other: "Otros ajustes: familia inicial, mostrar animaciones del clima, uso del VO₂max.",
       note3: "Datos estimados, no en tiempo real. Los valores mostrados son estimados y se actualizan una vez por minuto. Excepciones: los pasos, actualizados cada 10 segundos, y la frecuencia cardíaca, actualizada cada 3 segundos.",
       note1: "<strong>Data unavailable → default.</strong> If a device does not expose Body Battery, the creature always shows the Active state (mood 2). The same applies to every other service (stress, weather, VO₂max, recovery, sleep, etc.): if we can fetch them from Garmin we use them, otherwise we fall back to a default value or hide the field. This all depends on the devices and which features they support natively: the same code runs on a high-end Fenix and a basic Instinct, adapting to what the watch can measure.",
-      note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo may not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
-      footer: "Kibo · Connect IQ Watch Face · Tommaso Campani"
+      note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo Pet may not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
+      footer: "Kibo Pet · Connect IQ Watch Face · Tommaso Campani"
     },
     fr: {
-      doc_ref: "Référence de Design", main_title: "Kibo – Watch Face", last_mod: "Dernière modification :", author: "Auteur :",
+      doc_ref: "Référence de Design", main_title: "Kibo Pet – Watch Face", last_mod: "Dernière modification :", author: "Auteur :",
       toc_title: "Contenu", toc_1: "États / Émotions du monstre", toc_2: "Tableau des évolutions", toc_3: "Formule XP pour évolution", toc_4: "Formule des calories actives", toc_5: "Animations météo",
       sec1_title: "🎭 États / Émotions du monstre", sec1_desc: "Le monstre a 7 états émotionnels déterminés en temps réel par la Body Battery et le niveau de stress Garmin. Le stress a la priorité : si ≥ 70, le monstre est Stressé indépendamment de la Body Battery.", sec1_panel: "La priorité de lecture est : Stress ≥ 70 → Stressé. Sinon, la Body Battery est utilisée : ≥70 → Hyper, ≥20 → Actif, ≥10 → Fatigué, <10 → Épuisé.",
       mood0_t: "😴 Épuisé", mood0_d: "Yeux fermés, bouche ouverte, ZZZ flottants", mood1_t: "😪 Fatigué", mood1_d: "Yeux mi-clos avec paupières lourdes, bouche neutre", mood2_t: "😊 Actif", mood2_d: "Yeux ouverts et vifs, sourire ouvert", mood3_t: "🤩 Hyper", mood3_d: "Yeux grands ouverts, méga sourire, éclats brillants", mood4_t: "😰 Stressé", mood4_d: "Sourcils arqués, bouche vers le bas, goutte de sueur",
@@ -1190,7 +1190,7 @@
       xp_lbl: "Visualisation de la progression de l'XP (exemple : 750 XP)", xp_st1: "Stade 1", xp_st2: "Stade 2",
       tbl4_title: "Objectif quotidien (série)", tbl4_th1: "Constante", tbl4_th2: "Valeur", tbl4_th3: "Description",
       tbl4_r1: "Minutes actives/jour pour maintenir la série", tbl4_r2: "30 × 4 – XP minimum pour une 'bonne journée'", tbl4_r3: "En dessous de ce seuil, la journée compte comme 'paresseuse'", tbl4_r4: "Pénalité pour chaque journée paresseuse ou sautée", tbl4_r5: "XP maximum d'une seule journée", tbl4_r6: "Seuil d'évolution stade 1", tbl4_r7: "Seuil d'évolution stade 2", sec3_panel: "Le Niveau (LVL) affiché sur le cadran est distinct des stades évolutifs : level = 1 + (effectiveXp ÷ 10). Il grandit continuellement et ne régresse pas.",
-      sec4_title: "🔥 Formule des calories actives", sec4_desc: "Les calories actives excluent le métabolisme de base (BMR) et représentent uniquement les calories brûlées par le mouvement. Kibo utilise une stratégie en cascade :",
+      sec4_title: "🔥 Formule des calories actives", sec4_desc: "Les calories actives excluent le métabolisme de base (BMR) et représentent uniquement les calories brûlées par le mouvement. Kibo Pet utilise une stratégie en cascade :",
       f3_title: "Stratégie 1 – Champ natif de l'appareil (préféré)", f3_v1: "Disponible sur Fenix 7 / Epix / MARQ et appareils haut de gamme", f3_v2: "Si non disponible → passe à la Stratégie 2",
       f4_title: "Stratégie 2 – Calcul avec le BMR Mifflin-St Jeor", f4_v1: "calorie_totali – calories totales brûlées via l'ActivityMonitor depuis le début de la journée", f4_v2: "secondi_trascorsi – secondes écoulées depuis le début de la journée (heures × 3600 + min × 60 + sec)", f4_v3: "Si le profil utilisateur n'est pas disponible → estimation brute : calories_actives ≈ calories_totales × 0.40",
       f5_title: "BMR – Équation de Mifflin-St Jeor", f5_v1: "kg – poids en kg (profil utilisateur Garmin : grammes ÷ 1000)", f5_v2: "cm – hauteur en cm", f5_v3: "età – année en cours − année de naissance", f5_v4: "offset : +5 (homme) / −161 (femme) / −78 (neutre/non défini)",
@@ -1207,14 +1207,14 @@
       st_f_n: "2 hip dots + 3 belly dots (except Volt)",
       sec3_panel: "The XP value on the dial is effectiveXp = committed XP + today's live contribution. The gauge shows progress toward the next stage (stageProgress); there is no separate level.",
       evo_title: "🔄 Evolution & Devolution",
-      evo_desc: "Kibo grows with your training and devolves with inactivity. Each active day adds XP; lazy or skipped days subtract XP, eventually dropping the monster to a previous stage. The cycle is reversible: a mirror of your habits.",
+      evo_desc: "Kibo Pet grows with your training and devolves with inactivity. Each active day adds XP; lazy or skipped days subtract XP, eventually dropping the monster to a previous stage. The cycle is reversible: a mirror of your habits.",
       evo_cap: "Top: consistent training evolves the monster (Stage 0 → 1 → 2). Bottom: prolonged inactivity devolves it to the previous stage.",
       evo_up_t: "⬆️ Evolution", evo_up_d: "Earn XP by training: active_minutes × 4 + steps ÷ 150 (+ VO₂max bonus). A day is worth at most 220 XP. Above 300 XP → Stage 1, above 1200 XP → Stage 2.",
       evo_down_t: "⬇️ Devolution", evo_down_d: "A lazy day (below 20 XP) subtracts 90 XP and resets the streak. Skipped days (face not shown) also decay 90 XP/day (max 5). Below the threshold the monster devolves. XP never goes below zero.",
       evo_panel: "XP-generating activity is detected by combining step cadence and heart rate (relative to resting), confirmed by rising active calories or low stress. So cycling, weights and yoga count, while stress while still is not mistaken for training.",
       toc_6: "User Profile & Day/Night",
       sec6_title: "👤 User Profile & Day / Night",
-      sec6_desc: "Kibo distinguishes two separate, independent mechanisms: the day/night background and the creature's sleep. The first is purely time-of-day; the second reads the sleep window from the Garmin user profile.",
+      sec6_desc: "Kibo Pet distinguishes two separate, independent mechanisms: the day/night background and the creature's sleep. The first is purely time-of-day; the second reads the sleep window from the Garmin user profile.",
       f6_title: "Day / night background (time-based, NOT from profile)",
       f6_v1: "By day (07:00–21:00) the sky is lighter with a glow toward the horizon.",
       f6_v2: "At night the background darkens and the animated star field appears.",
@@ -1237,11 +1237,11 @@
       toc_8: "Réglages du cadran", sec8_title: "⚙️ Réglages du cadran", sec8_desc: "Le cadran expose cinq emplacements configurables, chacun sélectionnable depuis l'app Connect IQ.", sec8_slots_t: "Les cinq emplacements — valeurs sélectionnables", sec8_slots: "aucun, pas, calories, FC, distance, étages, batterie de la montre, Body Battery (énergie), date, minutes actives, XP, notifications, calories actives (calculées), temps de récupération.", sec8_other: "Autres réglages : famille de départ, afficher les animations météo, utilisation du VO₂max.",
       note3: "Données estimées, pas en temps réel. Les valeurs affichées sont estimées et actualisées une fois par minute. Exceptions : les pas, mis à jour toutes les 10 secondes, et la fréquence cardiaque, mise à jour toutes les 3 secondes.",
       note1: "<strong>Data unavailable → default.</strong> If a device does not expose Body Battery, the creature always shows the Active state (mood 2). The same applies to every other service (stress, weather, VO₂max, recovery, sleep, etc.): if we can fetch them from Garmin we use them, otherwise we fall back to a default value or hide the field. This all depends on the devices and which features they support natively: the same code runs on a high-end Fenix and a basic Instinct, adapting to what the watch can measure.",
-      note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo may not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
-      footer: "Kibo · Connect IQ Watch Face · Tommaso Campani"
+      note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo Pet may not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
+      footer: "Kibo Pet · Connect IQ Watch Face · Tommaso Campani"
     },
     de: {
-      doc_ref: "Design-Referenz", main_title: "Kibo – Watch Face", last_mod: "Zuletzt geändert:", author: "Autor:",
+      doc_ref: "Design-Referenz", main_title: "Kibo Pet – Watch Face", last_mod: "Zuletzt geändert:", author: "Autor:",
       toc_title: "Inhalt", toc_1: "Zustände / Emotionen des Monsters", toc_2: "Evolutionstabelle", toc_3: "XP-Formel für Evolution", toc_4: "Formel für aktive Kalorien", toc_5: "Wetteranimationen",
       sec1_title: "🎭 Zustände / Emotionen des Monsters", sec1_desc: "Das Monster hat 7 emotionale Zustände, die in Echtzeit durch die Body Battery und das Stresslevel von Garmin bestimmt werden. Stress hat Priorität: Wenn ≥ 70, ist das Monster gestresst, unabhängig von der Body Battery.", sec1_panel: "Die Lesepriorität ist: Stress ≥ 70 → Gestresst. Andernfalls wird die Body Battery verwendet: ≥70 → Hyper, ≥20 → Aktiv, ≥10 → Müde, <10 → Erschöpft.",
       mood0_t: "😴 Erschöpft", mood0_d: "Geschlossene Augen, offener Mund, schwebende ZZZs", mood1_t: "😪 Müde", mood1_d: "Halbgeschlossene Augen mit schweren Augenlidern, neutraler Mund", mood2_t: "😊 Aktiv", mood2_d: "Offene und lebendige Augen, offenes Lächeln", mood3_t: "🤩 Hyper", mood3_d: "Weit geöffnete Augen, Mega-Lächeln, leuchtende Funken", mood4_t: "😰 Gestresst", mood4_d: "Gezogene Augenbrauen, Mund nach unten, Schweißtropfen",
@@ -1256,7 +1256,7 @@
       xp_lbl: "Visualisierung des XP-Fortschritts (Beispiel: 750 XP)", xp_st1: "Stufe 1", xp_st2: "Stufe 2",
       tbl4_title: "Tagesziel (Streak)", tbl4_th1: "Konstante", tbl4_th2: "Wert", tbl4_th3: "Beschreibung",
       tbl4_r1: "Aktive Minuten/Tag zur Aufrechterhaltung der Streak", tbl4_r2: "30 × 4 – Mindest-XP für einen 'guten Tag'", tbl4_r3: "Unter diesem Schwellenwert gilt der Tag als 'faul'", tbl4_r4: "Strafe für jeden faulen oder ausgelassenen Tag", tbl4_r5: "Maximale XP an einem einzelnen Tag", tbl4_r6: "Evolutionsschwelle Stufe 1", tbl4_r7: "Evolutionsschwelle Stufe 2", sec3_panel: "Das auf dem Zifferblatt angezeigte Level (LVL) ist unabhängig von den Evolutionsstufen: level = 1 + (effectiveXp ÷ 10). Es wächst kontinuierlich und sinkt nicht.",
-      sec4_title: "🔥 Formel für aktive Kalorien", sec4_desc: "Aktive Kalorien schließen den Grundumsatz (BMR) aus und stellen nur die durch Bewegung verbrannten Kalorien dar. Kibo verwendet eine Kaskadenstrategie:",
+      sec4_title: "🔥 Formel für aktive Kalorien", sec4_desc: "Aktive Kalorien schließen den Grundumsatz (BMR) aus und stellen nur die durch Bewegung verbrannten Kalorien dar. Kibo Pet verwendet eine Kaskadenstrategie:",
       f3_title: "Strategie 1 – Natives Feld des Geräts (bevorzugt)", f3_v1: "Verfügbar auf Fenix 7 / Epix / MARQ und High-End-Geräten", f3_v2: "Falls nicht verfügbar → Wechsel zu Strategie 2",
       f4_title: "Strategie 2 – Berechnung mit BMR Mifflin-St Jeor", f4_v1: "calorie_totali – Gesamtkalorien, die seit Beginn des Tages vom ActivityMonitor verbrannt wurden", f4_v2: "secondi_trascorsi – vergangene Sekunden seit Beginn des Tages (Stunden × 3600 + Min. × 60 + Sek.)", f4_v3: "Wenn das Benutzerprofil nicht verfügbar ist → grobe Schätzung: aktive_Kalorien ≈ Gesamtkalorien × 0.40",
       f5_title: "BMR – Mifflin-St-Jeor-Gleichung", f5_v1: "kg – Gewicht in kg (Garmin-Benutzerprofil: Gramm ÷ 1000)", f5_v2: "cm – Höhe in cm", f5_v3: "età – aktuelles Jahr − Geburtsjahr", f5_v4: "Offset: +5 (männlich) / −161 (weiblich) / −78 (neutral/nicht definiert)",
@@ -1273,14 +1273,14 @@
       st_f_n: "2 hip dots + 3 belly dots (except Volt)",
       sec3_panel: "The XP value on the dial is effectiveXp = committed XP + today's live contribution. The gauge shows progress toward the next stage (stageProgress); there is no separate level.",
       evo_title: "🔄 Evolution & Devolution",
-      evo_desc: "Kibo grows with your training and devolves with inactivity. Each active day adds XP; lazy or skipped days subtract XP, eventually dropping the monster to a previous stage. The cycle is reversible: a mirror of your habits.",
+      evo_desc: "Kibo Pet grows with your training and devolves with inactivity. Each active day adds XP; lazy or skipped days subtract XP, eventually dropping the monster to a previous stage. The cycle is reversible: a mirror of your habits.",
       evo_cap: "Top: consistent training evolves the monster (Stage 0 → 1 → 2). Bottom: prolonged inactivity devolves it to the previous stage.",
       evo_up_t: "⬆️ Evolution", evo_up_d: "Earn XP by training: active_minutes × 4 + steps ÷ 150 (+ VO₂max bonus). A day is worth at most 220 XP. Above 300 XP → Stage 1, above 1200 XP → Stage 2.",
       evo_down_t: "⬇️ Devolution", evo_down_d: "A lazy day (below 20 XP) subtracts 90 XP and resets the streak. Skipped days (face not shown) also decay 90 XP/day (max 5). Below the threshold the monster devolves. XP never goes below zero.",
       evo_panel: "XP-generating activity is detected by combining step cadence and heart rate (relative to resting), confirmed by rising active calories or low stress. So cycling, weights and yoga count, while stress while still is not mistaken for training.",
       toc_6: "User Profile & Day/Night",
       sec6_title: "👤 User Profile & Day / Night",
-      sec6_desc: "Kibo distinguishes two separate, independent mechanisms: the day/night background and the creature's sleep. The first is purely time-of-day; the second reads the sleep window from the Garmin user profile.",
+      sec6_desc: "Kibo Pet distinguishes two separate, independent mechanisms: the day/night background and the creature's sleep. The first is purely time-of-day; the second reads the sleep window from the Garmin user profile.",
       f6_title: "Day / night background (time-based, NOT from profile)",
       f6_v1: "By day (07:00–21:00) the sky is lighter with a glow toward the horizon.",
       f6_v2: "At night the background darkens and the animated star field appears.",
@@ -1303,11 +1303,11 @@
       toc_8: "Zifferblatt-Einstellungen", sec8_title: "⚙️ Zifferblatt-Einstellungen", sec8_desc: "Das Zifferblatt bietet fünf konfigurierbare Slots, jeder über die Connect IQ App wählbar.", sec8_slots_t: "Die fünf Slots — wählbare Werte", sec8_slots: "keiner, Schritte, Kalorien, HF, Distanz, Etagen, Uhrenakku, Body Battery (Energie), Datum, aktive Minuten, XP, Benachrichtigungen, aktive Kalorien (berechnet), Erholungszeit.", sec8_other: "Weitere Einstellungen: Start-Familie, Wetteranimationen anzeigen, VO₂max-Nutzung.",
       note3: "Geschätzte Daten, nicht in Echtzeit. Die angezeigten Werte sind geschätzt und werden einmal pro Minute aktualisiert. Ausnahmen: Schritte, alle 10 Sekunden aktualisiert, und Herzfrequenz, alle 3 Sekunden aktualisiert.",
       note1: "<strong>Data unavailable → default.</strong> If a device does not expose Body Battery, the creature always shows the Active state (mood 2). The same applies to every other service (stress, weather, VO₂max, recovery, sleep, etc.): if we can fetch them from Garmin we use them, otherwise we fall back to a default value or hide the field. This all depends on the devices and which features they support natively: the same code runs on a high-end Fenix and a basic Instinct, adapting to what the watch can measure.",
-      note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo may not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
-      footer: "Kibo · Connect IQ Watch Face · Tommaso Campani"
+      note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo Pet may not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
+      footer: "Kibo Pet · Connect IQ Watch Face · Tommaso Campani"
     },
     ja: {
-      doc_ref: "デザイン仕様書", main_title: "Kibo – Watch Face", last_mod: "最終更新日:", author: "著者:",
+      doc_ref: "デザイン仕様書", main_title: "Kibo Pet – Watch Face", last_mod: "最終更新日:", author: "著者:",
       toc_title: "コンテンツ", toc_1: "モンスターの状態 / 感情", toc_2: "進化マトリクス表", toc_3: "進化のためのXP計算式", toc_4: "アクティブカロリー計算式", toc_5: "天候アニメーション",
       sec1_title: "🎭 モンスターの状態 / 感情", sec1_desc: "モンスターには、GarminのBody Batteryとストレスレベルによってリアルタイムに決定される7つの感情状態があります。ストレスが最優先され、70以上の場合はBody Batteryに関係なく「ストレス検知」状態になります。", sec1_panel: "読み取りの優先順位は次のとおりです：ストレス ≥ 70 → ストレス検知。それ以外はBody Batteryを参照：≥70 → ハイパー、≥20 → アクティブ、≥10 → 疲労、<10 → 疲弊。",
       mood0_t: "😴 疲弊", mood0_d: "目を閉じ、口を開け、ZZZが浮遊している状態", mood1_t: "😪 疲労", mood1_d: "重い瞼の半開き、ニュートラルな口元", mood2_t: "😊 アクティブ", mood2_d: "生き生きと開いた目、明るい笑顔", mood3_t: "🤩 ハイパー", mood3_d: "見開いた目、メガスマイル、輝く火花", mood4_t: "😰 ストレス検知", mood4_d: "ひそめられた眉、下がった口元、冷や汗",
@@ -1339,14 +1339,14 @@
       st_f_n: "2 hip dots + 3 belly dots (except Volt)",
       sec3_panel: "The XP value on the dial is effectiveXp = committed XP + today's live contribution. The gauge shows progress toward the next stage (stageProgress); there is no separate level.",
       evo_title: "🔄 Evolution & Devolution",
-      evo_desc: "Kibo grows with your training and devolves with inactivity. Each active day adds XP; lazy or skipped days subtract XP, eventually dropping the monster to a previous stage. The cycle is reversible: a mirror of your habits.",
+      evo_desc: "Kibo Pet grows with your training and devolves with inactivity. Each active day adds XP; lazy or skipped days subtract XP, eventually dropping the monster to a previous stage. The cycle is reversible: a mirror of your habits.",
       evo_cap: "Top: consistent training evolves the monster (Stage 0 → 1 → 2). Bottom: prolonged inactivity devolves it to the previous stage.",
       evo_up_t: "⬆️ Evolution", evo_up_d: "Earn XP by training: active_minutes × 4 + steps ÷ 150 (+ VO₂max bonus). A day is worth at most 220 XP. Above 300 XP → Stage 1, above 1200 XP → Stage 2.",
       evo_down_t: "⬇️ Devolution", evo_down_d: "A lazy day (below 20 XP) subtracts 90 XP and resets the streak. Skipped days (face not shown) also decay 90 XP/day (max 5). Below the threshold the monster devolves. XP never goes below zero.",
       evo_panel: "XP-generating activity is detected by combining step cadence and heart rate (relative to resting), confirmed by rising active calories or low stress. So cycling, weights and yoga count, while stress while still is not mistaken for training.",
       toc_6: "User Profile & Day/Night",
       sec6_title: "👤 User Profile & Day / Night",
-      sec6_desc: "Kibo distinguishes two separate, independent mechanisms: the day/night background and the creature's sleep. The first is purely time-of-day; the second reads the sleep window from the Garmin user profile.",
+      sec6_desc: "Kibo Pet distinguishes two separate, independent mechanisms: the day/night background and the creature's sleep. The first is purely time-of-day; the second reads the sleep window from the Garmin user profile.",
       f6_title: "Day / night background (time-based, NOT from profile)",
       f6_v1: "By day (07:00–21:00) the sky is lighter with a glow toward the horizon.",
       f6_v2: "At night the background darkens and the animated star field appears.",
@@ -1369,11 +1369,11 @@
       toc_8: "文字盤の設定", sec8_title: "⚙️ 文字盤の設定", sec8_desc: "文字盤には5つの設定可能なスロットがあり、それぞれConnect IQアプリから選択できます。", sec8_slots_t: "5つのスロット — 選択可能な値", sec8_slots: "なし、歩数、カロリー、心拍数、距離、上った階数、時計のバッテリー、Body Battery（エネルギー）、日付、アクティブ時間（分）、XP、通知、アクティブカロリー（計算値）、回復時間。", sec8_other: "その他の設定：開始ファミリー、天気アニメーションの表示、VO₂maxの使用。",
       note3: "推定値であり、リアルタイムではありません。表示される値は推定値で、1分ごとに更新されます。例外として、歩数は10秒ごと、心拍数は3秒ごとに更新されます。",
       note1: "<strong>Data unavailable → default.</strong> If a device does not expose Body Battery, the creature always shows the Active state (mood 2). The same applies to every other service (stress, weather, VO₂max, recovery, sleep, etc.): if we can fetch them from Garmin we use them, otherwise we fall back to a default value or hide the field. This all depends on the devices and which features they support natively: the same code runs on a high-end Fenix and a basic Instinct, adapting to what the watch can measure.",
-      note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo may not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
-      footer: "Kibo · Connect IQ Watch Face · Tommaso Campani"
+      note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo Pet may not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
+      footer: "Kibo Pet · Connect IQ Watch Face · Tommaso Campani"
     },
     zh: {
-      doc_ref: "设计参考规范", main_title: "Kibo – Watch Face", last_mod: "最后修改:", author: "作者:",
+      doc_ref: "设计参考规范", main_title: "Kibo Pet – Watch Face", last_mod: "最后修改:", author: "作者:",
       toc_title: "目录", toc_1: "怪物状态与情绪映射", toc_2: "进化矩阵分支表", toc_3: "进化经验值计算公式", toc_4: "动态活动热量公式", toc_5: "高能天气动画渲染",
       sec1_title: "🎭 宠物状态与情绪映射", sec1_desc: "宠物拥有7种不同的情感状态，这些状态通过连接到Garmin底层的身体电量和压力指标进行实时解算。压力指标具备最高系统优先级：一旦压力 ≥ 70，宠物立即切入高压焦虑状态，无视当前的身体电量状况。", sec1_panel: "读取优先级规则为：压力 ≥ 70 → 高压焦虑。其余情况下使用身体电量：≥70 → 亢奋，≥20 → 活跃，≥10 → 疲惫，<10 → 力竭。",
       mood0_t: "😴 力竭", mood0_d: "双眼闭合、有规律张嘴，并有ZZZ符号在头部上方悬浮漂移", mood1_t: "😪 疲惫", mood1_d: "眼睑下垂呈半睁开状态，嘴角保持水平中性", mood2_t: "😊 活跃", mood2_d: "双眼睁开、神采奕奕，嘴角上扬露出标准微笑", mood3_t: "🤩 亢奋", mood3_d: "双眼由于兴奋放大，大范围微笑嘴角，同时面部两侧生成金色星星闪烁特效", mood4_t: "😰 高压焦虑", mood4_d: "眉头紧锁、下撇嘴角，同时额头一侧浮现动态汗滴与红色张力线条",
@@ -1388,7 +1388,7 @@
       xp_lbl: "经验进化条阶梯映射（示例：当前累计 750 XP）", xp_st1: "1阶突破", xp_st2: "2阶满载",
       tbl4_title: "单日运动目标常数表", tbl4_th1: "系统常数", tbl4_th2: "设定阈值", tbl4_th3: "逻辑解释",
       tbl4_r1: "每日需达标的有效中高强度运动分钟数，用以维持连击火苗", tbl4_r2: "30 × 4 – 被系统认定为'充实健身日'所需的最低经验红线", tbl4_r3: "步入该经验值以下则直接判定单日活动水平触及'懈怠底线'", tbl4_r4: "懈怠日或长期不进入表盘导致的总累积经验衰减惩罚额度", tbl4_r5: "单日可吸纳的最大经验上限熔断器", tbl4_r6: "解锁1阶变异形态所需的累积XP门槛", tbl4_r7: "解锁2阶终极形态所需的累积XP门槛", sec3_panel: "表盘主UI上呈现的宠物角色等级（LVL）与各形态阶梯互不干扰：level = 1 + (effectiveXp ÷ 10)。等级为线性正向累加且永久锁死，绝不因懈怠退化而发生等级滑落。",
-      sec4_title: "🔥 动态活动热量公式", sec4_desc: "活动热量计算已深度剔除人体基础代谢率（BMR）功耗，精准映射因外部物理运动导致的纯粹净燃卡路里。Kibo 核心固件执行三级降级策略：",
+      sec4_title: "🔥 动态活动热量公式", sec4_desc: "活动热量计算已深度剔除人体基础代谢率（BMR）功耗，精准映射因外部物理运动导致的纯粹净燃卡路里。Kibo Pet 核心固件执行三级降级策略：",
       f3_title: "降级策略 1 – 提取硬件原生计算通道（最高优先）", f3_v1: "全面兼容 Fenix 7 / Epix / MARQ 等自带高阶运动处理芯片的旗舰机型", f3_v2: "若硬件底层未开放此项参数接口 → 自动降级至第二策略解算",
       f4_title: "降级策略 2 – Mifflin-St Jeor 算法离线模拟", f4_v1: "calorie_totali – 截至当前秒，ActivityMonitor 模块统计到的当天消耗的总卡路里（包含BMR）", f4_v2: "secondi_trascorsi – 当天已度过的总秒数（小时 × 3600 + 分钟 × 60 + 当前秒）", f4_v3: "若设备处于极端环境导致用户离线配置文件丢失 → 开启兜底黑盒估算：活动燃脂 ≈ 总卡路里 × 0.40",
       f5_title: "BMR – Mifflin-St Jeor 核心数学基准线", f5_v1: "kg – 用户当前体重（Garmin原生单位：克 ÷ 1000 转换）", f5_v2: "cm – 静态净身高厘米数", f5_v3: "età – 当年年份 − 出生年份", f5_v4: "性别修正常数（offset）：男性为 +5 / 女性为 −161 / 未定义或隐藏性别用户取标准值 −78",
@@ -1405,14 +1405,14 @@
       st_f_n: "2 hip dots + 3 belly dots (except Volt)",
       sec3_panel: "The XP value on the dial is effectiveXp = committed XP + today's live contribution. The gauge shows progress toward the next stage (stageProgress); there is no separate level.",
       evo_title: "🔄 Evolution & Devolution",
-      evo_desc: "Kibo grows with your training and devolves with inactivity. Each active day adds XP; lazy or skipped days subtract XP, eventually dropping the monster to a previous stage. The cycle is reversible: a mirror of your habits.",
+      evo_desc: "Kibo Pet grows with your training and devolves with inactivity. Each active day adds XP; lazy or skipped days subtract XP, eventually dropping the monster to a previous stage. The cycle is reversible: a mirror of your habits.",
       evo_cap: "Top: consistent training evolves the monster (Stage 0 → 1 → 2). Bottom: prolonged inactivity devolves it to the previous stage.",
       evo_up_t: "⬆️ Evolution", evo_up_d: "Earn XP by training: active_minutes × 4 + steps ÷ 150 (+ VO₂max bonus). A day is worth at most 220 XP. Above 300 XP → Stage 1, above 1200 XP → Stage 2.",
       evo_down_t: "⬇️ Devolution", evo_down_d: "A lazy day (below 20 XP) subtracts 90 XP and resets the streak. Skipped days (face not shown) also decay 90 XP/day (max 5). Below the threshold the monster devolves. XP never goes below zero.",
       evo_panel: "XP-generating activity is detected by combining step cadence and heart rate (relative to resting), confirmed by rising active calories or low stress. So cycling, weights and yoga count, while stress while still is not mistaken for training.",
       toc_6: "User Profile & Day/Night",
       sec6_title: "👤 User Profile & Day / Night",
-      sec6_desc: "Kibo distinguishes two separate, independent mechanisms: the day/night background and the creature's sleep. The first is purely time-of-day; the second reads the sleep window from the Garmin user profile.",
+      sec6_desc: "Kibo Pet distinguishes two separate, independent mechanisms: the day/night background and the creature's sleep. The first is purely time-of-day; the second reads the sleep window from the Garmin user profile.",
       f6_title: "Day / night background (time-based, NOT from profile)",
       f6_v1: "By day (07:00–21:00) the sky is lighter with a glow toward the horizon.",
       f6_v2: "At night the background darkens and the animated star field appears.",
@@ -1435,8 +1435,8 @@
       toc_8: "表盘设置", sec8_title: "⚙️ 表盘设置", sec8_desc: "表盘提供五个可配置的插槽，每个均可通过 Connect IQ 应用进行选择。", sec8_slots_t: "五个插槽 — 可选值", sec8_slots: "无、步数、卡路里、心率、距离、楼层、手表电量、Body Battery（能量）、日期、活动分钟数、XP、通知、活动卡路里（计算值）、恢复时间。", sec8_other: "其他设置：初始家族、显示天气动画、VO₂max 的使用。",
       note3: "数据为估算值，非实时。显示的数值为估算值，每分钟更新一次。例外：步数每10秒更新一次，心率每3秒更新一次。",
       note1: "<strong>Data unavailable → default.</strong> If a device does not expose Body Battery, the creature always shows the Active state (mood 2). The same applies to every other service (stress, weather, VO₂max, recovery, sleep, etc.): if we can fetch them from Garmin we use them, otherwise we fall back to a default value or hide the field. This all depends on the devices and which features they support natively: the same code runs on a high-end Fenix and a basic Instinct, adapting to what the watch can measure.",
-      note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo may not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
-      footer: "Kibo · Garmin Connect IQ 表盘开发团队 · Tommaso Campani"
+      note2: "<strong>Active calories ≠ Garmin's.</strong> The active-calories value shown by Kibo Pet may not match the one displayed in the Garmin app/widget, because ours is a custom formula (total calories − Mifflin-St Jeor BMR over elapsed time, with fallback). The calculation details are those described in the 'Active Calories Formula' section above.",
+      footer: "Kibo Pet · Garmin Connect IQ 表盘开发团队 · Tommaso Campani"
     }
   };
 
@@ -1453,7 +1453,7 @@
   }
 
 
-  // ---- decorative background Kibo creatures (element families) ----
+  // ---- decorative background Kibo Pet creatures (element families) ----
   function kiboSVG(base, light, accent, acc) {
     var top = {
       flame:  '<path d="M32 4 q6 8 0 15 q-6-7 0-15z" fill="'+accent+'"/>',
